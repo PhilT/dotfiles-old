@@ -1,0 +1,25 @@
+[apply]
+	whitespace = nowarn
+[user]
+	name = Phil Thompson
+	email = phil@electricvisions.com
+[color]
+  ui = true
+[alias]
+  st = status -s
+  ci = commit
+  br = branch
+  co = checkout
+  df = diff HEAD
+  lg = log -p
+
+[branch]
+	autosetupmerge = true
+	autosetuprebase = always
+[push]
+	default = current
+[core]
+	whitespace = -trailing-space
+[github]
+	user = PhilT
+

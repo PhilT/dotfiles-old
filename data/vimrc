@@ -1,0 +1,45 @@
+runtime bundle/vim-pathogen/autoload/pathogen.vim
+execute pathogen#infect()
+syntax enable
+colorscheme molokai
+let g:molokai_original=0
+filetype plugin indent on
+highlight NonText ctermfg=0
+highlight SignColumn ctermbg=8
+
+set number
+set tabstop=2
+set shiftwidth=2
+set expandtab
+
+map <C-b> :NERDTreeToggle<CR>
+map <Tab> gt
+map <S-Tab> gT
+map <silent> <C-Up> :wincmd k<CR>
+map <silent> <C-Down> :wincmd j<CR>
+map <silent> <C-Left> :wincmd h<CR>
+map <silent> <C-Right> :wincmd l<CR>
+
+" only highlight current line while in insert mode
+augroup CursorLine
+  au!
+  au InsertEnter * setlocal cursorline
+  au InsertLeave * setlocal nocursorline
+augroup END
+
+" remove trailing spaces
+" remove extra lines at end of file
+" insert single empty newline at end
+function TrimTrailingSpacesAndNewLines()
+  let cursor_pos = getpos('.')
+  :silent! %s/\s\+$//e
+  :silent! %s/\($\n\s*\)\+\%$/
+  :silent! %s/\%$/\r
+  call setpos('.', cursor_pos)
+endfunction
+
+autocmd BufWritePre * call TrimTrailingSpacesAndNewLines()
+
+" quit vim if NERDTree is last window
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
