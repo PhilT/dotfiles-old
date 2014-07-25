@@ -1,3 +1,2 @@
 xrdb -merge ~/.Xdefaults
-which VBoxClient && VBoxClient --clipboard -d &
-ck-launch-session dbus-launch startdwm
+ck-launch-session dbus-launch ~/bin/startdwm
