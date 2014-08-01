@@ -10,8 +10,8 @@ PATH="$HOME/bin:$PATH"
 export EDITOR=vim
 export CDPATH=/home/phil/ws
 PATH=.bin/safe/../../.bin:$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH
-pgrep startx > /dev/null
-if [ $? -eq 1 ]; then
+
+if [[ $(which startx &>-) && ! $(pgrep startx &>-) ]]; then
   echo Starting X...
   startx
 fi
