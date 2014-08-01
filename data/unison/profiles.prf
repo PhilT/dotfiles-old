@@ -1,0 +1,18 @@
+include common.inc
+
+logfile = C:\Users\phil\.unison\unison.log
+fastcheck = true
+
+# This machine
+root = C:\Users\Phil\.unison
+prefer = C:\Users\Phil\.unison
+
+# Other machine
+root = ssh://Media//data/unison
+
+ignore = Name ?*
+
+ignorenot = Name *.inc
+ignorenot = Name gamer.prf
+ignorenot = Name profiles.prf
+ignorenot = Name surface.prf

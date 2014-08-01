@@ -1,0 +1,17 @@
+logfile = C:\Users\phil\.unison\unison.log
+fastcheck = true
+
+# This machine
+root = C:\data
+prefer = C:\data
+
+# Other machine
+root = ssh://Media//data
+
+path = Downloads
+path = Music
+path = Pictures
+path = Portable
+path = Reference
+path = Studio
+path = Videos

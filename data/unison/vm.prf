@@ -1,0 +1,14 @@
+logfile = /home/phil/.unison/unison.log
+
+# This machine
+prefer = /home/phil
+root = /home/phil
+
+# Other machine
+root = ssh://Media//data
+
+#path = workspace
+#path = Documents
+#path = Pictures
+#path = Reference
+#path = Videos
