@@ -28,8 +28,8 @@ alias la='ls -A'
 alias l='ls -CF'
 
 alias cls='reset && clear'
-alias off='sudo shutdown now -P'
-alias boot='sudo reboot'
+alias off='sudo systemctl poweroff'
+alias boot='sudo systemctl reboot'
 
 alias pacupg='sudo pacman -Syu' # Sync and upgrade all packages
 alias pacin='sudo pacman -S'    # Install package
@@ -64,4 +64,3 @@ YELLOW="\[\e[0;33m\]"
 NORMAL="\[\e[m\]"
 BRANCH="\$(parse_git_branch)"
 PS1="$PURPLE\h $BLUE\w$RED$RVM$YELLOW$BRANCH $PURPLE\$$NORMAL "
-
