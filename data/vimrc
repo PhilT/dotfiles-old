@@ -1,7 +1,7 @@
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
 syntax enable
-colorscheme molokai
+colorscheme hybrid
 let g:molokai_original=0
 filetype plugin indent on
 highlight NonText ctermfg=0
@@ -12,6 +12,9 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 set noswapfile
+set ignorecase
+set smartcase
+set incsearch
 
 map <C-b> :NERDTreeToggle<CR>
 map <Tab> gt

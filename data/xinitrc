@@ -1,2 +1,3 @@
 xrdb -merge ~/.Xdefaults
+xset +fp /usr/share/fonts/local/
 ck-launch-session dbus-launch ~/bin/startdwm
