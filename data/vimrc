@@ -11,6 +11,7 @@ set number
 set tabstop=2
 set shiftwidth=2
 set expandtab
+set noswapfile
 
 map <C-b> :NERDTreeToggle<CR>
 map <Tab> gt
@@ -42,4 +43,3 @@ autocmd BufWritePre * call TrimTrailingSpacesAndNewLines()
 
 " quit vim if NERDTree is last window
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
