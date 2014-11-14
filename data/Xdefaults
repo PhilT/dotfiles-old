@@ -16,6 +16,7 @@ URxvt.keysym.C-k: perl:matcher:list
 ! scrollback and style
 URxvt*scrollstyle: plain
 URxvt*scrollBar_right: true
+URxvt*scrollColor: #444444
 URxvt.saveLines: 100000
 URxvt*scrollTtyOutput:      false
 URxvt*scrollWithBuffer:     true
@@ -35,8 +36,8 @@ Xcursor.theme:    Vanilla-DMZ-AA
 
 !urxvt color scheme:
 
-URxvt*background: #2B2B2B
-URxvt*foreground: #DEDEDE
+URxvt*background: #222222
+URxvt*foreground: #DDDDDD
 
 URxvt*colorUL: #86a2b0
 
@@ -64,4 +65,3 @@ URxvt*color14 : #34E2E2
 ! white
 URxvt*color7  : #D3D7CF
 URxvt*color15 : #EEEEEC
-
