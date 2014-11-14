@@ -1,7 +1,7 @@
 URxvt.intensityStyles: false
 ! font
-URxvt*font: xft:Monospace:pixelsize=12
-URxvt*boldFont: xft:Monospace:bold:pixelsize=12
+URxvt*font: xft:Monospace:pixelsize=14
+URxvt*boldFont: xft:Monospace:bold:pixelsize=14
 
 ! spacing
 URxvt.letterSpace: -1
@@ -16,7 +16,7 @@ URxvt.keysym.C-k: perl:matcher:list
 ! scrollback and style
 URxvt*scrollstyle: plain
 URxvt*scrollBar_right: true
-URxvt*scrollColor: #444444
+URxvt*scrollColor: #292929
 URxvt.saveLines: 100000
 URxvt*scrollTtyOutput:      false
 URxvt*scrollWithBuffer:     true
@@ -42,7 +42,7 @@ URxvt*colorUL: #86a2b0
 ! https://github.com/chriskempson/tomorrow-theme/blob/master/vim/colors/Tomorrow-Night.vim
 ! vim: ft=xdefaults
 
-*background: #1D1F21
+*background: #2D2F31
 *foreground: #C5C8C6
 ! black
 *color0: #282A2E
@@ -68,3 +68,4 @@ URxvt*colorUL: #86a2b0
 ! white
 *color7: #707880
 *color15: #C5C8C6
+
