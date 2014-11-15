@@ -47,14 +47,53 @@ alias halfsize='ls *.* | xargs -n1 --replace convert -verbose {} -resize 50% {}'
 # Slideshow with feh image viewer
 # Press ENTER to load current image into Gimp. H to pause slideshow
 #   slide <file or folder>
-function slide {
+slide () {
   feh --action "gimp '%f'" --fullscreen --auto-zoom --borderless --slideshow-delay 5 --sort name
+}
+
+
+alias pac='sudo pacman -S --noconfirm --noprogressbar --needed'
+
+aur () {
+  url=$1
+  name=`basename $url .tar.gz`
+  mkdir -p ~/packages
+  cd ~/packages
+  rm -rf $name
+  curl -s $url | tar -zx
+  cd $name
+  makepkg -cf --noprogressbar --noconfirm
+  sudo pacman -U --noconfirm --noprogressbar --needed /tmp/$name*.pkg.tar
+}
+
+# Clone or update a git repo
+gup () {
+  repo=$1
+  other=$2
+
+  if [[ other = true ]]; then
+    host=$PRIVATE_GIT
+  elif [[ ! other ]]; then
+    host=$PUBLIC_GIT
+  else
+    host=https://github.com/$other
+  fi
+
+  if [ -d $repo ]; then
+    echo updating $repo
+    cd $repo
+    git pull -q
+    cd -
+  else
+    echo cloning $repo
+    git clone -q $host/$repo
+  fi
 }
 
 # Colour-coded prompt
 #     machine-name current-dir rubyversion@gemset [branch] $
 #
-parse_git_branch() {
+parse_git_branch () {
   git symbolic-ref -q HEAD 2> /dev/null | sed 's/refs\/heads\/\(.*\)/ \1/'
 }
 PURPLE="\[\e[0;35m\]"

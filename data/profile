@@ -7,8 +7,14 @@ fi
 
 PATH="$HOME/bin:$PATH"
 
+# used in dotfiles/bin scripts
+export WORKSPACE=ws
+export PUBLIC_GIT='git@github.com:PhilT'
+export PRIVATE_GIT='git@bitbucket.org:philat'
+
 export EDITOR=vim
-export CDPATH=/home/phil/ws
+export CDPATH=/home/phil/$WORKSPACE
+
 PATH=.bin/safe/../../.bin:$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH
 
 if [[ $(which startx > /dev/null 2>&1) && ! $(pgrep startx > /dev/null 2>&1) ]]; then

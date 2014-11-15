@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 existing=`find ~ -maxdepth 1 -type l`
 current=`ls data`
