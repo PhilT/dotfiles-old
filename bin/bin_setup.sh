@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-git clone $PUBLIC_GIT/bin.git ~/bin
+cd ~/bin
+gup bin
+cd -
 
 echo "{
   \"dir\": \"c:/data/$WORKSPACE/documents\",
