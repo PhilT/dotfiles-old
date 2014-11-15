@@ -52,7 +52,9 @@ slide () {
 }
 
 
-alias pac='sudo pacman -S --noconfirm --noprogressbar --needed'
+pac () {
+  sudo pacman -S --noconfirm --noprogressbar --needed $@
+}
 
 aur () {
   url=$1
@@ -71,9 +73,9 @@ gup () {
   repo=$1
   other=$2
 
-  if [[ other = true ]]; then
+  if [[ $other = true ]]; then
     host=$PRIVATE_GIT
-  elif [[ ! other ]]; then
+  elif [[ ! $other ]]; then
     host=$PUBLIC_GIT
   else
     host=https://github.com/$other
@@ -90,6 +92,8 @@ gup () {
   fi
 }
 
+export -f aur gup pac
+
 # Colour-coded prompt
 #     machine-name current-dir rubyversion@gemset [branch] $
 #
@@ -103,3 +107,4 @@ YELLOW="\[\e[0;33m\]"
 NORMAL="\[\e[m\]"
 BRANCH="\$(parse_git_branch)"
 PS1="$PURPLE\h $BLUE\w$RED$RVM$YELLOW$BRANCH $PURPLE\$$NORMAL "
+
