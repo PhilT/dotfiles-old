@@ -16,6 +16,7 @@ use_spacer none
 TEXT
 ${cpu cpu1}% ${cpu cpu2}% ${cpu cpu3}% ${cpu cpu4}% | $memperc% ($mem) | ${time %Y-%m-%d %H:%M}
 ' | sudo tee /etc/conky/conky.conf > /dev/null
+sudo localectl set-x11-keymap gb
 
 pushd $WORKSPACE
 git clone $PUBLIC_GIT/dwm.git
@@ -29,3 +30,4 @@ if [[ ! $(lspci | grep -q VirtualBox) ]]; then
   sudo systemctl enable vboxservice dkms
   sudo groupadd vboxusers && sudo gpasswd -a $USER vboxusers
 fi
+
