@@ -13,7 +13,7 @@ export PUBLIC_GIT='git@github.com:PhilT'
 export PRIVATE_GIT='git@bitbucket.org:philat'
 
 export EDITOR=vim
-export CDPATH=/home/phil/$WORKSPACE
+export CDPATH=$WORKSPACE
 
 PATH=.bin/safe/../../.bin:$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH
 
