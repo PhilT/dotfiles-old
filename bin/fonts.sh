@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-
-if [ -z `pacman -Q xorg-server` ]; then
+pacman -Q xorg-server
+if [ $? -eq 0 ]; then
   echo -e '[infinality-bundle]\nServer = http://bohoomil.com/repo/$arch' >> /etc/pacman.conf
   echo -e '[infinality-bundle-multilib]\nServer = http://bohoomil.com/repo/multilib/$arch' >> /etc/pacman.conf
   echo -e '[infinality-bundle-fonts]\nServer = http://bohoomil.com/repo/fonts' >> /etc/pacman.conf
@@ -13,3 +13,4 @@ if [ -z `pacman -Q xorg-server` ]; then
 else
   echo 'XWindows not installed.'
 fi
+
