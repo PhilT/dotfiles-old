@@ -85,7 +85,7 @@ gup () {
     echo updating $repo
     cd $repo
     git pull -q
-    cd -
+    cd - > /dev/null
   else
     echo cloning $repo
     git clone -q $host/$repo
