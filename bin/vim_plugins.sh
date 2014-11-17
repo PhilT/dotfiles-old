@@ -23,8 +23,8 @@ gup vim-rake tpope
 gup vim-surround tpope
 gup vim-ruby vim-ruby
 gup JavaScript-Indent vim-scripts
-gup jshint.vim walm
 mkdir -p ~/.vim/colors
 cd ~/.vim/colors
 curl -s -O https://raw.githubusercontent.com/tomasr/molokai/master/colors/molokai.vim
 curl -s -O https://raw.githubusercontent.com/w0ng/vim-hybrid/master/colors/hybrid.vim
+

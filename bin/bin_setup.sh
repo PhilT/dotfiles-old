@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-cd ~/bin
 gup bin
-cd -
 
 echo "{
   \"dir\": \"c:/data/$WORKSPACE/documents\",
