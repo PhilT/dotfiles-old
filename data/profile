@@ -17,8 +17,5 @@ export CDPATH=$WORKSPACE
 
 PATH=.bin/safe/../../.bin:$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH
 
-if [[ $(which startx > /dev/null 2>&1) && ! $(pgrep startx > /dev/null 2>&1) ]]; then
-  echo Starting X...
-  startx
-fi
+$(which startx > /dev/null 2>&1) && $(pgrep startx > /dev/null 2>&1) || startx
 
