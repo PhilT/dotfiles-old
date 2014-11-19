@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 pacman -Q xorg-server
 if [ $? -eq 0 ]; then
-  echo -e '[infinality-bundle]\nServer = http://bohoomil.com/repo/$arch' >> /etc/pacman.conf
-  echo -e '[infinality-bundle-multilib]\nServer = http://bohoomil.com/repo/multilib/$arch' >> /etc/pacman.conf
-  echo -e '[infinality-bundle-fonts]\nServer = http://bohoomil.com/repo/fonts' >> /etc/pacman.conf
-  pacman-key -r 962DDE58
-  pacman-key -f 962DDE58
-  pacman-key --lsign-key 962DDE58
-  pacman -Syy --noconfirm
-  pacman -Rdd --noconfirm --noprogressbar ttf-dejavu
+  echo -e '[infinality-bundle]\nServer = http://bohoomil.com/repo/$arch' | sudo tee -a /etc/pacman.conf >> /dev/null
+  echo -e '[infinality-bundle-multilib]\nServer = http://bohoomil.com/repo/multilib/$arch' | sudo tee -a /etc/pacman.conf >> /dev/null
+  echo -e '[infinality-bundle-fonts]\nServer = http://bohoomil.com/repo/fonts'  | sudo tee -a /etc/pacman.conf >> /dev/null
+  sudo pacman-key -r 962DDE58
+  sudo pacman-key -f 962DDE58
+  sudo pacman-key --lsign-key 962DDE58
+  sudo pacman -Syy --noconfirm
+  sudo pacman -Rdd --noconfirm --noprogressbar ttf-dejavu
   pac ibfonts-meta-base
 else
   echo 'XWindows not installed.'
