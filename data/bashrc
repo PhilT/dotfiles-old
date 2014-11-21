@@ -57,12 +57,13 @@ pac () {
 }
 
 aur () {
-  url=$1
-  name=`basename $url .tar.gz`
+  shortcode=$1
+  name=$2
+  url="https://aur.archlinux.org/packages/$shortcode/$name/PKGBUILD"
   mkdir -p ~/packages
   cd ~/packages
   rm -rf $name
-  curl -s $url | tar -zx
+  curl -s -O $url
   cd $name
   makepkg -cf --noprogressbar --noconfirm
   sudo pacman -U --noconfirm --noprogressbar --needed /tmp/$name*.pkg.tar
@@ -107,4 +108,3 @@ YELLOW="\[\e[0;33m\]"
 NORMAL="\[\e[m\]"
 BRANCH="\$(parse_git_branch)"
 PS1="$PURPLE\h $BLUE\w$RED$RVM$YELLOW$BRANCH $PURPLE\$$NORMAL "
-

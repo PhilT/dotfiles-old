@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-pacman -Q xorg-server
-if [ $? -eq 0 ]; then
+
+if [[ `pacman -Q xorg-server 2>/dev/null` != '' ]]; then
   echo -e '[infinality-bundle]\nServer = http://bohoomil.com/repo/$arch' | sudo tee -a /etc/pacman.conf >> /dev/null
   echo -e '[infinality-bundle-multilib]\nServer = http://bohoomil.com/repo/multilib/$arch' | sudo tee -a /etc/pacman.conf >> /dev/null
   echo -e '[infinality-bundle-fonts]\nServer = http://bohoomil.com/repo/fonts'  | sudo tee -a /etc/pacman.conf >> /dev/null
@@ -10,7 +10,4 @@ if [ $? -eq 0 ]; then
   sudo pacman -Syy --noconfirm
   sudo pacman -Rdd --noconfirm --noprogressbar ttf-dejavu
   pac ibfonts-meta-base
-else
-  echo 'XWindows not installed.'
 fi
-

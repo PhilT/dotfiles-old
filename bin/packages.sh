@@ -1,18 +1,20 @@
-!/usr/bin/env bash
+#!/usr/bin/env bash
 
-aur 'https://aur.archlinux.org/packages/rb/rbenv/rbenv.tar.gz'
-aur 'https://aur.archlinux.org/packages/ru/ruby-build/ruby-build.tar.gz'
-rbenv install 2.1.4
-rbenv global 2.1.4
+RUBY_VERSION=2.1.4
+
+aur 'rb' 'rbenv'
+aur 'ru' 'ruby-build'
+aur 'im' 'imagemagick-no-hdri'
+rbenv version | grep $RUBY_VERSION || rbenv install $RUBY_VERSION
+rbenv global $RUBY_VERSION
+rbenv rehash
 gem install mdl ruby-lint
 
 pac nodejs unison
 sudo npm install -g jscs jshint jsonlint
 
-pacman -Q xorg-server
-if [ $? -eq 0 ]; then
+if [[ `pacman -Q xorg-server 2>/dev/null` != '' ]]; then
   pac alsa-lib flac gconf harfbuzz-icu icu libxtst nss opus snappy speech-dispatcher xdg-utils
-  aur 'https://aur.archlinux.org/packages/go/google-chrome/google-chrome.tar.gz'
-  aur 'https://aur.archlinux.org/packages/ur/urxvt-clipboard/urxvt-clipboard.tar.gz'
+  aur 'go' 'google-chrome'
+  aur 'ur' 'urxvt-clipboard'
 fi
-
