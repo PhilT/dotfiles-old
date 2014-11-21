@@ -9,10 +9,10 @@ sudo ln -s /etc/fonts/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d
 sudo cp /etc/conky/conky.conf /etc/conky/conky.conf.original
 pac acpi
 if [[ `acpi | grep Battery` != '' ]]; then
-  sudo ln -s $WORKSPACE/dotfiles/root/conky_laptop.conf /etc/conky/conky.conf
+  ln -s $WORKSPACE/dotfiles/opt/conkyrc_laptop ~/.conkyrc
 else
   sudo pacman -Rdd --noconfirm acpi
-  sudo ln -s $WORKSPACE/dotfiles/root/conky_desktop.conf /etc/conky/conky.conf
+  ln -s $WORKSPACE/dotfiles/opt/conkyrc_desktop ~/.conkyrc
 fi
 sudo localectl set-x11-keymap gb
 
