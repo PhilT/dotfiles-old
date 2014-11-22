@@ -3,3 +3,8 @@
 "xbacklight -inc 5"
   XF86MonBrightnessUp
 
+"amixer set Master 5+"
+  XF86AudioRaiseVolume
+"amixer set Master 5-"
+  XF86AudioLowerVolume
+

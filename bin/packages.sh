@@ -10,7 +10,7 @@ rbenv global $RUBY_VERSION
 rbenv rehash
 gem install mdl ruby-lint
 
-pac nodejs unison
+pac nodejs unison postgresql alsa-utils alsa-plugins
 sudo npm install -g jscs jshint jsonlint
 
 if [[ `pacman -Q xorg-server 2>/dev/null` != '' ]]; then
@@ -18,3 +18,4 @@ if [[ `pacman -Q xorg-server 2>/dev/null` != '' ]]; then
   aur 'go' 'google-chrome'
   aur 'ur' 'urxvt-clipboard'
 fi
+
