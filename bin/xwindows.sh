@@ -34,3 +34,4 @@ if [[ `lspci | grep VGA | grep Intel` != '' ]]; then
 fi
 
 chmod u+s /usr/bin/xinit
+
