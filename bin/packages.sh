@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+# PACKAGES
+
+pac nodejs unison postgresql alsa-utils alsa-plugins
+
+
+# RUBY
+
 RUBY_VERSION=2.1.4
 
 aur 'rb' 'rbenv'
@@ -10,8 +17,10 @@ rbenv global $RUBY_VERSION
 rbenv rehash
 gem install mdl ruby-lint
 
-pac nodejs unison postgresql alsa-utils alsa-plugins
+# NODE LIBS
+
 sudo npm install -g jscs jshint jsonlint
+
 
 if [[ `pacman -Q xorg-server 2>/dev/null` != '' ]]; then
   pac alsa-lib flac gconf harfbuzz-icu icu libxtst nss opus snappy speech-dispatcher xdg-utils
