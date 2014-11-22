@@ -32,3 +32,5 @@ fi
 if [[ `lspci | grep VGA | grep Intel` != '' ]]; then
   pac xf86-video-intel xf86-input-synaptics
 fi
+
+chmod u+s /usr/bin/xinit
