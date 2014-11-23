@@ -25,6 +25,7 @@ IP=dhcp
 Key=$evmob_password
 " | sudo tee /etc/netctl/$wl-evmob > /dev/null
 sudo systemctl enable netctl-auto@${wl}.service
+sudo systemctl start  netctl-auto@${wl}.service
 fi
 
 en=`ls /sys/class/net | grep en`
@@ -35,7 +36,9 @@ Connection=ethernet
 IP=dhcp
 " | sudo tee /etc/netctl/$en > /dev/null
 sudo systemctl enable netctl-ifplugd@${en}.service
+sudo systemctl start  netctl-ifplugd@${en}.service
 fi
 
 sudo systemctl enable netctl.service
+sudo systemctl start  netctl.service
 
