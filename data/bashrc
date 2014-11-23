@@ -63,8 +63,8 @@ aur () {
   mkdir -p ~/packages
   cd ~/packages
   rm -rf $name
-  curl -s -O $url
   cd $name
+  curl -s -O $url
   makepkg -cf --noprogressbar --noconfirm
   sudo pacman -U --noconfirm --noprogressbar --needed /tmp/$name*.pkg.tar
 }
