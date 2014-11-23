@@ -17,5 +17,7 @@ export CDPATH=$WORKSPACE
 
 PATH=.bin/safe/../../.bin:$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH
 
-$(which startx > /dev/null 2>&1) && $(pgrep startx > /dev/null 2>&1) || startx
+if [[ `which startx > /dev/null 2>&1` != '' ]]; then
+  `pgrep startx > /dev/null 2>&1` || startx
+fi
 
