@@ -6,7 +6,7 @@ export SERVER=evs
 
 dir=`dirname $0`
 
-$dir/wifi.sh
+$dir/network.sh
 $dir/bin_setup.sh
 $dir/vim_plugins.sh
 $dir/repos.sh

@@ -26,3 +26,11 @@ Key=$evmob_password
 " > /etc/netctl/$wl-evmob
 fi
 
+en=`ls /sys/class/net | grep en`
+
+if [[ $en != '' ]]; then
+  echo "Interface=$en
+Connection=ethernet
+IP=dhcp
+" > /etc/netctl/$en
+fi
