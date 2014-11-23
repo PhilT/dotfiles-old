@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-DESKTOP=evm
-LAPTOP=evx
-SERVER=evs
+export DESKTOP=evm
+export LAPTOP=evx
+export SERVER=evs
 
 dir=`dirname $0`
 
@@ -13,3 +13,4 @@ $dir/repos.sh
 [[ `hostname` != $SERVER ]] && $dir/xwindows.sh
 $dir/packages.sh
 $dir/fonts.sh
+

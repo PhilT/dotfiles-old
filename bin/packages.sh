@@ -2,8 +2,7 @@
 
 # PACKAGES
 
-pac nodejs unison postgresql alsa-utils alsa-plugins
-
+pac nodejs unison postgresql alsa-utils alsa-plugins skype
 
 # RUBY
 

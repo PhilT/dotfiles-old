@@ -1,4 +1,5 @@
-xrdb -merge ~/.Xdefaults
+xrdb -merge ~/.Xresources
+[ -f ~/.Xoverrides ] && xrdb -merge ~/.Xoverrides
 which xbindkeys > /dev/null 2>&1 && xbindkeys
 exec ~/bin/startdwm
 
