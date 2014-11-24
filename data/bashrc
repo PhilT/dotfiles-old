@@ -59,12 +59,16 @@ pac () {
 aur () {
   shortcode=$1
   name=$2
+  version=$3
+  sha1=$4
   url="https://aur.archlinux.org/packages/$shortcode/$name/$name.tar.gz"
   mkdir -p ~/packages
   cd ~/packages
   rm -rf $name
   curl -s $url | tar -zx
   cd $name
+  [[ $version != '' ]] && sed -i "s/^pkgver=.*/pkgver=$version/" PKGBUILD
+  [[ $sha1 != '' ]] && sed -i "s/^sha1sums=.*/sha1sums=('$sha1')/" PKGBUILD
   makepkg -sf --noprogressbar --noconfirm
   sudo pacman -U --noconfirm --noprogressbar --needed /tmp/$name*.pkg.tar
 }
@@ -108,3 +112,4 @@ YELLOW="\[\e[0;33m\]"
 NORMAL="\[\e[m\]"
 BRANCH="\$(parse_git_branch)"
 PS1="$PURPLE\h $BLUE\w$RED$RVM$YELLOW$BRANCH $PURPLE\$$NORMAL "
+
