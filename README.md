@@ -1,13 +1,14 @@
 # Phils dotfiles
 
-A simple repo for storing and symlinking my dotfiles to make them portable.
+Make dotfiles portable. Make setup scripts portable.
 
 ## Usage
 
-Removes all symlinks from ~ and then adds any symlinks to ~ for each file/folder in data/ prepended with a dot.
+Removes all symlinks from `~/` and then adds any symlinks to `~/` for each file/folder in `data/` prepended with a dot.
 
-    bin/sync.sh
+    bin/symlink.sh
 
-## TODO
+## Notes
 
-Improve sync script to update symlinks rather than delete and recreate them all.
+`xinitrc` will merge `~/.Xoverrides` after `Xresources` if it exists.
+
