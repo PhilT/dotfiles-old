@@ -65,7 +65,7 @@ aur () {
   rm -rf $name
   curl -s $url | tar -zx
   cd $name
-  makepkg -cf --noprogressbar --noconfirm
+  makepkg -sf --noprogressbar --noconfirm
   sudo pacman -U --noconfirm --noprogressbar --needed /tmp/$name*.pkg.tar
 }
 

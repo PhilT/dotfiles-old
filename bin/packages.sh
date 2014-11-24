@@ -22,7 +22,6 @@ sudo npm install -g jscs jshint jsonlint
 
 
 if [[ `pacman -Q xorg-server 2>/dev/null` != '' ]]; then
-  pac alsa-lib flac gconf harfbuzz-icu icu libxtst nss opus snappy speech-dispatcher xdg-utils
   aur 'go' 'google-chrome'
   aur 'ur' 'urxvt-clipboard'
 fi
