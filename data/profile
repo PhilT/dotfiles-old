@@ -5,8 +5,6 @@ if [ -n "$BASH_VERSION" ]; then
 	. "$HOME/.bashrc"
 fi
 
-PATH="$HOME/bin:$PATH"
-
 # used in dotfiles/bin scripts
 export WORKSPACE=$HOME/ws
 export PUBLIC_GIT='git@github.com:PhilT'
@@ -15,9 +13,13 @@ export PRIVATE_GIT='git@bitbucket.org:philat'
 export EDITOR=vim
 export CDPATH=$WORKSPACE
 
-PATH=.bin/safe/../../.bin:$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH
+BINSTUBS_SAFE=.bin/safe/../../.bin  # create a 'safe' folder in .bin for security
+RBENV_SHIMS=$HOME/.rbenv/shims      # rbenv shims folder (instead of rbenv init)
+USER_BIN=$HOME/bin                  # for running user scripts
 
-if [[ `which startx > /dev/null 2>&1` != '' ]]; then
-  `pgrep startx > /dev/null 2>&1` || startx
+PATH=$BINSTUBS_SAFE:$RBENV_SHIMS:$USER_BIN:$PATH
+
+if [[ `which startx 2>&1` != '' ]]; then
+  `pgrep startx 2>&1` || startx
 fi
 
