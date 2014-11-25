@@ -8,7 +8,7 @@ fi
 PATH="$HOME/bin:$PATH"
 
 # used in dotfiles/bin scripts
-export WORKSPACE=~/ws
+export WORKSPACE=$HOME/ws
 export PUBLIC_GIT='git@github.com:PhilT'
 export PRIVATE_GIT='git@bitbucket.org:philat'
 

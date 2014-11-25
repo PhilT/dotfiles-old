@@ -4,6 +4,7 @@ export DESKTOP=evm
 export LAPTOP=evx
 export SERVER=evs
 
+ssh-keyscan -H bitbucket.org | >> ~/.ssh/known_hosts
 dir=`dirname $0`
 
 $dir/network.sh

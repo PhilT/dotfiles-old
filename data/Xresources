@@ -1,7 +1,7 @@
 URxvt.intensityStyles: false
 ! font
-URxvt*font: xft:Monospace:pixelsize=20
-URxvt*boldFont: xft:Monospace:bold:pixelsize=20
+URxvt*font: xft:Monospace:pixelsize=14
+URxvt*boldFont: xft:Monospace:bold:pixelsize=14
 
 ! spacing
 URxvt.letterSpace: -1
