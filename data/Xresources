@@ -24,7 +24,6 @@ URxvt*scrollTtyKeypress:    true
 
 ! cursor
 URxvt*cursorBlink: true
-URxvt*cursorUnderline: true
 
 URxvt.keysym.Control-Up:   \033[1;5A
 URxvt.keysym.Control-Down:    \033[1;5B

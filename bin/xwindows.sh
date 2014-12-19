@@ -7,7 +7,7 @@ aur 'im' 'imagemagick-no-hdri' '6.9.0.0' '6bf4263ceaeea61e00fe15a95db320d49bcc48
 pac xorg-server xorg-server-utils xorg-xinit
 pac conky elementary-icon-theme feh gnome-themes-standard lxappearance mesa-vdpau
 pac pcmanfm rxvt-unicode slock terminus-font ttf-arphic-uming xautolock xcursor-vanilla-dmz
-pac gimp inkscape xsel
+pac gimp inkscape xsel xbindkeys
 
 sudo ln -s /etc/fonts/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d
 sudo cp /etc/conky/conky.conf /etc/conky/conky.conf.original
