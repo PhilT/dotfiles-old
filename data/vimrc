@@ -8,14 +8,15 @@ filetype plugin indent on
 highlight NonText ctermfg=0
 highlight SignColumn ctermbg=8
 
-set number
-set tabstop=2
-set shiftwidth=2
 set expandtab
-set noswapfile
 set ignorecase
-set smartcase
 set incsearch
+set noswapfile
+set number
+set shiftwidth=2
+set smartcase
+set tabstop=2
+set tags=./tags
 set wildignore+=.git/**,tmp/**,coverage/**,log/**,app/assets/fonts/**,app/assets/images/**,db/migrate/**
 
 map <C-b> :NERDTreeToggle<CR>

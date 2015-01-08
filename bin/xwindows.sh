@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 
-# Needs to be installed before inkscape otherwise inkscape will install HDRI version
-# This version is needed for Havas Dove App
-aur 'im' 'imagemagick-no-hdri' '6.9.0.0' '6bf4263ceaeea61e00fe15a95db320d49bcc48c4'
-
 pac xorg-server xorg-server-utils xorg-xinit
 pac conky elementary-icon-theme feh gnome-themes-standard lxappearance mesa-vdpau
 pac pcmanfm rxvt-unicode slock terminus-font ttf-arphic-uming xautolock xcursor-vanilla-dmz

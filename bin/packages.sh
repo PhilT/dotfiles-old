@@ -2,11 +2,11 @@
 
 # PACKAGES
 
-pac nodejs unison postgresql alsa-utils alsa-plugins skype
+pac nodejs unison postgresql alsa-utils alsa-plugins skype evince etags phantomjs
 
 # RUBY
 
-RUBY_VERSION=2.1.4
+RUBY_VERSION=2.2.0
 
 aur 'rb' 'rbenv'
 aur 'ru' 'ruby-build'
@@ -20,8 +20,22 @@ gem install mdl ruby-lint
 sudo npm install -g jscs jshint jsonlint
 
 
+# CHROME and CLIPBOARD
+
 if [[ `pacman -Q xorg-server 2>/dev/null` != '' ]]; then
   aur 'go' 'google-chrome'
   aur 'ur' 'urxvt-clipboard'
 fi
+
+
+# POSTGRESQL
+
+sudo -u postgres 'createuser -s phil'
+sudo systemctl enable postgresql
+sudo systemctl start postgresql
+
+
+# HEROKU
+
+aur 'he' 'heroku-client-standalone'
 
