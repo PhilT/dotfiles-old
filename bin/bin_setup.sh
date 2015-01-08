@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# THIS SCRIPT IS REPEATABLE
+
 cd ~
 gup bin
 cd -
