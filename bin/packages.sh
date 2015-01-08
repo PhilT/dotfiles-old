@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
+# THIS SCRIPT IS REPEATABLE
+
 # PACKAGES
 
-pac nodejs unison postgresql alsa-utils alsa-plugins skype evince etags phantomjs
+pac nodejs unison postgresql alsa-utils alsa-plugins skype evince ctags phantomjs
 
 # RUBY
 
@@ -29,8 +31,7 @@ fi
 
 
 # POSTGRESQL
-
-sudo -u postgres 'createuser -s phil'
+psql postgres -tAc "SELECT 1 FROM pg_roles WHERE rolname='phil'" | grep -q 1 || sudo -u postgres 'createuser -s phil'
 sudo systemctl enable postgresql
 sudo systemctl start postgresql
 
