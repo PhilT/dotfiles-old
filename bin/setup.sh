@@ -12,6 +12,8 @@ $dir/bin_setup.sh
 $dir/vim_plugins.sh
 $dir/repos.sh
 [[ `hostname` != $SERVER ]] && $dir/xwindows.sh
+$dir/ruby.sh
 $dir/packages.sh
+$dir/aur_packages.sh
 $dir/fonts.sh
 
