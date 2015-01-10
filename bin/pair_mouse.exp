@@ -11,5 +11,7 @@ send "pair F0:65:DD:9B:A0:97\r"
 expect "Pairing successful"
 send "connect F0:65:DD:9B:A0:97\r"
 expect "Connection successful"
+send "trust F0:65:DD:9B:A0:97\r"
+expect "Trusted: yes"
 send "exit\r"
 
