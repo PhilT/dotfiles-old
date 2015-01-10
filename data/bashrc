@@ -64,7 +64,7 @@ aur () {
   sha1=$4
   url="https://aur.archlinux.org/packages/$shortcode/$name/$name.tar.gz"
   mkdir -p ~/packages
-  cd ~/packages
+  pushd ~/packages
   rm -rf $name
   curl -s $url | tar -zx
   cd $name
@@ -72,6 +72,7 @@ aur () {
   [[ $sha1 != '' ]] && sed -i "s/^sha1sums=.*/sha1sums=('$sha1')/" PKGBUILD
   makepkg -sf --noprogressbar --noconfirm
   sudo pacman -U --noconfirm --noprogressbar --needed /tmp/$name*.pkg.tar
+  popd
 }
 
 # Clone or update a git repo
@@ -96,6 +97,16 @@ gup () {
     echo cloning $repo
     git clone -q $host/$repo
   fi
+}
+
+# Setup monitor at home
+home () {
+  xrandr --output HDMI2 --mode 3440x1440 --pos 0x0 --output eDP1 --pos 440x1440
+}
+
+# Setup monitor at work
+work () {
+  xrandr --output HDMI2 --pos 0x0 --output eDP1 --pos 1280x0
 }
 
 export -f aur gup pac

@@ -35,8 +35,3 @@ fi
 
 chmod u+s /usr/bin/xinit
 
-if [[ `hostname` = $LAPTOP ]]; then
-  echo 'URxvt*font: xft:Monospace:pixelsize=20' > ~/.Xoverrides
-  echo 'URxvt*boldFont: xft:Monospace:bold:pixelsize=20' >> ~/.Xoverrides
-fi
-

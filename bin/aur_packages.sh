@@ -4,13 +4,14 @@
 
 
 # CHROME and CLIPBOARD
-
 if [[ `pacman -Q xorg-server 2>/dev/null` != '' ]]; then
-  aur 'go' 'google-chrome'
-  aur 'ur' 'urxvt-clipboard'
+  aur go google-chrome
+  aur ur urxvt-clipboard
 fi
 
 # HEROKU
+aur he heroku-client-standalone
 
-aur 'he' 'heroku-client-standalone'
+# RESIZE FONTS IN URXVT
+aur ur urxvt-font-size-git
 

@@ -7,7 +7,7 @@ URxvt*boldFont: xft:Monospace:bold:pixelsize=14
 URxvt.letterSpace: -1
 
 ! yankable links clipboard
-URxvt.perl-ext-common : default,matcher,clipboard,searchable-scrollback<C-s>
+URxvt.perl-ext-common : default,matcher,clipboard,searchable-scrollback<C-s>,font-size
 URxvt.urlLauncher     : google-chrome
 URxvt.matcher.button  : 3
 URxvt.keysym.C-i: perl:matcher:last
@@ -25,10 +25,10 @@ URxvt*scrollTtyKeypress:    true
 ! cursor
 URxvt*cursorBlink: true
 
-URxvt.keysym.Control-Up:   \033[1;5A
-URxvt.keysym.Control-Down:    \033[1;5B
-URxvt.keysym.Control-Left:    \033[1;5D
-URxvt.keysym.Control-Right:    \033[1;5C
+URxvt.keysym.C-Up:     perl:font-size:increase
+URxvt.keysym.C-Down:   perl:font-size:decrease
+URxvt.keysym.C-S-Up:   perl:font-size:incglobal
+URxvt.keysym.C-S-Down: perl:font-size:decglobal
 
 Xcursor.theme:    Vanilla-DMZ
 
