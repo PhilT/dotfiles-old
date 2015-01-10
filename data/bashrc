@@ -28,8 +28,9 @@ alias la='ls -A'
 alias l='ls -CF'
 
 alias cls='reset && clear'
-alias off='sudo systemctl poweroff'
+alias shutdown='sudo systemctl poweroff'
 alias boot='sudo systemctl reboot'
+alias off='sudo systemctl suspend'
 
 alias pacupg='sudo pacman -Syu' # Sync and upgrade all packages
 alias pacin='sudo pacman -S'    # Install package

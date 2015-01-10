@@ -1,0 +1,15 @@
+#!/usr/bin/expect -f
+
+set timeout 30
+spawn bluetoothctl
+expect "# "
+send "power on\r"
+expect "Changing power on succeeded"
+send "scan on\r"
+expect "ThinkPad Bluetooth Laser Mouse"
+send "pair F0:65:DD:9B:A0:97\r"
+expect "Pairing successful"
+send "connect F0:65:DD:9B:A0:97\r"
+expect "Connection successful"
+send "exit\r"
+
