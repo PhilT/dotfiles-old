@@ -7,5 +7,5 @@ use_spacer none
 short_units yes
 
 TEXT
-W ${wireless_link_qual_perc wlp3s0}%   $battery_short (${execi 60 acpi | sed 's/.*\([0-9][0-9]\):\([0-9][0-9]\):[0-9][0-9].*/\1h\2m/' | sed 's/00h//'})   CPU ${cpu cpu0}%   $memperc% ($mem)   ${time %Y-%m-%d %H:%M}
+W ${wireless_link_qual_perc wlp3s0}%   ${execi 2 acpi -b | sed 's/.*: //' | sed 's/\(.\)[a-z]\+, /\1/' | sed 's/, \([0-9]\+\):\([0-9]\+\):.*/ \1h\2m/' | sed 's/00h//'}   CPU ${cpu cpu0}%   $memperc% ($mem)   ${time %Y-%m-%d %H:%M}
 

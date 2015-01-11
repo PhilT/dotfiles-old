@@ -18,4 +18,5 @@ $dir/aur_packages.sh
 $dir/fonts.sh
 $dir/bluetooth.sh
 $dir/pair_mouse.exp
+[[ `hostname` == $LAPTOP ]] && $dir/sound.sh
 
