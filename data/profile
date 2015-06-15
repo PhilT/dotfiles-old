@@ -13,9 +13,10 @@ export PRIVATE_GIT='git@bitbucket.org:philat'
 export EDITOR=vim
 export CDPATH=$WORKSPACE
 
-BINSTUBS_SAFE=.bin/safe/../../.bin  # create a 'safe' folder in .bin for security
+BINSTUBS_SAFE=.bin/safe/../../.bin:bin/safe/../../bin  # create a 'safe' folder in .bin/ or bin/ for security
 RBENV_SHIMS=$HOME/.rbenv/shims      # rbenv shims folder (instead of rbenv init)
 USER_BIN=$HOME/bin                  # for running user scripts
+#DHCLIENT=yes                        # use instead of dhcpd as lease problems occur
 
 PATH=$BINSTUBS_SAFE:$RBENV_SHIMS:$USER_BIN:$PATH
 

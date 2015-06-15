@@ -1,11 +1,11 @@
 URxvt.intensityStyles: false
 ! font
-URxvt*font: xft:Monospace:pixelsize=14
-URxvt*boldFont: xft:Monospace:bold:pixelsize=14
+URxvt*font: xft:Monospace:pixelsize=18
+URxvt*boldFont: xft:Monospace:bold:pixelsize=18
 
 ! turn off keycap mode when pressing CTRL+SHIFT
 ! http://wilmer.gaa.st/blog/archives/36-rxvt-unicode-and-iso-14755-mode.html
-URxvt.iso14755: true
+URxvt.iso14755: false
 URxvt.iso14755_52: false
 
 ! spacing
@@ -16,7 +16,7 @@ URxvt.perl-ext-common : default,matcher,clipboard,searchable-scrollback<C-s>,fon
 URxvt.url-launcher    : google-chrome-stable
 URxvt.matcher.button  : 3
 URxvt.keysym.C-i: perl:matcher:last
-URxvt.keysym.C-k: perl:matcher:list
+! URxvt.keysym.C-k: perl:matcher:list conflicts with Vim bindings for window switching
 
 ! scrollback and style
 URxvt*scrollstyle: plain
@@ -34,6 +34,9 @@ URxvt.keysym.C-Up:     perl:font-size:increase
 URxvt.keysym.C-Down:   perl:font-size:decrease
 URxvt.keysym.C-S-Up:   perl:font-size:incglobal
 URxvt.keysym.C-S-Down: perl:font-size:decglobal
+
+! Map keys not recognised in Vim
+URxvt.keysym.C-semicolon:   \033[;
 
 Xcursor.theme:    Vanilla-DMZ
 

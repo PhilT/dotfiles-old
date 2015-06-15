@@ -1,11 +1,15 @@
 out_to_console yes
 out_to_x no
 background no
-update_interval 5
+update_interval 10
 total_run_times 0
 use_spacer none
 short_units yes
 
 TEXT
-W ${wireless_link_qual_perc wlp3s0}%   ${execi 2 acpi -b | sed 's/.*: //' | sed 's/\(.\)[a-z]\+, /\1/' | sed 's/, \([0-9]\+\):\([0-9]\+\):.*/ \1h\2m/' | sed 's/00h//'}   CPU ${cpu cpu0}%   $memperc% ($mem)   ${time %Y-%m-%d %H:%M}
+w${wireless_link_qual_perc wlp3s0}% \
+${execi 60 acpi -b | sed 's/.*: //' | sed 's/\(.\)[a-z]\+, /\1/' | sed 's/charging at zero rate.*//' | sed 's/, \([0-9]\+\):\([0-9]\+\):.*/ \1h\2m/' | sed 's/00h//'} \
+${cpu cpu0}% \
+$memperc%/$mem \
+${time %Y-%m-%d %H:%M}
 

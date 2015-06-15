@@ -17,15 +17,37 @@ set shiftwidth=2
 set smartcase
 set tabstop=2
 set tags=./tags
-set wildignore+=.git/**,tmp/**,coverage/**,log/**,app/assets/fonts/**,app/assets/images/**,db/migrate/**
+set wildignore+=*/.git/*,*/tmp/*,*/coverage/*,*/log/*,*/app/assets/fonts/*,*/app/assets/images/*,*/db/migrate/*,*/node_modules/*,*/bin/*
 
 map <C-b> :NERDTreeToggle<CR>
 map <Tab> gt
 map <S-Tab> gT
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
+
+map  <Esc>[; <C-Semicolon>
+map! <Esc>[; <C-Semicolon>
+
+nmap <C-n> :cn<CR>
+nmap <C-m> :cp<CR>
+nmap j gj
+nmap k gk
+nmap <Leader>n :setlocal number!<CR>
+nmap <Leader>o :set paste!<CR>
+
+noremap ; l
+noremap l k
+noremap k j
+noremap j h
+noremap h ;
+noremap <C-j> <C-w>h
+noremap <C-k> <C-w>j
+noremap <C-l> <C-w>k
+noremap <C-Semicolon> <C-w>l
+
+
+" vim-rspec mappings
+nnoremap <Leader>t :call RunCurrentSpecFile()<CR>
+nnoremap <Leader>s :call RunNearestSpec()<CR>
+nnoremap <Leader>l :call RunLastSpec()<CR>
 
 " only highlight current line while in insert mode
 augroup CursorLine
@@ -52,4 +74,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 
 "close NERDTree after opening file
 let NERDTreeQuitOnOpen=1
+
+let g:syntastic_javascript_checkers = ['eslint']
 

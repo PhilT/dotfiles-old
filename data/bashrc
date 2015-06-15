@@ -31,6 +31,7 @@ alias cls='reset && clear'
 alias shutdown='sudo systemctl poweroff'
 alias boot='sudo systemctl reboot'
 alias off='sudo systemctl suspend'
+alias wifi='sudo systemctl restart netctl-auto@wlp3s0.service'
 
 alias pacupg='sudo pacman -Syu' # Sync and upgrade all packages
 alias pacin='sudo pacman -S'    # Install package
@@ -78,20 +79,26 @@ aur () {
 # Clone or update a git repo
 gup () {
   repo=$1
-  other=$2
+  author=$2
+  modifier=$3
 
-  if [[ $other = true ]]; then
+  if [[ $author = true ]]; then
     host=$PRIVATE_GIT
-  elif [[ ! $other ]]; then
+  elif [[ ! $author ]]; then
     host=$PUBLIC_GIT
   else
-    host=https://github.com/$other
+    host=https://github.com/$author
   fi
+
 
   if [ -d $repo ]; then
     echo updating $repo
     cd $repo
+    if [[ $modifer ]]; then
+      git co .
+    fi
     git pull -q
+    eval $modifier
     cd - > /dev/null
   else
     echo cloning $repo
@@ -101,12 +108,12 @@ gup () {
 
 # Setup monitor at home
 home () {
-  xrandr --output HDMI2 --mode 3440x1440 --pos 0x0 --output eDP1 --pos 440x1440
+  xrandr --output HDMI2 --mode 3440x1440 --pos 0x0 --output eDP1 --left-of HDMI2
 }
 
 # Setup monitor at work
 work () {
-  xrandr --output HDMI2 --pos 0x0 --output eDP1 --pos 1280x0
+  xrandr --output HDMI2 --mode 1280x1024 --pos 0x0 --output eDP1 --right-of HDMI2
 }
 
 # No extra monitor
