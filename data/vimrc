@@ -20,22 +20,18 @@ set tags=./tags
 set wildignore+=*/.git/*,*/tmp/*,*/coverage/*,*/log/*,*/app/assets/fonts/*,*/app/assets/images/*,*/db/migrate/*,*/node_modules/*,*/bin/*
 
 map <C-b> :NERDTreeToggle<CR>
-map <Tab> gt
-map <S-Tab> gT
 
 map  <Esc>[; <C-Semicolon>
 map! <Esc>[; <C-Semicolon>
 
 nmap <C-n> :cn<CR>
 nmap <C-m> :cp<CR>
-nmap j gj
-nmap k gk
 nmap <Leader>n :setlocal number!<CR>
 nmap <Leader>o :set paste!<CR>
 
 noremap ; l
-noremap l k
-noremap k j
+noremap l gk
+noremap k gj
 noremap j h
 noremap h ;
 noremap <C-j> <C-w>h

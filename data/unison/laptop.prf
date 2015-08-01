@@ -5,10 +5,11 @@ prefer = /home/phil
 root = /home/phil
 
 # Other machine
-root = ssh://Media//data
+root = ssh://server//data
 
 #path = workspace
 #path = Documents
 #path = Pictures
-#path = Reference
+path = Library
 #path = Videos
+
