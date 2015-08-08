@@ -28,6 +28,7 @@ nmap <C-n> :cn<CR>
 nmap <C-m> :cp<CR>
 nmap <Leader>n :setlocal number!<CR>
 nmap <Leader>o :set paste!<CR>
+vmap <C-c> y: call system("xsel -i", getreg("\""))<CR>
 
 noremap ; l
 noremap l gk

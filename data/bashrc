@@ -59,11 +59,9 @@ pac () {
 }
 
 aur () {
-  shortcode=$1
-  name=$2
-  version=$3
-  sha1=$4
-  url="https://aur.archlinux.org/packages/$shortcode/$name/$name.tar.gz"
+  name=$1
+  sha1=$2
+  url="https://aur4.archlinux.org/cgit/aur.git/snapshot/$name.tar.gz"
   mkdir -p ~/packages
   pushd ~/packages
   rm -rf $name

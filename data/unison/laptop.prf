@@ -1,4 +1,5 @@
 logfile = /home/phil/.unison/unison.log
+confirmbigdel = false
 
 # This machine
 prefer = /home/phil
@@ -11,5 +12,6 @@ root = ssh://server//data
 #path = Documents
 #path = Pictures
 path = Library
+path = Downloads/articles
 #path = Videos
 

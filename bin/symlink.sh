@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# Adds symlinks for everything in data/ to ~/ and prefixes them with a dot ('.')
+
 existing=`find ~ -maxdepth 1 -type l`
 current=`ls data`
 
@@ -17,3 +19,4 @@ add_current () {
 
 remove_existing
 add_current
+

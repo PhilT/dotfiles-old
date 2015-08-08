@@ -5,13 +5,16 @@
 
 # CHROME and CLIPBOARD
 if [[ `pacman -Q xorg-server 2>/dev/null` != '' ]]; then
-  aur go google-chrome
-  aur ur urxvt-clipboard
+  aur google-chrome
+  aur urxvt-clipboard
 fi
 
 # HEROKU
-aur he heroku-client-standalone
+aur heroku-client-standalone
 
 # RESIZE FONTS IN URXVT
-aur ur urxvt-font-size-git
+aur urxvt-font-size-git
+
+# makemkv
+[[ `hostname` == $SERVER ]] && aur makemkv-cli
 

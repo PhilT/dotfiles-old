@@ -17,6 +17,7 @@ URxvt.url-launcher    : google-chrome-stable
 URxvt.matcher.button  : 3
 URxvt.keysym.C-i: perl:matcher:last
 ! URxvt.keysym.C-k: perl:matcher:list conflicts with Vim bindings for window switching
+URxvt.clipboard.autocopy: true
 
 ! scrollback and style
 URxvt*scrollstyle: plain
