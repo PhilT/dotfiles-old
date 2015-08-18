@@ -33,12 +33,14 @@ alias boot='sudo systemctl reboot'
 alias off='sudo systemctl suspend'
 alias wifi='sudo systemctl restart netctl-auto@wlp3s0.service'
 
-alias pacupg='sudo pacman -Syu' # Sync and upgrade all packages
-alias pacin='sudo pacman -S'    # Install package
-alias pacrem='sudo pacman -Rns' # Remove package and dependencies
-alias pacins='sudo pacman -U'   # Install package from a file
-alias pacreps='pacman -Ss'      # Search for package in the repos
-alias paclist='pacman -Q --color always | less' # List installed packages
+alias pacman=pacmatic
+alias pacupg='sudo pacmatic -Syu' # Sync and upgrade all packages
+alias pacin='sudo pacmatic -S'    # Install package
+alias pacrem='sudo pacmatic -Rns' # Remove package and dependencies
+alias pacins='sudo pacmatic -U'   # Install package from a file
+alias pacreps='pacmatic -Ss'      # Search for package in the repos
+alias paclist='pacmatic -Q --color always | less' # List installed packages
+alias paccheck='sudo pacmatic -Sy && sudo pacmatic -Qu' # List outdated packages
 
 # Install gems and create binstubs for bundler
 alias bb='bundle && bundle --binstubs=.bin'
@@ -106,7 +108,7 @@ gup () {
 
 # Setup monitor at home
 home () {
-  xrandr --output HDMI2 --mode 3440x1440 --pos 0x0 --output eDP1 --left-of HDMI2
+  xrandr --output HDMI2 --mode 3840x2160 --pos 0x0 --output eDP1 --left-of HDMI2
 }
 
 # Setup monitor at work

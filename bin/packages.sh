@@ -4,7 +4,7 @@
 
 # PACKAGES
 
-pac nodejs npm unison postgresql alsa-utils alsa-plugins skype evince ctags phantomjs
+pac linux-lts pacmatic nodejs npm unison postgresql alsa-utils alsa-plugins skype evince ctags phantomjs
 
 
 # NODE LIBS

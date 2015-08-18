@@ -8,11 +8,12 @@ fi
 # used in dotfiles/bin scripts
 export WORKSPACE=$HOME/ws
 export CLIENTS=$HOME/ws/documents/electricvisions/clients
+export ACCOUNTS=$HOME/ws/documents/electricvisions/accounts
 export PUBLIC_GIT='git@github.com:PhilT'
 export PRIVATE_GIT='git@bitbucket.org:philat'
 
 export EDITOR=vim
-export CDPATH=$WORKSPACE:$CLIENTS
+export CDPATH=$WORKSPACE:$CLIENTS:$ACCOUNTS
 
 BINSTUBS_SAFE=.bin/safe/../../.bin:bin/safe/../../bin  # create a 'safe' folder in .bin/ or bin/ for security
 RBENV_SHIMS=$HOME/.rbenv/shims      # rbenv shims folder (instead of rbenv init)
