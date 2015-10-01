@@ -2,6 +2,7 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
 Helptags
 syntax enable
+set background=dark
 colorscheme hybrid
 let g:molokai_original=0
 filetype plugin indent on
