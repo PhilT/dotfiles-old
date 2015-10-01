@@ -1,6 +1,7 @@
 xrdb -merge ~/.Xresources
 [ -f ~/.Xoverrides ] && xrdb -merge ~/.Xoverrides
-which xbindkeys > /dev/null 2>&1 && xbindkeys
+[ -f /usr/bin/xbindkeys ] && xbindkeys
+[ -f /usr/bin/VBoxClient-all ] && VBoxClient-all
 xset m 3/2 0
 exec ~/bin/startdwm
 
