@@ -1,12 +1,18 @@
+" Setup pathogen
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
-Helptags
-syntax enable
-colorscheme hybrid
-let g:molokai_original=0
+syntax on
 filetype plugin indent on
+
+Helptags
+colorscheme hybrid
+set background=dark
+let g:molokai_original=0
 highlight NonText ctermfg=0
 highlight SignColumn ctermbg=8
+
+map <C-p> :FZF<CR>
+set rtp+=~/.fzf
 
 set expandtab
 set ignorecase
@@ -14,10 +20,11 @@ set incsearch
 set noswapfile
 set number
 set shiftwidth=2
+set backspace=2
 set smartcase
 set tabstop=2
 set tags=./tags
-set wildignore+=*/.git/*,*/tmp/*,*/coverage/*,*/log/*,*/app/assets/fonts/*,*/app/assets/images/*,*/db/migrate/*,*/node_modules/*,*/bin/*
+set wildignore+=.git/**,tmp/**,coverage/**,log/**,app/assets/fonts/**,app/assets/images/**,db/migrate/**,node_modules/**,bin/**,fca-frontend/**,frontend/**
 
 map <C-b> :NERDTreeToggle<CR>
 
@@ -30,21 +37,20 @@ nmap <Leader>n :setlocal number!<CR>
 nmap <Leader>o :set paste!<CR>
 vmap <C-c> y: call system("xsel -i", getreg("\""))<CR>
 
-noremap ; l
-noremap l gk
-noremap k gj
-noremap j h
-noremap h ;
-noremap <C-j> <C-w>h
-noremap <C-k> <C-w>j
-noremap <C-l> <C-w>k
-noremap <C-Semicolon> <C-w>l
+noremap j gj
+noremap k gk
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
 
 
 " vim-rspec mappings
-nnoremap <Leader>t :call RunCurrentSpecFile()<CR>
-nnoremap <Leader>s :call RunNearestSpec()<CR>
-nnoremap <Leader>l :call RunLastSpec()<CR>
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAppSpecs()<CR>
+let g:rspec_command = "Dispatch bundle exec rspec {spec}"
 
 " only highlight current line while in insert mode
 augroup CursorLine
@@ -60,7 +66,6 @@ function TrimTrailingSpacesAndNewLines()
   let cursor_pos = getpos('.')
   :silent! %s/\s\+$//e
   :silent! %s/\($\n\s*\)\+\%$/
-  :silent! %s/\%$/\r
   call setpos('.', cursor_pos)
 endfunction
 
@@ -73,4 +78,3 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 let NERDTreeQuitOnOpen=1
 
 let g:syntastic_javascript_checkers = ['eslint']
-

@@ -18,7 +18,7 @@ shopt -s checkwinsize
 # Add color
 alias less='less -R'
 alias grep='grep --color=auto'
-alias ls='ls --color=auto'
+[[ `uname` == 'Darwin' ]] && alias ls='ls -G' || alias ls='ls --color=auto'
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
@@ -42,8 +42,8 @@ alias pacreps='pacmatic -Ss'      # Search for package in the repos
 alias paclist='pacmatic -Q --color always | less' # List installed packages
 alias paccheck='sudo pacmatic -Sy && sudo pacmatic -Qu' # List outdated packages
 
-# Install gems and create binstubs for bundler
-alias bb='bundle && bundle --binstubs=.bin'
+alias bi='bundle ins'
+alias be='bundle exec'
 
 # Halve the size of all images in the current folder
 alias halfsize='ls *.* | xargs -n1 --replace convert -verbose {} -resize 50% {}'
@@ -137,3 +137,5 @@ NORMAL="\[\e[m\]"
 BRANCH="\$(parse_git_branch)"
 PS1="$PURPLE\h $BLUE\w$RED$RVM$YELLOW$BRANCH $PURPLE\$$NORMAL "
 
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[ -f ~/.bashrc_local ] && source ~/.bashrc_local

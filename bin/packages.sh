@@ -17,3 +17,6 @@ psql postgres -tAc "SELECT 1 FROM pg_roles WHERE rolname='phil'" | grep -q 1 || 
 sudo systemctl enable postgresql
 sudo systemctl restart postgresql
 
+# FZF - Commandline Fuzzy Finder
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
