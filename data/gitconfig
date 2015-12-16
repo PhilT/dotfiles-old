@@ -12,6 +12,7 @@
   co = checkout
   df = diff HEAD
   lg = log -p
+  lf = log --name-only --oneline
 
 [branch]
 	autosetupmerge = true

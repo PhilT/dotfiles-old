@@ -44,6 +44,7 @@ alias paccheck='sudo pacmatic -Sy && sudo pacmatic -Qu' # List outdated packages
 
 alias bi='bundle ins'
 alias be='bundle exec'
+alias gfz="git st | sed 's/...//' | fzf"
 
 # Halve the size of all images in the current folder
 alias halfsize='ls *.* | xargs -n1 --replace convert -verbose {} -resize 50% {}'
