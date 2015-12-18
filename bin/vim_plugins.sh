@@ -1,33 +1,38 @@
 #!/usr/bin/env bash
 
+mkdir -p ~/apps
+cd ~/apps
+gup fzf junegunn --depth 1
+fzf/install
+
 mkdir -p ~/.vim/bundle
 cd ~/.vim/bundle
 
-gup ack.vim mileszs
-gup vim-airline bling
-gup vim-bundler tpope
-gup vim-dispatch tpope
-gup vim-fugitive tpope
-gup fzf.vim junegunn
-gup vim-git tpope
-gup vim-haml tpope
-gup jasmine.vim claco
-gup JavaScript-Indent vim-scripts
-gup vim-javascript-syntax jelera
-gup vim-markdown tpope
-gup nerdtree scrooloose
-gup vim-node moll
-gup vim-pathogen tpope
-gup vim-rails tpope
-gup vim-rake tpope
-gup vim-rspec thoughtbot
-gup vim-ruby vim-ruby
-gup vim-slim slim-template
-gup snipmate.vim msanders
-gup syntastic scrooloose
-gup vim-surround tpope
-gup vim-yaml avakhov
-gup ag.vim rking
+gup ack.vim mileszs --depth 1
+gup vim-airline bling --depth 1
+gup vim-bundler tpope --depth 1
+gup vim-dispatch tpope --depth 1
+gup vim-fugitive tpope --depth 1
+gup fzf.vim junegunn --depth 1
+gup vim-git tpope --depth 1
+gup vim-haml tpope --depth 1
+gup jasmine.vim claco --depth 1
+gup JavaScript-Indent vim-scripts --depth 1
+gup vim-javascript-syntax jelera --depth 1
+gup vim-markdown tpope --depth 1
+gup nerdtree scrooloose --depth 1
+gup vim-node moll --depth 1
+gup vim-pathogen tpope --depth 1
+gup vim-rails tpope --depth 1
+gup vim-rake tpope --depth 1
+gup vim-rspec thoughtbot --depth 1
+gup vim-ruby vim-ruby --depth 1
+gup vim-slim slim-template --depth 1
+gup snipmate.vim msanders --depth 1
+gup syntastic scrooloose --depth 1
+gup vim-surround tpope --depth 1
+gup vim-yaml avakhov --depth 1
+gup ag.vim rking --depth 1
 
 
 mkdir -p ~/.vim/colors

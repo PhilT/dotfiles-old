@@ -79,11 +79,11 @@ aur () {
 
 # Clone or update a git repo
 gup () {
-  repo=$1
-  author=$2
-  modifier=$3
+  repo=$1; shift
+  author=$1; shift
+  options=$@
 
-  if [[ $author = true ]]; then
+  if [[ $author = '--private' ]]; then
     host=$PRIVATE_GIT
   elif [[ ! $author ]]; then
     host=$PUBLIC_GIT
@@ -95,15 +95,11 @@ gup () {
   if [ -d $repo ]; then
     echo updating $repo
     cd $repo
-    if [[ $modifer ]]; then
-      git co .
-    fi
     git pull -q
-    eval $modifier
     cd - > /dev/null
   else
     echo cloning $repo
-    git clone -q $host/$repo
+    git clone -q $options $host/$repo
   fi
 }
 

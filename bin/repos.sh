@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 cd $WORKSPACE
-gup documents true
-gup condensd true
-gup velocity true
+gup documents --private
+gup condensd --private
+gup velocity --private
 
 gup arch_installer
 gup canvas_experiment
