@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+source `dirname $0`/config.sh
 
 wl=`ls /sys/class/net | grep wl`
 
@@ -6,8 +7,8 @@ if [[ $wl != '' ]]; then
   echo Enter WIFI password for 'router':
   read router_password
 
-  echo Enter WIFI password for 'evmob':
-  read evmob_password
+  echo Enter WIFI password for 'mev':
+  read mobile_password
 
   echo "Interface=$wl
 Connection=wireless
@@ -20,10 +21,10 @@ Key=$router_password
   echo "Interface=$wl
 Connection=wireless
 Security=wpa
-ESSID=evmob
+ESSID=mev
 IP=dhcp
-Key=$evmob_password
-" | sudo tee /etc/netctl/$wl-evmob > /dev/null
+Key=$mobile_password
+" | sudo tee /etc/netctl/$wl-mev > /dev/null
   sudo systemctl enable netctl-auto@${wl}.service
   sudo systemctl start  netctl-auto@${wl}.service
 fi

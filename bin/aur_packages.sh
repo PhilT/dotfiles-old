@@ -1,20 +1,18 @@
 #!/usr/bin/env bash
+source `dirname $0`/config.sh
 
 # THIS SCRIPT IS REPEATABLE
 
 
-# CHROME and CLIPBOARD
-if [[ `pacman -Q xorg-server 2>/dev/null` != '' ]]; then
+if [[ $DESKTOP ]]; then
   aur google-chrome
   aur urxvt-clipboard
+
+  # RESIZE FONTS IN URXVT
+  aur urxvt-font-size-git
 fi
 
-# HEROKU
-aur heroku-client-standalone
-
-# RESIZE FONTS IN URXVT
-aur urxvt-font-size-git
-
-# makemkv
-[[ `hostname` == $SERVER ]] && aur makemkv-cli
+if [[ $MEDIA_SERVER ]]; then
+  aur makemkv plex-media-server plex-media-player
+fi
 

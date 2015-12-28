@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
+source `dirname $0`/config.sh
 
 # THIS SCRIPT IS REPEATABLE
 
-if [[ `pacman -Q xorg-server 2>/dev/null` != '' ]]; then
+if [[ $DESKTOP ]]; then
 
   sudo -i dirmngr < /dev/null # fixes https://bugs.archlinux.org/task/42798
 

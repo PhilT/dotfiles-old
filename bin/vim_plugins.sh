@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+source `dirname $0`/config.sh
 
 mkdir -p ~/apps
 cd ~/apps
@@ -39,3 +40,4 @@ mkdir -p ~/.vim/colors
 cd ~/.vim/colors
 curl -s -O https://raw.githubusercontent.com/tomasr/molokai/master/colors/molokai.vim
 curl -s -O https://raw.githubusercontent.com/w0ng/vim-hybrid/master/colors/hybrid.vim
+
