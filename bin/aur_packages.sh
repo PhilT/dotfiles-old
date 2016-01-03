@@ -13,6 +13,7 @@ if [[ $DESKTOP ]]; then
 fi
 
 if [[ $MEDIA_SERVER ]]; then
-  aur makemkv plex-media-server plex-media-player
+  pac cmake ffmpeg hicolor-icon-theme icu libcec libxbcommon-x11 mpv qt5-base qt5-webengine
+  aur makemkv plex-media-server-plexpass plex-media-player
 fi
 
