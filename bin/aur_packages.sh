@@ -14,8 +14,11 @@ fi
 
 if [[ $MEDIA_SERVER ]]; then
   pac cmake ffmpeg hicolor-icon-theme icu libcec libxbcommon-x11 mpv qt5-base qt5-webengine
+  aur prelink
   aur makemkv
   aur plex-media-server-plexpass
   aur plex-media-player
+
+  sudo usermod -G plex -a $USER
 fi
 
