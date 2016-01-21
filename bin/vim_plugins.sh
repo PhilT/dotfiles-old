@@ -27,7 +27,7 @@ gup vim-node moll --depth 1
 gup vim-pathogen tpope --depth 1
 gup vim-rails tpope --depth 1
 gup vim-rake tpope --depth 1
-gup vim-rspec thoughtbot --depth 1
+gup vim-test janko-m --depth 1
 gup vim-ruby vim-ruby --depth 1
 gup vim-slim slim-template --depth 1
 gup snipmate.vim msanders --depth 1

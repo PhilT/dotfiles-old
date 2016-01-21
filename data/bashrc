@@ -32,6 +32,7 @@ alias shutdown='sudo systemctl poweroff'
 alias boot='sudo systemctl reboot'
 alias off='sudo systemctl suspend'
 alias wifi='sudo systemctl restart netctl-auto@wlp3s0.service'
+alias open='xdg-open'
 
 alias pacman=pacmatic
 alias pacupg='sudo pacmatic -Syu' # Sync and upgrade all packages
@@ -56,6 +57,9 @@ slide () {
   feh --action "gimp '%f'" --fullscreen --auto-zoom --borderless --slideshow-delay 5 --sort name
 }
 
+function q {
+  links "https://google.co.uk?q=$1"
+}
 
 pac () {
   sudo pacman -S --noconfirm --noprogressbar --needed $@
@@ -141,3 +145,4 @@ PS1="$PURPLE\h $BLUE\w$RED$RVM$YELLOW$BRANCH $PURPLE\$$NORMAL "
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 [ -f ~/.bashrc_local ] && source ~/.bashrc_local
+

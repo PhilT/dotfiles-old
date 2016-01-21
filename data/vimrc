@@ -12,7 +12,7 @@ highlight NonText ctermfg=0
 highlight SignColumn ctermbg=8
 
 map <C-p> :FZF<CR>
-set rtp+=~/.fzf
+set rtp+=~/apps/fzf
 
 set expandtab
 set ignorecase
@@ -45,13 +45,12 @@ noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 
-
-" vim-rspec mappings
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAppSpecs()<CR>
-let g:rspec_command = "Dispatch bundle exec rspec {spec}"
+let test#strategy = 'dispatch'
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>g :TestVisit<CR>
 
 " only highlight current line while in insert mode
 augroup CursorLine
@@ -80,3 +79,4 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 let NERDTreeQuitOnOpen=1
 
 let g:syntastic_javascript_checkers = ['eslint']
+
