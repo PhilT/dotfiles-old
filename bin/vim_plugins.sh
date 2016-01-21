@@ -16,6 +16,7 @@ gup vim-dispatch tpope --depth 1
 gup vim-fugitive tpope --depth 1
 gup fzf.vim junegunn --depth 1
 gup vim-git tpope --depth 1
+gup vim-gitgutter airblade --depth 1
 gup vim-haml tpope --depth 1
 gup jasmine.vim claco --depth 1
 gup JavaScript-Indent vim-scripts --depth 1

@@ -25,6 +25,7 @@ set smartcase
 set tabstop=2
 set tags=./tags
 set wildignore+=.git/**,tmp/**,coverage/**,log/**,app/assets/fonts/**,app/assets/images/**,db/migrate/**,node_modules/**,bin/**,fca-frontend/**,frontend/**
+set so=7
 
 map <C-b> :NERDTreeToggle<CR>
 
