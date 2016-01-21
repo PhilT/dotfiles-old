@@ -19,7 +19,10 @@ gup vim-git tpope --depth 1
 gup vim-gitgutter airblade --depth 1
 gup vim-haml tpope --depth 1
 gup jasmine.vim claco --depth 1
+cd ~/.vim/bundle/JavaScript-Indent > /dev/null 2>&1 && git checkout .
+cd - > /dev/null
 gup JavaScript-Indent vim-scripts --depth 1
+sed -i '/echo "Sourcing/d' ~/.vim/bundle/JavaScript-Indent/indent/html.vim
 gup vim-javascript-syntax jelera --depth 1
 gup vim-markdown tpope --depth 1
 gup nerdtree scrooloose --depth 1
