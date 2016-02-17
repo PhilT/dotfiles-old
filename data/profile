@@ -13,7 +13,7 @@ export PUBLIC_GIT='git@github.com:PhilT'
 export PRIVATE_GIT='git@bitbucket.org:philat'
 
 export EDITOR=vim
-export CDPATH=$WORKSPACE:$CLIENTS:$ACCOUNTS
+export CDPATH=.:$WORKSPACE:$CLIENTS:$ACCOUNTS
 
 BINSTUBS_SAFE=.bin/safe/../../.bin:bin/safe/../../bin  # create a 'safe' folder in .bin/ or bin/ for security
 RBENV_SHIMS=$HOME/.rbenv/shims      # rbenv shims folder (instead of rbenv init)

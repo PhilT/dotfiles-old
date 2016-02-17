@@ -78,7 +78,7 @@ aur () {
     cd $name
     [[ $version != '' ]] && sed -i "s/^pkgver=.*/pkgver=$version/" PKGBUILD
     [[ $sha1 != '' ]] && sed -i "s/^sha1sums=.*/sha1sums=('$sha1')/" PKGBUILD
-    makepkg -sf --noprogressbar --noconfirm
+    makepkg -sf --noconfirm
     sudo pacman -U --noconfirm --noprogressbar --needed /tmp/$name*.pkg.tar
   else
     echo Could not download package
@@ -143,6 +143,6 @@ NORMAL="\[\e[m\]"
 BRANCH="\$(parse_git_branch)"
 PS1="$PURPLE\h $BLUE\w$RED$RVM$YELLOW$BRANCH $PURPLE\$$NORMAL "
 
+export FZF_DEFAULT_COMMAND='ag -g ""'
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 [ -f ~/.bashrc_local ] && source ~/.bashrc_local
-

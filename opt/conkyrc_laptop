@@ -1,10 +1,10 @@
-out_to_console true
-out_to_x false
-background false
+out_to_console yes
+out_to_x no
+background no
 update_interval 10
 total_run_times 0
 use_spacer none
-short_units true
+short_units yes
 
 TEXT
 w${wireless_link_qual_perc wlp3s0}% \
@@ -12,4 +12,3 @@ ${execi 60 acpi -b | sed 's/.*: //' | sed 's/\(.\)[a-z]\+, /\1/' | sed 's/chargi
 ${cpu cpu0}% \
 $memperc%/$mem \
 ${time %Y-%m-%d %H:%M}
-

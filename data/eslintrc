@@ -5,10 +5,12 @@
   },
   "env": {
     "es6": true,
-    "browser": true
+    "browser": true,
+    "node": true,
+    "phantomjs": true
   },
+  "parser": "babel-eslint",
   "rules": {
     "semi": [2, "never"],
   }
 }
-
