@@ -14,4 +14,3 @@ if [[ $DEVELOPMENT ]]; then
   gem install mdl ruby-lint
   gem install bundler
 fi
-

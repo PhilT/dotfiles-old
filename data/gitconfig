@@ -13,6 +13,7 @@
   df = diff HEAD
   lg = log -p
   lf = log --name-only --oneline
+  lfd = log --name-only --oneline --diff-filter=ACMRTUXB
 
 [branch]
 	autosetupmerge = true
