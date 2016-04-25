@@ -1,16 +1,18 @@
 {
-  "extends": "eslint:recommended",
+  "extends": "airbnb/base",
   "ecmaFeatures": {
     "modules": true
   },
   "env": {
-    "es6": true,
     "browser": true,
-    "node": true,
     "phantomjs": true
   },
   "parser": "babel-eslint",
   "rules": {
     "semi": [2, "never"],
+    "no-multiple-empty-lines": ["error", { "max": 1 }],
+    "no-param-reassign": ["error", { "props": false }],
+    "func-names": "off", // ES6 sets name correctly
+    "radix": ["error", "as-needed"],
   }
 }

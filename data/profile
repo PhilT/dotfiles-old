@@ -7,7 +7,7 @@ fi
 
 # used in dotfiles/bin scripts
 export WORKSPACE=$HOME/ws
-export CLIENTS=$HOME/ws/documents/electricvisions/clients
+export CLIENTS=$HOME/ws/clients
 export ACCOUNTS=$HOME/ws/documents/electricvisions/accounts
 export PUBLIC_GIT='git@github.com:PhilT'
 export PRIVATE_GIT='git@bitbucket.org:philat'
@@ -25,4 +25,3 @@ PATH=$BINSTUBS_SAFE:$RBENV_SHIMS:$USER_BIN:$PATH
 #if [[ `which startx 2>&1` != '' ]]; then
 #  `pgrep startx 2>&1` || startx
 #fi
-

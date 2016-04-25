@@ -6,6 +6,10 @@ source `dirname $0`/config.sh
 
 if [[ $DESKTOP ]]; then
   aur google-chrome
+
+  # make browser-launch npm package able to detect chrome
+  $DEVELOPMENT && sudo ln -s /usr/bin/google-chrome-stable /usr/bin/google-chrome
+
   aur urxvt-clipboard
 
   # RESIZE FONTS IN URXVT
@@ -21,4 +25,3 @@ if [[ $MEDIA_SERVER ]]; then
 
   sudo usermod -G plex -a $USER
 fi
-
