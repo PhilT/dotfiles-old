@@ -4,4 +4,3 @@ xrdb -merge ~/.Xresources
 [ -f /usr/bin/VBoxClient-all ] && VBoxClient-all
 xset m 3/2 0
 exec ~/bin/startdwm
-

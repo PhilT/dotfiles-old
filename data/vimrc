@@ -1,8 +1,9 @@
 " Setup pathogen
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
-syntax on
-filetype plugin indent on
+filetype indent on
+filetype plugin on
+ syntax on
 
 Helptags
 colorscheme hybrid
@@ -14,6 +15,8 @@ highlight SignColumn ctermbg=8
 map <C-p> :FZF<CR>
 set rtp+=~/apps/fzf
 
+set clipboard=unnamed
+set autoread
 set expandtab
 set ignorecase
 set incsearch
@@ -85,5 +88,8 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_eruby_ruby_quiet_messages = {'regex': 'possibly useless use of a variable in void context'}
 
-let g:gitgutter_enabled = 1
+let g:gitgutter_enabled = 0
+
+autocmd BufRead,BufNewFile *.md setlocal spell

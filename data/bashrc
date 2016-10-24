@@ -11,6 +11,7 @@ HISTSIZE=4000
 HISTFILESIZE=4000
 
 export LANG=en_GB.UTF-8
+export LC_MESSAGES="C"
 
 # update LINES and COLUMNS after each command.
 shopt -s checkwinsize
@@ -54,7 +55,7 @@ alias halfsize='ls *.* | xargs -n1 --replace convert -verbose {} -resize 50% {}'
 # Press ENTER to load current image into Gimp. H to pause slideshow
 #   slide <file or folder>
 slide () {
-  feh --action "gimp '%f'" --fullscreen --auto-zoom --borderless --slideshow-delay 5 --sort name
+  feh --action "gimp '%f'" --recursive --fullscreen --auto-zoom --borderless --slideshow-delay 5 --sort dirname,name
 }
 
 function q {

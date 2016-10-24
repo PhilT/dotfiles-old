@@ -38,4 +38,3 @@ if [[ $DESKTOP ]]; then
 
   chmod u+s /usr/bin/xinit
 fi
-

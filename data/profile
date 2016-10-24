@@ -22,6 +22,4 @@ USER_BIN=$HOME/bin                  # for running user scripts
 
 PATH=$BINSTUBS_SAFE:$RBENV_SHIMS:$USER_BIN:$PATH
 
-#if [[ `which startx 2>&1` != '' ]]; then
-#  `pgrep startx 2>&1` || startx
-#fi
+which startx 2>&1 && (pgrep startx 2>&1 || startx)
