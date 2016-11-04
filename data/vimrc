@@ -1,9 +1,10 @@
-" Setup pathogen
+set nocompatible
+
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
 filetype indent on
 filetype plugin on
- syntax on
+syntax on
 
 Helptags
 colorscheme hybrid
@@ -20,15 +21,16 @@ set autoread
 set expandtab
 set ignorecase
 set incsearch
+set smartcase
 set noswapfile
 set number
 set shiftwidth=2
 set backspace=2
-set smartcase
 set tabstop=2
 set tags=./tags
 set wildignore+=.git/**,tmp/**,coverage/**,log/**,app/assets/fonts/**,app/assets/images/**,db/migrate/**,node_modules/**,bin/**,fca-frontend/**,frontend/**
 set so=7
+set laststatus=2
 
 map <C-b> :NERDTreeToggle<CR>
 
@@ -37,8 +39,11 @@ map! <Esc>[; <C-Semicolon>
 
 nmap <C-n> :cn<CR>
 nmap <C-m> :cp<CR>
-nmap <Leader>n :setlocal number!<CR>
+nmap <Leader>l :setlocal number!<CR>
 nmap <Leader>o :set paste!<CR>
+map <Leader>p :bp<CR> " previous buffer
+map <Leader>n :bn<CR> " next buffer
+map <Leader>d :bd<CR> " delete buffer
 vmap <C-c> y: call system("xsel -i", getreg("\""))<CR>
 
 noremap j gj
@@ -52,7 +57,6 @@ let test#strategy = 'dispatch'
 nmap <silent> <leader>T :TestNearest<CR>
 nmap <silent> <leader>t :TestFile<CR>
 nmap <silent> <leader>a :TestSuite<CR>
-nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
 
 " only highlight current line while in insert mode

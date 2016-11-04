@@ -8,8 +8,9 @@ fzf/install
 
 mkdir -p ~/.vim/bundle
 cd ~/.vim/bundle
-
+gup ag.vim rking --depth 1
 gup vim-airline bling --depth 1
+gup auto-pairs jiangmiao --depth 1
 gup vim-bundler tpope --depth 1
 gup vim-dispatch tpope --depth 1
 gup vim-fugitive tpope --depth 1
@@ -33,7 +34,6 @@ gup vim-surround tpope --depth 1
 gup vim-test janko-m --depth 1
 gup yajs.vim othree --depth 1
 gup vim-yaml avakhov --depth 1
-gup ag.vim rking --depth 1
 
 
 mkdir -p ~/.vim/colors
