@@ -12,6 +12,7 @@ HISTFILESIZE=4000
 
 export LANG=en_GB.UTF-8
 export LC_MESSAGES="C"
+[[ $XTERM == 'xterm' ]] && export TERM=xterm-256color
 
 # update LINES and COLUMNS after each command.
 shopt -s checkwinsize
@@ -147,3 +148,20 @@ PS1="$PURPLE\h $BLUE\w$RED$RVM$YELLOW$BRANCH $PURPLE\$$NORMAL "
 export FZF_DEFAULT_COMMAND='ag -g ""'
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 [ -f ~/.bashrc_local ] && source ~/.bashrc_local
+
+export WORKSPACE=/mnt/c/Users/Phil/ws
+export CLIENTS=$HOME/ws/documents/electricvisions/clients
+export ACCOUNTS=$HOME/ws/documents/electricvisions/accounts
+export PUBLIC_GIT='git@github.com:PhilT'
+export PRIVATE_GIT='git@bitbucket.org:philat'
+
+export EDITOR=vim
+export CDPATH=.:$WORKSPACE:$CLIENTS:$ACCOUNTS
+
+eval $(dircolors -b $HOME/.dircolors)
+
+# Only add to path if not previously executed
+# (this is instead of having a ~/.profile file which isn't loaded in Bash on Windows)
+[[ $PATH =~ rbenv ]] || export PATH="$HOME/bin:$HOME/.rbenv/bin:$PATH"
+
+eval "$(rbenv init -)"

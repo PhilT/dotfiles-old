@@ -7,11 +7,9 @@ filetype plugin on
 syntax on
 
 Helptags
-colorscheme hybrid
 set background=dark
-let g:molokai_original=0
-highlight NonText ctermfg=0
-highlight SignColumn ctermbg=8
+let g:hybrid_custom_term_colors = 1
+colorscheme hybrid
 
 map <C-p> :FZF<CR>
 set rtp+=~/apps/fzf

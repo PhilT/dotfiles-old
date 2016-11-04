@@ -2,10 +2,11 @@
 
 MACHINE=`hostname`
 DESKTOP_VM=evm
+DESKTOP=Gamer
 LAPTOP=evx
 SERVER=evs
 
-if [[ $MACHINE == $DESKTOP_VM ]]; then
+if [[ $MACHINE == $DESKTOP_VM || $MACHINE == $DESKTOP ]]; then
   DESKTOP=true
   DEVELOPMENT=true
   APPS=true
@@ -24,4 +25,3 @@ else
   echo 'Did you forget to update config.sh or arch_installer/install.sh?'
   exit 1
 fi
-
