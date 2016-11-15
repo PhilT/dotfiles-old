@@ -25,6 +25,7 @@ alias grep='grep --color=auto'
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
+alias vim='nvim'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
@@ -137,13 +138,30 @@ export -f aur gup pac
 parse_git_branch () {
   git symbolic-ref -q HEAD 2> /dev/null | sed 's/refs\/heads\/\(.*\)/ \1/'
 }
-PURPLE="\[\e[0;35m\]"
-BLUE="\[\e[0;34m\]"
-RED="\[\e[0;31m\]"
-YELLOW="\[\e[0;33m\]"
-NORMAL="\[\e[m\]"
-BRANCH="\$(parse_git_branch)"
-PS1="$PURPLE\h $BLUE\w$RED$RVM$YELLOW$BRANCH $PURPLE\$$NORMAL "
+
+git_modified () {
+  [[ $(git status --porcelain) == '' ]] && printf $green || printf $yellow
+}
+
+ruby_version () {
+  rbenv version | sed 's/ .*//'
+}
+
+grey="\[\e[38;5;248;48;5;236m\]"
+blue="\[\e[38;5;15;48;5;27m\]"
+green="\e[38;5;0;48;5;84m"
+red="\[\e[38;5;0;48;5;1m\]"
+yellow="\e[38;5;0;48;5;227m"
+glow="\[\e[38;5;266m\]"
+
+host=" \h"
+workingdir=" \w"
+ruby=" \$(ruby_version)"
+branch=" \$(git_modified)\$(parse_git_branch) "
+prompt=\$
+normal="\[\033[0m\]"
+
+PS1="$grey$host$blue$workingdir$red$ruby$branch$normal $glow$prompt$normal "
 
 export FZF_DEFAULT_COMMAND='ag -g ""'
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
@@ -158,7 +176,7 @@ export PRIVATE_GIT='git@bitbucket.org:philat'
 export EDITOR=vim
 export CDPATH=.:$WORKSPACE:$CLIENTS:$ACCOUNTS
 
-eval $(dircolors -b $HOME/.dircolors)
+#eval $(dircolors -b $HOME/.dircolors)
 
 # Only add to path if not previously executed
 # (this is instead of having a ~/.profile file which isn't loaded in Bash on Windows)

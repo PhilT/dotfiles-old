@@ -2,11 +2,11 @@
 
 MACHINE=`hostname`
 DESKTOP_VM=evm
-DESKTOP=Gamer
+DESKTOP_REAL=Gamer
 LAPTOP=evx
 SERVER=evs
 
-if [[ $MACHINE == $DESKTOP_VM || $MACHINE == $DESKTOP ]]; then
+if [[ $MACHINE == $DESKTOP_VM || $MACHINE == $DESKTOP_REAL ]]; then
   DESKTOP=true
   DEVELOPMENT=true
   APPS=true

@@ -1,0 +1,10 @@
+#umask 022
+
+# if running bash
+if [ -n "$BASH_VERSION" ]; then
+       . "$HOME/.bashrc"
+fi
+
+
+which startx 2>&1 && (pgrep startx 2>&1 || startx)
+
