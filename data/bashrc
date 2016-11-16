@@ -159,7 +159,7 @@ glow="\[\e[38;5;166;48;5;233m\]"
 host=" \h"
 workingdir=" \w"
 ruby=" \$(ruby_version)"
-branch="\$(git_modified)\$(parse_git_branch)"
+branch="\[\$(git_modified)\]\$(parse_git_branch)"
 prompt=\$
 normal="\[\033[0m\]"
 
