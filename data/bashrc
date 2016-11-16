@@ -132,15 +132,17 @@ lap () {
 
 export -f aur gup pac
 
-# Colour-coded prompt
-#     machine-name current-dir rubyversion@gemset [branch] $
-#
 parse_git_branch () {
   git symbolic-ref -q HEAD 2> /dev/null | sed 's/refs\/heads\/\(.*\)/ \1/'
 }
 
 git_modified () {
-  [[ $(git status --porcelain) == '' ]] && printf $green || printf $yellow
+  git_status=$(git status --porcelain 2>&1)
+  if [[ $git_status  == '' ]]; then
+    printf $green
+  elif ! [[ $git_status =~ /^fatal/ ]]; then
+    printf $yellow
+  fi
 }
 
 ruby_version () {
@@ -152,12 +154,12 @@ blue="\[\e[38;5;15;48;5;27m\]"
 green="\e[38;5;0;48;5;84m"
 red="\[\e[38;5;0;48;5;1m\]"
 yellow="\e[38;5;0;48;5;227m"
-glow="\[\e[38;5;266m\]"
+glow="\[\e[38;5;166;48;5;233m\]"
 
 host=" \h"
 workingdir=" \w"
 ruby=" \$(ruby_version)"
-branch=" \$(git_modified)\$(parse_git_branch) "
+branch="\$(git_modified)\$(parse_git_branch)"
 prompt=\$
 normal="\[\033[0m\]"
 
@@ -167,19 +169,6 @@ export FZF_DEFAULT_COMMAND='ag -g ""'
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 [ -f ~/.bashrc_local ] && source ~/.bashrc_local
 
-export WORKSPACE=/mnt/c/Users/Phil/ws
-export CLIENTS=$HOME/ws/documents/electricvisions/clients
-export ACCOUNTS=$HOME/ws/documents/electricvisions/accounts
-export PUBLIC_GIT='git@github.com:PhilT'
-export PRIVATE_GIT='git@bitbucket.org:philat'
-
-export EDITOR=vim
-export CDPATH=.:$WORKSPACE:$CLIENTS:$ACCOUNTS
-
 #eval $(dircolors -b $HOME/.dircolors)
-
-# Only add to path if not previously executed
-# (this is instead of having a ~/.profile file which isn't loaded in Bash on Windows)
-[[ $PATH =~ rbenv ]] || export PATH="$HOME/bin:$HOME/.rbenv/bin:$PATH"
 
 eval "$(rbenv init -)"
