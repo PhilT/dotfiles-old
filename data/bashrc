@@ -146,7 +146,7 @@ git_modified () {
 }
 
 ruby_version () {
-  rbenv version | sed 's/ .*/ /'
+  [[ $(which rbenv) != '' ]] && rbenv version 2> /dev/null | sed 's/ .*/ /'
 }
 
 grey="\[\e[38;5;248;48;5;236m\]"
@@ -169,6 +169,5 @@ export FZF_DEFAULT_COMMAND='ag -g ""'
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 [ -f ~/.bashrc_local ] && source ~/.bashrc_local
 
-#eval $(dircolors -b $HOME/.dircolors)
+eval $(dircolors -b $HOME/.dircolors)
 
-eval "$(rbenv init -)"
