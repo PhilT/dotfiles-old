@@ -5,7 +5,12 @@ if [ -n "$BASH_VERSION" ]; then
   . "$HOME/.bashrc"
 fi
 
-export WORKSPACE=/mnt/c/Users/Phil/ws
+if [[ -f /mnt/c/Users/Phil/ws ]]; then
+  export WORKSPACE=/mnt/c/Users/Phil/ws
+else
+  export WORKSPACE=$HOME/ws
+fi
+
 export CLIENTS=$HOME/ws/documents/electricvisions/clients
 export ACCOUNTS=$HOME/ws/documents/electricvisions/accounts
 export PUBLIC_GIT='git@github.com:PhilT'
