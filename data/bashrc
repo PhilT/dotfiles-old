@@ -153,7 +153,7 @@ grey="\[\e[38;5;248;48;5;236m\]"
 blue="\[\e[38;5;15;48;5;27m\]"
 green="\e[38;2;0;0;0;48;2;1;165;37m"
 red="\[\e[38;2;250;250;250;48;2;178;0;0m\]"
-yellow="\e[38;2;81;76;8;48;2;232;218;27m"
+yellow="\e[38;2;232;218;27;48;2;81;76;8m"
 purple="\[\e[38;2;184;60;242;48;2;30;30;30m\]"
 
 host=" \h "
@@ -169,5 +169,4 @@ export FZF_DEFAULT_COMMAND='ag -g ""'
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 [ -f ~/.bashrc_local ] && source ~/.bashrc_local
 
-eval $(dircolors -b $HOME/.dircolors)
-
+[ -f $HOME/.dircolors ] && eval $(dircolors -b $HOME/.dircolors)
