@@ -98,6 +98,10 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" Terminal
+hi Normal guibg=#121417| " Match background color of terminal in editor
+tnoremap <Esc> <C-\><C-n>
+
 " Build
 autocmd! BufWritePost * Neomake
 
@@ -140,6 +144,8 @@ autocmd BufRead,BufNewFile *.md setlocal spell
 " <C-x><C-n> - Complete filenames
 command! Tags !ctags -R .
 
+nnoremap <leader>vim :e ~/.config/nvim/init.vim<CR>
+
 " Snippets
 function PasteSnippet(type)
   let snippets_dir = '$WORKSPACE/dotfiles/data/config/nvim/snippets'
@@ -149,5 +155,5 @@ function PasteSnippet(type)
   execute 'startinsert'
 endfunction
 
-nnoremap <Leader>slim :call PasteSnippet('slim')<CR>
-nnoremap <Leader>spec :call PasteSnippet('spec')<CR>
+nnoremap <leader>slim :call PasteSnippet('slim')<CR>
+nnoremap <leader>spec :call PasteSnippet('spec')<CR>
