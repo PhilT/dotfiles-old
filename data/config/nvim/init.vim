@@ -6,29 +6,33 @@ call dein#begin('$WORKSPACE/dotfiles/data/config/nvim/dein')
 
 call dein#add('Shougo/dein.vim')
 
-call dein#add('Shougo/neosnippet.vim')
-call dein#add('Shougo/neosnippet-snippets')
 call dein#add('sheerun/vim-polyglot')
 call dein#add('joshdick/onedark.vim') " theme
 
+call dein#add('junegunn/fzf')
+call dein#add('neomake/neomake')
+call dein#add('jiangmiao/auto-pairs')
 call dein#add('bling/vim-airline')
-call dein#add('airblade/vim-gitgutter')
 call dein#add('scrooloose/nerdtree')
-call dein#add('slim-template/vim-slim')
-call dein#add('vim-ruby/vim-ruby')
-call dein#add('slm-lang/vim-slm')
-call dein#add('wavded/vim-stylus')
-call dein#add('avakhov/vim-yaml')
-
-call dein#add('tpope/vim-bundler')
-call dein#add('tpope/vim-dispatch')
-call dein#add('tpope/vim-fugitive')
-call dein#add('tpope/vim-git')
+call dein#add('airblade/vim-gitgutter')
+call dein#add('tpope/vim-fugitive') " Gedit, Gblame, Gdiff, Gstatus, Greset, Gcommit, plus loads more
 call dein#add('tpope/vim-markdown')
+call dein#add('janko-m/vim-test')
+
+" Ruby
+call dein#add('tpope/vim-bundler')
 call dein#add('tpope/vim-rails')
 call dein#add('tpope/vim-rake')
 
-call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
+" JavaScript
+call dein#add('slm-lang/vim-slm')
+call dein#add('marijnh/tern_for_vim', { 'build': 'npm install' })
+call dein#add('othree/yajs.vim')
+call dein#add('othree/javascript-libraries-syntax.vim')
+call dein#add('gavocanov/vim-js-indent')
+call dein#add('moll/vim-node')
+call dein#add('elzr/vim-json')
+
 
 call dein#end()
 
@@ -58,11 +62,16 @@ set tags=./tags
 set scrolloff=7
 set laststatus=2
 
+" Search/Replace
+hi Search guibg=#61AFEF
+hi WildMenu guifg=#333333 guibg=#61AFEF
+nmap <silent> <Space> :nohlsearch<CR>
+
 " Fuzzy find
-set wildignore+=.git/**,tmp/**,coverage/**,log/**,app/assets/fonts/**,app/assets/images/**,db/migrate/**,node_modules/**,bin/**,fca-frontend/**,frontend/**
-set path+=** " recursively search files
 set wildmenu " display files with TAB
-map <C-p> :find<SPACE>
+set wildignore+=.git/**,tmp/**,coverage/**,log/**,app/assets/fonts/**,app/assets/images/**,db/migrate/**,node_modules/**,bin/**
+set path+=** " recursively search files
+map <C-p> :FZF<CR>
 
 
 " NERDTree
@@ -82,21 +91,26 @@ map <Leader>n :bn<CR>| " next buffer
 map <Leader>d :bd<CR>| " delete buffer
 
 " Sensible movement keys
-noremap j gj
-noremap k gk
-noremap <C-h> <C-w>h
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
+nnoremap j gj
+nnoremap k gk
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
-" Testing
-let test#strategy = 'dispatch'
-nmap <silent> <leader>T :TestNearest<CR>
-nmap <silent> <leader>t :TestFile<CR>
-nmap <silent> <leader>a :TestSuite<CR>
-nmap <silent> <leader>g :TestVisit<CR>
-let g:rspec_command = 'call VimuxRunCommand("bundle exec spring rspec --format progress --require ~/apps/rspec_support/quickfix_formatter.rb --format QuickfixFormatter --out quickfix.out {spec}\n")'
+" Build
+autocmd! BufWritePost * Neomake
 
+" Testing - vim-test
+let test#strategy = 'neovim'
+nmap <silent> <leader>T :TestNearest<CR>| " Runs test nearest to cursor
+nmap <silent> <leader>t :TestFile<CR>| " Runs all tests in file
+nmap <silent> <leader>a :TestSuite<CR>| " Runs entire suite
+nmap <silent> <leader>l :TestLast<CR>| " Runs last test
+nmap <silent> <leader>g :TestVisit<CR>| " Runs last test file
+
+" Git Gutter
+let g:gitgutter_sign_column_always = 1
 
 " Powerline fonts
 let g:airline_powerline_fonts = 1
