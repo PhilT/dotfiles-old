@@ -179,7 +179,7 @@ black='29;29;29'
 
 prehost="\[\e[38;2;${sbg};48;2;${green}m\]"
 host=" \h "
-posthost="\[\e[38;2;${green};48;2;${sbg}m\]"
+posthost="\[\e[38;2;${green};48;2;${bg_hl}m\]"
 
 preworkdir="\[\e[38;2;${silver};48;2;${bg_hl}m\]"
 workingdir=" \w "
