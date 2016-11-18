@@ -187,15 +187,11 @@ postworkdir="\[\e[38;2;${bg_hl};48;2;${red_2}m\]"
 
 preruby="\[\e[38;2;${sbg};48;2;${red_2}m\]"
 ruby=" \$(ruby_version)"
-postruby="\[\e[38;2;${red_2};48;2;${sbg}m\]"
+postruby="\[\e[38;2;${red_2};48;2;${bg_hl}m\]"
 
-prebranch="\[\e[38;2;$(git_modified);48;2;${bg_hl}m\]"
+prebranch="\[\e[38;2;\$(git_modified);48;2;${bg_hl}m\]"
 branch="\$(parse_git_branch)"
 postbranch="\[\e[38;2;${bg_hl};48;2;${black}m\]"
-
-preprompt="\[\e[38;2;${silver};48;2;$(root_user)m\]"
-prompt=" "
-postprompt="\[\e[38;2;$(root_user);48;2;${black}m\]"
 
 normal="\[\033[0m\] "
 
