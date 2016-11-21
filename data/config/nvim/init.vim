@@ -17,7 +17,8 @@ call dein#add('scrooloose/nerdtree')
 call dein#add('airblade/vim-gitgutter')
 call dein#add('tpope/vim-fugitive') " Gedit, Gblame, Gdiff, Gstatus, Greset, Gcommit, plus loads more
 call dein#add('tpope/vim-markdown')
-call dein#add('janko-m/vim-test')
+call dein#add('SirVer/ultisnips')
+call dein#add('metakirby5/codi.vim') " Interactive dev scratchpad - :Codi/:Codi! (on/off)
 
 " Ruby
 call dein#add('tpope/vim-bundler')
@@ -73,7 +74,6 @@ set wildignore+=.git/**,tmp/**,coverage/**,log/**,app/assets/fonts/**,app/assets
 set path+=** " recursively search files
 map <C-p> :FZF<CR>
 
-
 " NERDTree
 map <C-b> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif " quit vim if NERDTree is last window
@@ -100,10 +100,11 @@ nnoremap <C-l> <C-w>l
 
 " Terminal
 hi Normal guibg=#121417| " Match background color of terminal in editor
-tnoremap <Esc> <C-\><C-n>
+" tnoremap <Esc> <C-\><C-n> - conflicts with exiting FZF
 
-" Build
-autocmd! BufWritePost * Neomake
+" Build, Linting
+autocmd! BufReadPost,BufWritePost * Neomake
+let g:neomake_serialize=1
 
 " Testing - vim-test
 let test#strategy = 'neovim'
@@ -145,15 +146,3 @@ autocmd BufRead,BufNewFile *.md setlocal spell
 command! Tags !ctags -R .
 
 nnoremap <leader>vim :e ~/.config/nvim/init.vim<CR>
-
-" Snippets
-function PasteSnippet(type)
-  let snippets_dir = '$WORKSPACE/dotfiles/data/config/nvim/snippets'
-  execute '-1read ' . snippets_dir . '/template.' . a:type
-  execute 'normal! /$start'
-  execute 'normal! dE'
-  execute 'startinsert'
-endfunction
-
-nnoremap <leader>slim :call PasteSnippet('slim')<CR>
-nnoremap <leader>spec :call PasteSnippet('spec')<CR>
