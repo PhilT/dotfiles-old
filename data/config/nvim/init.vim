@@ -18,6 +18,7 @@ call dein#add('airblade/vim-gitgutter')
 call dein#add('tpope/vim-fugitive') " Gedit, Gblame, Gdiff, Gstatus, Greset, Gcommit, plus loads more
 call dein#add('tpope/vim-markdown')
 call dein#add('SirVer/ultisnips')
+call dein#add('honza/vim-snippets')
 call dein#add('metakirby5/codi.vim') " Interactive dev scratchpad - :Codi/:Codi! (on/off)
 
 " Ruby
@@ -82,6 +83,11 @@ let NERDTreeQuitOnOpen=1 "close NERDTree after opening file
 " Toggle line numbers and paste formatting
 nmap <Leader>l :setlocal number!<CR>
 nmap <Leader>o :set paste!<CR>
+
+" Map F1 to del key to fix terminfo problem when using st (simple terminal)
+" https://github.com/neovim/neovim/issues/3211
+map <F1> <del>
+map! <F1> <del>
 
 " Buffers
 nmap <C-n> :cn<CR>

@@ -5,7 +5,6 @@ dir=`dirname $0`
 $dir/network.sh
 ssh-keyscan bitbucket.org -t rsa >> ~/.ssh/known_hosts
 $dir/bin_setup.sh
-$dir/vim_plugins.sh
 $dir/repos.sh
 $dir/xwindows.sh
 $dir/ruby.sh
@@ -14,4 +13,3 @@ $dir/aur_packages.sh
 $dir/fonts.sh
 $dir/bluetooth.sh
 $dir/sound.sh
-
