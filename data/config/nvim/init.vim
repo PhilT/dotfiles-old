@@ -10,6 +10,7 @@ call dein#add('sheerun/vim-polyglot')
 call dein#add('joshdick/onedark.vim') " theme
 
 call dein#add('junegunn/fzf')
+call dein#add('mileszs/ack.vim')
 call dein#add('neomake/neomake')
 call dein#add('jiangmiao/auto-pairs')
 call dein#add('bling/vim-airline')
@@ -74,6 +75,11 @@ set wildmenu " display files with TAB
 set wildignore+=.git/**,tmp/**,coverage/**,log/**,app/assets/fonts/**,app/assets/images/**,db/migrate/**,node_modules/**,bin/**
 set path+=** " recursively search files
 map <C-p> :FZF<CR>
+
+" Find in files
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
 
 " NERDTree
 map <C-b> :NERDTreeToggle<CR>

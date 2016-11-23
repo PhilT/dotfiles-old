@@ -9,11 +9,6 @@ if [[ $DESKTOP ]]; then
 
   # make browser-launch npm package able to detect chrome
   $DEVELOPMENT && sudo ln -s /usr/bin/google-chrome-stable /usr/bin/google-chrome
-
-  aur urxvt-clipboard
-
-  # RESIZE FONTS IN URXVT
-  aur urxvt-font-size-git
 fi
 
 if [[ $MEDIA_SERVER ]]; then
