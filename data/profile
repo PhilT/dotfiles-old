@@ -23,4 +23,4 @@ export PATH="$HOME/bin:$HOME/.rbenv/bin:$PATH"
 
 eval "$(rbenv init -)"
 
-which startx 2>&1 && (pgrep startx 2>&1 || startx)
+pgrep startx 2>&1 || (which startx 2>&1 && startx)

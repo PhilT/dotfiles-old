@@ -160,51 +160,57 @@ root_user () {
   [[ $USER == root ]] && printf $purple || printf $blue
 }
 
-# Atom One Dark theme colors
-accent='82;139;255'
-sfg='171;178;191'
-sbg='40;44;52'
-bg_1='18;20;23'
-bg_hl='47;52;61'
-gutter='102;109;122'
-mono_1='171;178;191'
-mono_2='130;137;151'
-mono_3='92;99;112'
-cyan='86;182;194'
-blue='97;175;239'
-purple='198;120;221'
-green='152;195;121'
-red_1='224;108;117'
-red_2='190;80;70'
-orange_1='209;154;102'
-orange_2='229;192;123'
-gray='62;68;81'
-silver='170;170;170'
-black='29;29;29'
+if [[ $(pgrep startx 2>&1) ]]; then
+  # Atom One Dark theme colors
+  accent='82;139;255'
+  sfg='171;178;191'
+  sbg='40;44;52'
+  bg_1='18;20;23'
+  bg_hl='47;52;61'
+  gutter='102;109;122'
+  mono_1='171;178;191'
+  mono_2='130;137;151'
+  mono_3='92;99;112'
+  cyan='86;182;194'
+  blue='97;175;239'
+  purple='198;120;221'
+  green='152;195;121'
+  red_1='224;108;117'
+  red_2='190;80;70'
+  orange_1='209;154;102'
+  orange_2='229;192;123'
+  gray='62;68;81'
+  silver='170;170;170'
+  black='29;29;29'
 
 
-prehost="\[\e[38;2;${sbg};48;2;${green}m\]"
-host=" \h "
-posthost="\[\e[38;2;${green};48;2;${bg_hl}m\]"
+  prehost="\[\e[38;2;${sbg};48;2;${green}m\]"
+  host=" \h "
+  posthost="\[\e[38;2;${green};48;2;${bg_hl}m\]"
 
-preworkdir="\[\e[38;2;${silver};48;2;${bg_hl}m\]"
-workingdir=" \w "
-postworkdir="\[\e[38;2;${bg_hl};48;2;${red_2}m\]"
+  preworkdir="\[\e[38;2;${silver};48;2;${bg_hl}m\]"
+  workingdir=" \w "
+  postworkdir="\[\e[38;2;${bg_hl};48;2;${red_2}m\]"
 
-preruby="\[\e[38;2;${sbg};48;2;${red_2}m\]"
-ruby=" \$(ruby_version)"
-postruby="\[\e[38;2;${red_2};48;2;${bg_hl}m\]"
+  preruby="\[\e[38;2;${sbg};48;2;${red_2}m\]"
+  ruby=" \$(ruby_version)"
+  postruby="\[\e[38;2;${red_2};48;2;${bg_hl}m\]"
 
-prebranch="\[\e[38;2;\$(git_modified);48;2;${bg_hl}m\]"
-branch="\$(parse_git_branch)"
-postbranch="\[\e[38;2;${bg_hl};48;2;${bg_1}m\]"
+  prebranch="\[\e[38;2;\$(git_modified);48;2;${bg_hl}m\]"
+  branch="\$(parse_git_branch)"
+  postbranch="\[\e[38;2;${bg_hl};48;2;${bg_1}m\]"
 
-normal="\[\033[0m\] "
+  normal="\[\033[0m\] "
 
-PS1="$prehost$host$posthost$preworkdir$workingdir$postworkdir$preruby$ruby$postruby$prebranch$branch$postbranch$normal"
+  PS1="$prehost$host$posthost$preworkdir$workingdir$postworkdir$preruby$ruby$postruby$prebranch$branch$postbranch$normal"
+else
+  PS1="$host$workingdir$ruby$branch "
+fi
+
+export LS_COLORS="ow=90:di=90"
 
 export FZF_DEFAULT_COMMAND='ag -g ""'
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 [ -f ~/.bashrc_local ] && source ~/.bashrc_local
 
-export LS_COLORS="ow=90:di=90"
+cd # ensure we're in home dir on non-native linux's
