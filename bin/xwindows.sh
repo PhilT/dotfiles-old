@@ -24,14 +24,15 @@ if [[ $DESKTOP ]]; then
   pushd $WORKSPACE
 
   # Fork of DWM - suckless Dynamic Window Manager
-  git clone $PUBLIC_GIT/dwm.git
+  gup dwm
   cd dwm
   sudo -S make clean install
   cd -
 
   # Simple Terminal + font size increase
-  git clone git://git.suckless.org/st
+  [ -d st ] || git clone http://git.suckless.org/st
   cd st
+  git pull
   sed 's/pixelsize=12/pixelsize=18/' config.def.h > config.h
   sudo -S make clean install
 
