@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-source `dirname $0`/config.sh
 
 # Adds symlinks for everything in data/ to ~/ and prefixes them with a dot ('.')
 # so that dotfiles can be kept updated
@@ -21,4 +20,3 @@ add_current () {
 
 remove_existing
 add_current
-
