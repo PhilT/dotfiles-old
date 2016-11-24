@@ -206,8 +206,6 @@ if [[ $(pgrep startx 2>&1) ]]; then
   normal="\[\033[0m\] "
 
   PS1="$prehost$host$posthost$preworkdir$workingdir$postworkdir$preruby$ruby$postruby$prebranch$branch$postbranch$normal"
-else
-  PS1="$host$workingdir$ruby$branch "
 fi
 
 export LS_COLORS="ow=90:di=90"
