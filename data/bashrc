@@ -94,7 +94,7 @@ aur () {
 gup () {
   repo=$1; shift
   author=$1; shift
-  options=$@
+  dest=$1; shift
 
   if [[ $author = '--private' ]]; then
     host=$PRIVATE_GIT
@@ -104,15 +104,18 @@ gup () {
     host=https://github.com/$author
   fi
 
+  if [[ $dest = '' ]]; then
+    dest = $repo
+  fi
 
   if [ -d $repo ]; then
     echo updating $repo
-    cd $repo
+    cd $dest
     git pull -q
     cd - > /dev/null
   else
     echo cloning $repo
-    git clone -q $options $host/$repo
+    git clone -q $options $host/$repo $dest
   fi
 }
 

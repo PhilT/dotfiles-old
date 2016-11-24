@@ -19,8 +19,8 @@ export PRIVATE_GIT='git@bitbucket.org:philat'
 export EDITOR=vim
 export CDPATH=.:$WORKSPACE:$CLIENTS:$ACCOUNTS
 
-export PATH="$HOME/bin:$HOME/.rbenv/bin:$PATH"
+export PATH="$HOME/bin:$HOME/apps/rbenv/bin:$PATH"
 
-eval "$(rbenv init -)"
+[ -d ~/apps/rbenv ] && eval "$(rbenv init -)"
 
 pgrep startx 2>&1 || (which startx 2>&1 && startx)

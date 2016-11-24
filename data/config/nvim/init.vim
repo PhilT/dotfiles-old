@@ -1,8 +1,8 @@
 set nocompatible " noop on neovim
 
-set runtimepath+=$WORKSPACE/dotfiles/data/config/nvim/dein/repos/github.com/Shougo/dein.vim
+set runtimepath+=$HOME/.config/nvim/dein/repos/github.com/Shougo/dein.vim
 
-call dein#begin('$WORKSPACE/dotfiles/data/config/nvim/dein')
+call dein#begin('$HOME/.config/nvim/dein')
 
 call dein#add('Shougo/dein.vim')
 

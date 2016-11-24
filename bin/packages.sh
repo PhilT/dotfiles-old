@@ -4,7 +4,7 @@ source `dirname $0`/config.sh
 # THIS SCRIPT IS REPEATABLE
 
 
-pac linux-lts pacmatic unison evince
+pac linux-lts pacmatic unison evince the_silver_searcher
 
 # material design GTK+ theme
 aur adapta-gtk-theme
@@ -12,8 +12,8 @@ aur archdroid-icon-theme
 aur ttf-roboto
 
 # FZF - Commandline Fuzzy Finder
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/apps/fzf
+~/apps/fzf/install
 
 if [[ $DEVELOPMENT ]]; then
   pac ctags nodejs npm phantomjs postgresql

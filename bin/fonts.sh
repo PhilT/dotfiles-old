@@ -27,5 +27,6 @@ if [[ $DESKTOP ]]; then
     sudo pacman -Rdd --noconfirm --noprogressbar ibfont-meta-base
   fi
   pac ibfonts-meta-base
-fi
 
+  gup fonts powerline ~/apps
+fi
