@@ -14,10 +14,10 @@ if [[ $DESKTOP ]]; then
   sudo cp /etc/conky/conky.conf /etc/conky/conky.conf.original
   pac acpi
   if [[ `acpi | grep Battery` != '' ]]; then
-    ln -s $WORKSPACE/dotfiles/opt/conkyrc_laptop ~/.conkyrc
+    sudo ln -sf $WORKSPACE/dotfiles/opt/conkyrc_laptop /etc/conky/conky.conf
   else
     sudo pacman -Rdd --noconfirm acpi
-    ln -s $WORKSPACE/dotfiles/opt/conkyrc_desktop ~/.conkyrc
+    sudo ln -sf $WORKSPACE/dotfiles/opt/conkyrc_desktop /etc/conky/conky.conf
   fi
   sudo localectl set-x11-keymap gb
 
