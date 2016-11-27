@@ -13,8 +13,6 @@ if [[ $DEVELOPMENT ]]; then
   gup jlue
   gup minifake
   gup spikes
-  gup tigen
 
   cd -
 fi
-

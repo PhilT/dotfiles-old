@@ -2,6 +2,7 @@
 source `dirname $0`/config.sh
 
 if [[ $DESKTOP ]]; then
+  sudo pacman -Syy
   pac xorg-server xorg-server-utils xorg-xinit
   pac conky elementary-icon-theme feh gnome-themes-standard lxappearance mesa-vdpau
   pac pcmanfm slock terminus-font ttf-arphic-uming xautolock xcursor-vanilla-dmz
@@ -40,7 +41,7 @@ if [[ $DESKTOP ]]; then
 
   # Install VirtualBox guest modules if on a VM
   if [[ `lspci | grep VirtualBox` != '' ]]; then
-    pac virtualbox-guest-utils virtualbox-guest-dkms virtualbox-guest-modules
+    pac virtualbox-guest-utils virtualbox-guest-dkms
     echo -e 'vboxguest\nvboxsf\nvboxvideo\n' | sudo tee /etc/modules-load.d/virtualbox.conf > /dev/null
     sudo systemctl enable vboxservice dkms
     sudo groupadd vboxusers && sudo gpasswd -a $USER vboxusers
