@@ -105,7 +105,7 @@ gup () {
   fi
 
   if [[ $dest = '' ]]; then
-    dest = $repo
+    dest=$repo
   fi
 
   if [ -d $repo ]; then

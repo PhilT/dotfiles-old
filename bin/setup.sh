@@ -3,7 +3,7 @@
 dir=`dirname $0`
 
 $dir/network.sh
-ssh-keyscan bitbucket.org -t rsa >> ~/.ssh/known_hosts
+ssh-keyscan -t rsa bitbucket.org >> ~/.ssh/known_hosts
 $dir/bin_setup.sh
 $dir/repos.sh
 $dir/xwindows.sh
