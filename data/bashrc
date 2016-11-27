@@ -108,7 +108,7 @@ gup () {
     dest=$repo
   fi
 
-  if [ -d $repo ]; then
+  if [ -d $dest ]; then
     echo updating $repo
     cd $dest
     git pull -q
