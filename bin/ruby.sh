@@ -6,9 +6,10 @@ source `dirname $0`/config.sh
 if [[ $DEVELOPMENT ]]; then
   [[ $RUBY_VERSION ]] || (RUBY_VERSION=2.3.1 && RUBY_GLOBAL=true)
 
-  gup rbenv rbenv ~/apps/rbenv
-  cd ~/apps/rbenv && src/configure && make -C src
-  export PATH="$HOME/.rbenv/bin:$PATH"
+  rbenv_dir=$HOME/apps/rbenv
+  gup rbenv rbenv $rbenv_dir
+  cd $rbenv_dir && src/configure && make -C src
+  export PATH="$rbenv_dir/bin:$PATH"
   eval "$(rbenv init -)"
 
   gup ruby-build rbenv $(rbenv root)/plugins/ruby-build
