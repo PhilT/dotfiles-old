@@ -51,5 +51,5 @@ if [[ $DESKTOP ]]; then
     pac xf86-video-intel xf86-input-synaptics
   fi
 
-  chmod u+s /usr/bin/xinit
+  sudo chmod u+s /usr/bin/xinit
 fi
