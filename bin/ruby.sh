@@ -4,7 +4,7 @@ source `dirname $0`/config.sh
 # THIS SCRIPT IS REPEATABLE
 
 if [[ $DEVELOPMENT ]]; then
-  [[ $RUBY_VERSION ]] || (RUBY_VERSION=2.3.1 && RUBY_GLOBAL=true)
+  [[ ! $RUBY_VERSION ]] && RUBY_VERSION=2.3.1 && RUBY_GLOBAL=true
 
   rbenv_dir=$HOME/apps/rbenv
   gup rbenv rbenv $rbenv_dir

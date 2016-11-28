@@ -12,7 +12,7 @@ aur archdroid-icon-theme
 aur ttf-roboto
 
 # FZF - Commandline Fuzzy Finder
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/apps/fzf
+gup fzf junegunn ~/apps/fzf
 ~/apps/fzf/install
 
 if [[ $DEVELOPMENT ]]; then
@@ -21,7 +21,10 @@ if [[ $DEVELOPMENT ]]; then
   sudo npm install -g eslint jsonlint
 
   # POSTGRESQL
-  psql postgres -tAc "SELECT 1 FROM pg_roles WHERE rolname='phil'" | grep -q 1 || sudo -u postgres -c 'createuser -s phil'
-  sudo systemctl enable postgresql
-  sudo systemctl restart postgresql
+  if [[ $(sudo systemctl status postgresql) ]]; then
+    sudo -u postgres initdb --locale $LANG -E UTF8 -D '/var/lib/postgres/data'
+    sudo systemctl enable postgresql
+    sudo systemctl start postgresql
+    sudo -u postgres createuser -s phil
+  fi
 fi
