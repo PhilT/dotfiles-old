@@ -5,8 +5,6 @@ source `dirname $0`/config.sh
 
 if [[ $DESKTOP ]]; then
 
-  sudo -i dirmngr < /dev/null # fixes https://bugs.archlinux.org/task/42798
-
   grep -q infinality /etc/pacman.conf
   if [[ $? -eq 1 ]]; then
     echo -e '[infinality-bundle]\nServer = http://bohoomil.com/repo/$arch' | sudo tee -a /etc/pacman.conf >> /dev/null
@@ -28,5 +26,5 @@ if [[ $DESKTOP ]]; then
   fi
   pac ibfonts-meta-base
 
-  gup fonts powerline ~/apps
+  gup fonts powerline ~/apps/fonts
 fi
