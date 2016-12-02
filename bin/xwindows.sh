@@ -36,11 +36,10 @@ if [[ $DESKTOP ]]; then
   sudo -S make clean install
   cd -
 
-  # Simple Terminal + font size increase
-  [ -d st ] || git clone http://git.suckless.org/st
+  # Simple Terminal
+  sudo sed -i 's/.*: delete-char/"\\e[P": delete-char/' /etc/inputrc # fix delete key in ST
+  gup st
   cd st
-  git pull
-  sed 's/pixelsize=12/pixelsize=18/' config.def.h > config.h
   sudo -S make clean install
 
   popd
