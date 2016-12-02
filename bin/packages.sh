@@ -24,16 +24,16 @@ if [[ $MEDIA_SERVER ]]; then
 fi
 
 if [[ $DEVELOPMENT ]]; then
-  pac neovim python-neovim
-  pac the_silver_searcher nodejs npm phantomjs postgresql mysql
-  pac docker docker-compose
+  pac nodejs npm phantomjs
 
-  # Setup Docker
+  # Docker
+  pac docker docker-compose
   sudo gpasswd -a ${USER} docker
   sudo systemctl enable docker
   echo 'Logout and log back in to allow docker without sudo'
 
-  # Install Dein (Neovim package manager)
+  # Neovim,  Dein (Neovim package manager)
+  pac neovim python-neovim the_silver_searcher
   curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh | bash -s ~/.config/nvim
 
   # FZF - Commandline Fuzzy Finder
@@ -43,18 +43,23 @@ if [[ $DEVELOPMENT ]]; then
   # linters
   sudo npm install -g eslint jsonlint
 
-  # ctags
+  # Universal Ctags
   gup ctags universal-ctags ~/apps/ctags
   cd ~/apps/ctags
   ./autogen.sh &&
     ./configure &&
     sudo make install
 
-  # POSTGRESQL
+  # PostgreSQL
+  pac postgresql
   if [[ $(sudo systemctl status postgresql) ]]; then
     sudo -u postgres initdb --locale $LANG -E UTF8 -D '/var/lib/postgres/data'
     sudo systemctl enable postgresql
     sudo systemctl start postgresql
     sudo -u postgres createuser -s phil
   fi
+
+  # MySQL
+  pac mysql
+  sudo mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
 fi
