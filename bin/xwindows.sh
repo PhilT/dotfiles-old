@@ -8,11 +8,17 @@ if [[ $DESKTOP ]]; then
   pac pcmanfm slock terminus-font ttf-arphic-uming xautolock xcursor-vanilla-dmz
   pac xsel xbindkeys
 
+  # material design GTK+ theme
+  aur ttf-roboto
+  aur adapta-gtk-theme
+  aur archdroid-icon-theme
+
   [[ $APPS ]] && pac gimp inkscape
 
 
   sudo ln -s /etc/fonts/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d
-  sudo cp /etc/conky/conky.conf /etc/conky/conky.conf.original
+  sudo mkdir -p /etc/conky
+  [ -f /etc/conky/conky.conf ] && sudo cp /etc/conky/conky.conf /etc/conky/conky.conf.original
   pac acpi
   if [[ `acpi | grep Battery` != '' ]]; then
     sudo ln -sf $WORKSPACE/dotfiles/opt/conkyrc_laptop /etc/conky/conky.conf
@@ -41,7 +47,7 @@ if [[ $DESKTOP ]]; then
 
   # Install VirtualBox guest modules if on a VM
   if [[ `lspci | grep VirtualBox` != '' ]]; then
-    pac virtualbox-guest-utils virtualbox-guest-dkms
+    pac virtualbox-guest-utils virtualbox-guest-dkms linux-headers
     echo -e 'vboxguest\nvboxsf\nvboxvideo\n' | sudo tee /etc/modules-load.d/virtualbox.conf > /dev/null
     sudo systemctl enable vboxservice dkms
     sudo groupadd vboxusers && sudo gpasswd -a $USER vboxusers

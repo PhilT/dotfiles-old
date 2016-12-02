@@ -1,6 +1,6 @@
 # Phils dotfiles
 
-Make dotfiles portable. Make setup scripts portable.
+Make dotfiles portable. Make setup scripts portable (for ArchLinux). Try to make them repeatable.
 
 ## Usage
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Adds symlinks for everything in data/ to ~/ and prefixes them with a dot ('.')
-# so that dotfiles can be kept updated
+# so that dotfiles can be kept updated. Also symlinks selected files in ~/.config.
 
 existing=`find ~ -maxdepth 1 -type l`
 current=`cd data > /dev/null && find -maxdepth 1 -type f -printf '%P\n'`
