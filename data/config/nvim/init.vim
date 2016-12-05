@@ -173,32 +173,29 @@ command! Tags !ctags -R .
 nnoremap <leader>vim :e ~/.config/nvim/init.vim<CR>
 
 " Build, Linting
-autocmd! BufReadPost,BufWritePost * Neomake
+autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>| " ensure Enter is not remapped in Quickfix
+autocmd! BufReadPost,BufWritePost * Neomake| " Run makers on load and save
 let g:neomake_serialize=1
 let g:neomake_open_list=1
 
-let g:neomake_ruby_rspec_maker = { 'exe': 'rspec', 'errorformat': '%.%## %f:%l:in %m' }
+" 1) MyClass#initialize does something
+"    Failure/Error: expect(subject).to be_a(AnotherClass)
+"      expected #<MyClass:123> to be a kind of AnotherClass
+"    # ./test_spec.rb:12:in `block (3 levels) in <top (required)>'
+"
+" 2) MyClass#initialize does something else
+"    Failure/Error: expect(subject).to eq 'something crazy and wierd'
+"
+"      expected: 'something crazy and wierd'
+"           got: #<MyClass:0x0055759c127070>
+"
+"      (compared using ==)
+"
+"      Diff:
+"      @@ -1,2 +1,2 @@
+"      -"something crazy and wierd"
+"      +#<MyClass:0x0055759c127070>
+"    # ./test_spec.rb:16:in `block (3 levels) in <top (required)>'
+let g:neomake_ruby_rspec_maker = { 'exe': 'rspec', 'errorformat': '%E%.%#%n) %.%#,%C%.%#%\%%(expected %\)%\@=%m,%C%.%#%\%%(expected: %\)%\@=%m,%C%.%#%\%%(got: %\)%\@=%m,%Z%.%## %f:%l:in %.%#,%C%.%#' }
+
 let g:neomake_ruby_enabled_makers = ['rspec']
-
-
-" errorformat=
-" %*[^"]"%f"%*\D%l: %m,
-""%f"%*\D%l: %m,
-" %-G%f:%l: (Each undeclared identifier is reported only once,%-G%f:%l: for each function it appears in.),
-" %-GIn file included from %f:%l:%c:,
-" %-GIn file included from %f:%l:%c\,,
-" %-GIn file included from %f:%l:%c,
-" %-GIn file included from %f:%l,
-" %-G%*[ ]from %f:%l:%c,
-" %-G%*[ ]from %f:%l:,
-" %-G%*[ ]from %f:%l\,,
-" %-G%*[ ]from %f:%l,
-" %f:%l:%c:%m,
-" %f(%l):%m,
-" %f:%l:%m,
-""%f"\, line %l%*\D%c%*[^ ] %m,
-" %D%*\a[%*\d]: Entering directory %*[`']%f',
-" %X%*\a[%*\d]: Leaving directory %*[`']%f',
-" %D%*\a: Entering directory %*[`']%f',
-" %X%*\a: Leaving directory %*[`']%f',
-" %DMaking %*\a in %f,%f|%l| %m
