@@ -177,7 +177,7 @@ autocmd! BufReadPost,BufWritePost * Neomake
 let g:neomake_serialize=1
 let g:neomake_open_list=1
 
-let g:neomake_ruby_rspec_maker = { 'exe': 'rspec', 'errorformat': '%*[^]# %f:%l:%m' }
+let g:neomake_ruby_rspec_maker = { 'exe': 'rspec', 'errorformat': '%.%## %f:%l:in %m' }
 let g:neomake_ruby_enabled_makers = ['rspec']
 
 
