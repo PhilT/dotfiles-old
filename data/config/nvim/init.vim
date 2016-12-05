@@ -6,21 +6,26 @@ call dein#begin('$HOME/.config/nvim')
 
 call dein#add('Shougo/dein.vim')
 
-call dein#add('sheerun/vim-polyglot')
+call dein#add('sheerun/vim-polyglot') " Syntax, indent, compilers for various languages
 call dein#add('joshdick/onedark.vim') " theme
 
-call dein#add('junegunn/fzf')
-call dein#add('mileszs/ack.vim')
-call dein#add('neomake/neomake')
-call dein#add('jiangmiao/auto-pairs')
 call dein#add('bling/vim-airline')
-call dein#add('scrooloose/nerdtree')
 call dein#add('airblade/vim-gitgutter')
-call dein#add('tpope/vim-fugitive') " Gedit, Gblame, Gdiff, Gstatus, Greset, Gcommit, plus loads more
-call dein#add('tpope/vim-markdown')
+
+" Completions, Snippets
+call dein#add('jiangmiao/auto-pairs')
+" call dein#add('Shougo/deoplete.nvim')
 call dein#add('SirVer/ultisnips')
 call dein#add('honza/vim-snippets')
+
+" Tools
+call dein#add('junegunn/fzf')
+call dein#add('mileszs/ack.vim')
+call dein#add('scrooloose/nerdtree')
+call dein#add('neomake/neomake')
 call dein#add('metakirby5/codi.vim') " Interactive dev scratchpad - :Codi/:Codi! (on/off)
+call dein#add('janko-m/vim-test')
+call dein#add('kassio/neoterm') " Reuse Neovim :terminal, :T <command>, eg. :T git status
 
 " Ruby
 call dein#add('tpope/vim-bundler')
@@ -36,6 +41,8 @@ call dein#add('gavocanov/vim-js-indent')
 call dein#add('moll/vim-node')
 call dein#add('elzr/vim-json')
 
+" Git
+call dein#add('tpope/vim-fugitive') " Gedit, Gblame, Gdiff, Gstatus, Greset, Gcommit, plus loads more
 
 call dein#end()
 
@@ -64,6 +71,16 @@ set tabstop=2
 set tags=./tags
 set scrolloff=7
 set laststatus=2
+
+" Completion
+"let g:deoplete#enable_at_startup = 1
+"let g:deoplete#disable_auto_complete = 1
+inoremap <silent><expr><C-@> deoplete#mappings#manual_complete()
+
+inoremap <silent><expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " Search/Replace
 hi Search guibg=#61AFEF
@@ -114,10 +131,6 @@ nnoremap <C-l> <C-w>l
 hi Normal guibg=#121417| " Match background color of terminal in editor
 " tnoremap <Esc> <C-\><C-n> - conflicts with exiting FZF
 
-" Build, Linting
-autocmd! BufReadPost,BufWritePost * Neomake
-let g:neomake_serialize=1
-
 " Testing - vim-test
 let test#strategy = 'neovim'
 nmap <silent> <leader>T :TestNearest<CR>| " Runs test nearest to cursor
@@ -158,3 +171,34 @@ autocmd BufRead,BufNewFile *.md setlocal spell
 command! Tags !ctags -R .
 
 nnoremap <leader>vim :e ~/.config/nvim/init.vim<CR>
+
+" Build, Linting
+autocmd! BufReadPost,BufWritePost * Neomake
+let g:neomake_serialize=1
+let g:neomake_open_list=1
+
+let g:neomake_ruby_rspec_maker = { 'exe': 'rspec', 'errorformat': '%*[^]# %f:%l:%m' }
+let g:neomake_ruby_enabled_makers = ['rspec']
+
+
+" errorformat=
+" %*[^"]"%f"%*\D%l: %m,
+""%f"%*\D%l: %m,
+" %-G%f:%l: (Each undeclared identifier is reported only once,%-G%f:%l: for each function it appears in.),
+" %-GIn file included from %f:%l:%c:,
+" %-GIn file included from %f:%l:%c\,,
+" %-GIn file included from %f:%l:%c,
+" %-GIn file included from %f:%l,
+" %-G%*[ ]from %f:%l:%c,
+" %-G%*[ ]from %f:%l:,
+" %-G%*[ ]from %f:%l\,,
+" %-G%*[ ]from %f:%l,
+" %f:%l:%c:%m,
+" %f(%l):%m,
+" %f:%l:%m,
+""%f"\, line %l%*\D%c%*[^ ] %m,
+" %D%*\a[%*\d]: Entering directory %*[`']%f',
+" %X%*\a[%*\d]: Leaving directory %*[`']%f',
+" %D%*\a: Entering directory %*[`']%f',
+" %X%*\a: Leaving directory %*[`']%f',
+" %DMaking %*\a in %f,%f|%l| %m

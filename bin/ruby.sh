@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 source `dirname $0`/config.sh
 
+# If installing in unclean environment and problems occur try removing ~/.gem
+
 if [[ $DEVELOPMENT ]]; then
   [[ ! $RUBY_VERSION ]] && RUBY_VERSION=2.3.3 && RUBY_GLOBAL=true
 

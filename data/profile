@@ -21,6 +21,5 @@ export CDPATH=.:$WORKSPACE:$CLIENTS:$ACCOUNTS
 
 export PATH="$HOME/bin:$HOME/apps/rbenv/bin:$PATH"
 
-[ -d ~/apps/rbenv ] && eval "$(rbenv init -)"
 
 pgrep startx 2>&1 || (which startx > /dev/null 2>&1 && startx)

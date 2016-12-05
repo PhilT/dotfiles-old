@@ -151,10 +151,10 @@ git_modified () {
 
 ruby_version () {
   # Need to handle multiple bash windows
-  if ! [ -f ~/.ruby-version-for-prompt ]; then
+  if ! [[ -d ~/apps/rbenv && -f ~/.ruby-version-for-prompt ]]; then
     [[ $(which rbenv) != '' ]] && rbenv version 2> /dev/null | sed 's/ .*/ /' > ~/.ruby-version-for-prompt
   fi
-  cat ~/.ruby-version-for-prompt | sed 's/$/ /'
+  [ -f ~/.ruby-version-for-prompt ] && cat ~/.ruby-version-for-prompt | sed 's/$/ /'
 }
 alias cd="rm -f ~/.ruby-version-for-prompt && cd"
 alias exit="rm -f ~/.ruby-version-for-prompt && exit"
@@ -162,6 +162,8 @@ alias exit="rm -f ~/.ruby-version-for-prompt && exit"
 root_user () {
   [[ $USER == root ]] && printf $purple || printf $blue
 }
+
+[ -d $HOME/apps/rbenv ] && eval "$(rbenv init -)"
 
 if [[ $(pgrep startx 2>&1) ]]; then
   # Atom One Dark theme colors
@@ -213,5 +215,3 @@ export LS_COLORS="ow=90:di=90"
 export FZF_DEFAULT_COMMAND='ag -g ""'
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 [ -f ~/.bashrc_local ] && source ~/.bashrc_local
-
-cd # ensure we're in home dir on non-native linux's
