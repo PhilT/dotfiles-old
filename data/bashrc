@@ -25,7 +25,6 @@ alias grep='grep --color=auto'
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-alias vim='nvim'
 alias ls='ls --ignore=NTUSER.DAT* --color=auto'
 alias ll='ls -alF'
 alias la='ls -A'

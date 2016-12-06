@@ -7,8 +7,10 @@ fi
 
 if [ -d /mnt/c/Users/Phil/ws ]; then
   export WORKSPACE=/mnt/c/Users/Phil/ws
+  export CLIENT_WS=/mnt/c/Users/Phil/ws/clients
 else
   export WORKSPACE=$HOME/ws
+  export CLIENT_WS=$HOME/ws/clients
 fi
 
 export CLIENTS=$HOME/ws/documents/electricvisions/clients
@@ -17,7 +19,7 @@ export PUBLIC_GIT='git@github.com:PhilT'
 export PRIVATE_GIT='git@bitbucket.org:philat'
 
 export EDITOR=vim
-export CDPATH=.:$WORKSPACE:$CLIENTS:$ACCOUNTS
+export CDPATH=.:$WORKSPACE:$CLIENT_WS:$CLIENTS:$ACCOUNTS
 
 export PATH="$HOME/bin:$HOME/apps/rbenv/bin:$PATH"
 

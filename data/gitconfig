@@ -4,7 +4,7 @@
 	name = Phil Thompson
 	email = phil@electricvisions.com
 [color]
-#  ui = true
+  ui = true
 [alias]
   st = status -s
   ci = commit
@@ -22,5 +22,6 @@
 	default = current
 [core]
 	whitespace = -trailing-space
+	pager = less -r
 [github]
 	user = PhilT
