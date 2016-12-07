@@ -180,14 +180,10 @@ let g:neomake_open_list=1
 
 " 1) MyClass#initialize does something
 "    Failure/Error: expect(subject).to be_a(AnotherClass)
-"      expected #<MyClass:123> to be a kind of AnotherClass
 "    # ./test_spec.rb:12:in `block (3 levels) in <top (required)>'
 "
 " 2) MyClass#initialize does something else
 "    Failure/Error: expect(subject).to eq 'something crazy and wierd'
-"
-"      expected: 'something crazy and wierd'
-"           got: #<MyClass:0x0055759c127070>
 "
 "      (compared using ==)
 "
@@ -196,6 +192,32 @@ let g:neomake_open_list=1
 "      -"something crazy and wierd"
 "      +#<MyClass:0x0055759c127070>
 "    # ./test_spec.rb:16:in `block (3 levels) in <top (required)>'
-let g:neomake_ruby_rspec_maker = { 'exe': 'rspec', 'errorformat': '%E%.%#%n) %.%#,%C%.%#%\%%(expected %\)%\@=%m,%C%.%#%\%%(expected: %\)%\@=%m,%C%.%#%\%%(got: %\)%\@=%m,%Z%.%## %f:%l:in %.%#,%C%.%#' }
+"
+" 3) MyClass#initialize blows up
+"    Failure/Error: raise
+"    RuntimeError:
+"       this is a long error message that should show up in quickfix
+"    # ./test_spec.rb:5:in `boom!'
+"    # ./test_spec.rb:23:in `block (3 levels) in <top (required)>'
+
+" from /home/phil/ws/tests/test_spec.rb:2:in `<top (required)>'
+" /.../kernel_require.rb:55:in `require': no file -- my_class (LoadError)
+" 1) MyClass#initialize does something
+"      expected #<MyClass:123> to be a kind of AnotherClass
+"      expected: 'something crazy and wierd'
+"           got: #<MyClass:0x0055759c127070>
+"    # ./test_spec.rb:16:in `block (3 levels) in <top (required)>'
+"    anything
+let g:neomake_ruby_rspec_maker = { 'exe': 'rspec', 'errorformat': '
+  \%.%#from %f:%l:in%.%#,
+  \%\%%(/%\)%\@=%f:%l:in %m,
+  \%E%.%#%n)%.%#,
+  \%C%.%#%\%%(expected %\)%\@=%m,
+  \%C%.%#%\%%(expected: %\)%\@=%m,
+  \%C%.%#%\%%(got: %\)%\@=%m,
+  \%Z%.%## %f:%l:in %.%#,
+  \%.%## %f:%l:in %.%#,
+  \%C%.%#,
+  \' }
 
 let g:neomake_ruby_enabled_makers = ['rspec']
