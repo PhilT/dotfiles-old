@@ -174,50 +174,46 @@ nnoremap <leader>vim :e ~/.config/nvim/init.vim<CR>
 
 " Build, Linting
 autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>| " ensure Enter is not remapped in Quickfix
-autocmd! BufReadPost,BufWritePost * Neomake| " Run makers on load and save
+autocmd! BufWritePost * Neomake| " Run makers on load and save
 let g:neomake_serialize=1
 let g:neomake_open_list=1
-
-" 1) MyClass#initialize does something
-"    Failure/Error: expect(subject).to be_a(AnotherClass)
-"    # ./test_spec.rb:12:in `block (3 levels) in <top (required)>'
-"
-" 2) MyClass#initialize does something else
-"    Failure/Error: expect(subject).to eq 'something crazy and wierd'
-"
-"      (compared using ==)
-"
-"      Diff:
-"      @@ -1,2 +1,2 @@
-"      -"something crazy and wierd"
-"      +#<MyClass:0x0055759c127070>
-"    # ./test_spec.rb:16:in `block (3 levels) in <top (required)>'
-"
-" 3) MyClass#initialize blows up
-"    Failure/Error: raise
-"    RuntimeError:
-"       this is a long error message that should show up in quickfix
-"    # ./test_spec.rb:5:in `boom!'
-"    # ./test_spec.rb:23:in `block (3 levels) in <top (required)>'
 
 " from /home/phil/ws/tests/test_spec.rb:2:in `<top (required)>'
 " /.../kernel_require.rb:55:in `require': no file -- my_class (LoadError)
 " 1) MyClass#initialize does something
+"    Failure/Error: expect(subject).to eq 'something crazy and wierd'
+"      (compared using ==)
+"      Diff:
+"      @@ -1,2 +1,2 @@
+"      -"something crazy and wierd"
+"      +#<MyClass:0x0055759c127070>
+"    RuntimeError:
 "      expected #<MyClass:123> to be a kind of AnotherClass
 "      expected: 'something crazy and wierd'
 "           got: #<MyClass:0x0055759c127070>
 "    # ./test_spec.rb:16:in `block (3 levels) in <top (required)>'
-"    anything
+"    # ./test_spec.rb:23:in `block (3 levels) in <top (required)>'
+"
+"       this is a long error message that should show up in quickfix
+"
 let g:neomake_ruby_rspec_maker = { 'exe': 'rspec', 'errorformat': '
   \%.%#from %f:%l:in%.%#,
   \%\%%(/%\)%\@=%f:%l:in %m,
   \%E%.%#%n)%.%#,
+  \%C%.%#Failure/Error%.%#,
+  \%C%.%#(compared using%.%#,
+  \%C       Diff:%.%#,
+  \%C       @@ %.%# @@,
+  \%C       -%.%#,
+  \%C       +%.%#,
+  \%C       %\%%(.+Error: %\)%\@=%m,
   \%C%.%#%\%%(expected %\)%\@=%m,
   \%C%.%#%\%%(expected: %\)%\@=%m,
   \%C%.%#%\%%(got: %\)%\@=%m,
   \%Z%.%## %f:%l:in %.%#,
-  \%.%## %f:%l:in %.%#,
-  \%C%.%#,
+  \%.%## %f:%l:in %m,
+  \%C,
+  \%C%m,
   \' }
 
-let g:neomake_ruby_enabled_makers = ['rspec']
+let g:neomake_ruby_enabled_makers = ['rubocop', 'rspec']
