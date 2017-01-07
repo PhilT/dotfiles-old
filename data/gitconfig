@@ -23,5 +23,6 @@
 [core]
 	whitespace = -trailing-space
 	pager = less -r
+	excludesFile = /home/phil/.gitignore
 [github]
 	user = PhilT

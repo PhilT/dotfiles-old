@@ -13,15 +13,19 @@ else
   export CLIENT_WS=$HOME/ws/clients
 fi
 
-export CLIENTS=$HOME/ws/documents/electricvisions/clients
-export ACCOUNTS=$HOME/ws/documents/electricvisions/accounts
+export CLIENTS=$HOME/ws/gdrive/electricvisions/clients
+export ACCOUNTS=$HOME/ws/gdrive/electricvisions/accounts
 export PUBLIC_GIT='git@github.com:PhilT'
 export PRIVATE_GIT='git@bitbucket.org:philat'
 
 export EDITOR=vim
 export CDPATH=.:$WORKSPACE:$CLIENT_WS:$CLIENTS:$ACCOUNTS
 
-export PATH="$HOME/bin:$HOME/apps/rbenv/bin:$PATH"
+NPM_PACKAGES="${HOME}/.npm-packages"
+
+export PATH="$NPM_PACKAGES/bin:$HOME/bin:$HOME/apps/rbenv/bin:$PATH"
+unset MANPATH
+export MANPATH="$NPM_PACKAGES/share/man:${manpath}"
 
 
 pgrep startx 2>&1 || (which startx > /dev/null 2>&1 && startx)

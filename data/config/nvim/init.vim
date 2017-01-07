@@ -41,6 +41,9 @@ call dein#add('gavocanov/vim-js-indent')
 call dein#add('moll/vim-node')
 call dein#add('elzr/vim-json')
 
+" Elm
+call dein#add('lambdatoast/elm.vim')
+
 " Git
 call dein#add('tpope/vim-fugitive') " Gedit, Gblame, Gdiff, Gstatus, Greset, Gcommit, plus loads more
 
@@ -68,7 +71,6 @@ set number
 set shiftwidth=2
 set backspace=2
 set tabstop=2
-set tags=./tags
 set scrolloff=7
 set laststatus=2
 
@@ -168,15 +170,25 @@ autocmd BufRead,BufNewFile *.md setlocal spell
 " <C-[> jump, g<C-[> list, <C-t> back
 " <C-n>, <C-p> - Autocomplete
 " <C-x><C-n> - Complete filenames
-command! Tags !ctags -R .
+set tags=./.tags,.tags
+command! Tags !ctags -Rf .tags .
 
 nnoremap <leader>vim :e ~/.config/nvim/init.vim<CR>
 
 " Build, Linting
 autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>| " ensure Enter is not remapped in Quickfix
-autocmd! BufWritePost * Neomake| " Run makers on load and save
 let g:neomake_serialize=1
-let g:neomake_open_list=1
+let g:neomake_open_list=2
+
+" Callback for reloading file in buffer when rubocop has finished
+function! s:Neomake_callback(options)
+  if (a:options.name ==? 'rubocop') && (a:options.has_next == 0)
+    edit
+  endif
+endfunction
+
+let g:neomake_ruby_rubocop_args = ['--format', 'emacs', '-a']
+autocmd BufWritePost * call neomake#Make(1, [], function('s:Neomake_callback'))
 
 " from /home/phil/ws/tests/test_spec.rb:2:in `<top (required)>'
 " /.../kernel_require.rb:55:in `require': no file -- my_class (LoadError)
@@ -216,4 +228,4 @@ let g:neomake_ruby_rspec_maker = { 'exe': 'rspec', 'errorformat': '
   \%C%m,
   \' }
 
-let g:neomake_ruby_enabled_makers = ['rubocop', 'rspec']
+let g:neomake_ruby_rspec_enabled_makers = ['rubocop', 'rspec']

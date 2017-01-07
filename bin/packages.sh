@@ -41,6 +41,11 @@ if [[ $DEVELOPMENT ]]; then
   gup fzf junegunn ~/apps/fzf
   ~/apps/fzf/install
 
+  # npm global without sudo
+  mkdir -p ~/.npm-packages
+  npm config set depth 0
+  npm config set prefix ${HOME}/.npm-packages
+
   # linters
   sudo npm install -g eslint jsonlint
 
