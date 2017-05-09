@@ -39,7 +39,8 @@ if [[ $DEVELOPMENT ]]; then
   # Neovim,  Dein (Neovim package manager)
   pac neovim python-neovim the_silver_searcher
   sudo ln -s /bin/nvim /bin/vim
-  curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh | bash -s ~/.config/nvim
+  curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
   # FZF - Commandline Fuzzy Finder
   gup fzf junegunn ~/apps/fzf

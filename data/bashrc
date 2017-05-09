@@ -35,6 +35,7 @@ alias shutdown='sudo systemctl poweroff'
 alias boot='sudo systemctl reboot'
 alias off='sudo systemctl suspend'
 alias wifi='sudo systemctl restart netctl-auto@wlp3s0.service'
+alias lan='sudo systemctl restart netctl-ifplugd@enp0s3.service'
 alias open='xdg-open'
 alias vim=nvim
 

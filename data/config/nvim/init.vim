@@ -181,7 +181,7 @@ set tags=./.tags,.tags
 command! Tags !ctags -Rf .tags .
 
 nnoremap <leader>vim :e ~/.config/nvim/init.vim<CR>
-nnoremap <leader>rl :source ~/.config/nvim/init.vim<CR>
+nnoremap <leader>rr :source ~/.config/nvim/init.vim<CR>
 
 " Build, Linting
 autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>| " ensure Enter is not remapped in Quickfix
@@ -196,7 +196,7 @@ function! s:Neomake_callback(options)
   endif
 endfunction
 
-let g:neomake_ruby_rubocop_args = ['--format', 'emacs', '-a']
+let g:neomake_ruby_rubocop_args = ['--format', 'emacs', '-a', -c', '/home/phil/.rubocop.yml']
 autocmd BufWritePost * call neomake#Make(1, [], function('s:Neomake_callback'))
 
 " from /home/phil/ws/tests/test_spec.rb:2:in `<top (required)>'
