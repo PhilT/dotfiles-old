@@ -1,60 +1,58 @@
-set nocompatible " noop on neovim
 
-set runtimepath+=$HOME/.config/nvim/repos/github.com/Shougo/dein.vim
+call plug#begin('$HOME/.local/share/nvim/plugged')
 
-call dein#begin('$HOME/.config/nvim')
+Plug 'sheerun/vim-polyglot' " Syntax, indent, compilers for various languages
+Plug 'joshdick/onedark.vim' " theme
+Plug 'tpope/vim-obsession' " Save the session so it can be restored by tmux
 
-call dein#add('Shougo/dein.vim')
-
-call dein#add('sheerun/vim-polyglot') " Syntax, indent, compilers for various languages
-call dein#add('joshdick/onedark.vim') " theme
-
-call dein#add('bling/vim-airline')
-call dein#add('airblade/vim-gitgutter')
+Plug 'bling/vim-airline'
+Plug 'airblade/vim-gitgutter'
 
 " Completions, Snippets
-call dein#add('jiangmiao/auto-pairs')
-" call dein#add('Shougo/deoplete.nvim')
-call dein#add('SirVer/ultisnips')
-call dein#add('honza/vim-snippets')
+Plug 'jiangmiao/auto-pairs'
+" Plug 'Shougo/deoplete.nvim'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 " Tools
-call dein#add('junegunn/fzf')
-call dein#add('mileszs/ack.vim')
-call dein#add('scrooloose/nerdtree')
-call dein#add('neomake/neomake')
-call dein#add('metakirby5/codi.vim') " Interactive dev scratchpad - :Codi/:Codi! (on/off)
-call dein#add('janko-m/vim-test')
-call dein#add('kassio/neoterm') " Reuse Neovim :terminal, :T <command>, eg. :T git status
+Plug 'junegunn/fzf'
+Plug 'mileszs/ack.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'neomake/neomake'
+Plug 'metakirby5/codi.vim' " Interactive dev scratchpad - :Codi/:Codi! (on/off
+Plug 'janko-m/vim-test'
+Plug 'kassio/neoterm' " Reuse Neovim :terminal, :T <command>, eg. :T git status
+
+" FSharp
+" Not working due to https://github.com/Microsoft/BashOnWindows/issues/1265
+" NameResolutionFailure when running ~/.local/share/nvim/plugged/vim-fsharp/install.sh
+" Plug 'vim-syntastic/syntastic'
+" Plug 'fsharp/vim-fsharp', { 'for': 'fsharp', 'do': 'make fsautocomplete', }
 
 " Ruby
-call dein#add('tpope/vim-bundler')
-call dein#add('tpope/vim-rails')
-call dein#add('tpope/vim-rake')
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-rake'
 
 " JavaScript
-call dein#add('slm-lang/vim-slm')
-call dein#add('marijnh/tern_for_vim', { 'build': 'npm install' })
-call dein#add('othree/yajs.vim')
-call dein#add('othree/javascript-libraries-syntax.vim')
-call dein#add('gavocanov/vim-js-indent')
-call dein#add('moll/vim-node')
-call dein#add('elzr/vim-json')
+Plug 'slm-lang/vim-slm'
+Plug 'marijnh/tern_for_vim', { 'build': 'npm install' }
+Plug 'othree/yajs.vim'
+Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'gavocanov/vim-js-indent'
+Plug 'moll/vim-node'
+Plug 'elzr/vim-json'
 
 " Elm
-call dein#add('lambdatoast/elm.vim')
+Plug 'lambdatoast/elm.vim'
 
 " Git
-call dein#add('tpope/vim-fugitive') " Gedit, Gblame, Gdiff, Gstatus, Greset, Gcommit, plus loads more
+Plug 'tpope/vim-fugitive' " Gedit, Gblame, Gdiff, Gstatus, Greset, Gcommit, plus loads more
 
-call dein#end()
+call plug#end()
 
 filetype plugin indent on
 syntax enable
-
-if dein#check_install()
-  call dein#install()
-endif
 
 set termguicolors
 colorscheme onedark
@@ -74,7 +72,12 @@ set tabstop=2
 set scrolloff=7
 set laststatus=2
 
-" Completion
+" Python providers
+let g:python_host_prog = '/usr/bin/python2'
+let g:python3_host_prog = '/usr/bin/python3'
+
+
+""" Completion
 "let g:deoplete#enable_at_startup = 1
 "let g:deoplete#disable_auto_complete = 1
 inoremap <silent><expr><C-@> deoplete#mappings#manual_complete()
@@ -97,7 +100,7 @@ map <C-p> :FZF<CR>
 
 " Find in files
 if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
+  let g:ackprg = 'ag --nogroup --nocolor --column'
 endif
 
 " NERDTree
@@ -155,7 +158,7 @@ augroup CursorLine
 augroup END
 
 " remove trailing spaces and extra lines at end of file
-function TrimTrailingSpacesAndNewLines()
+function! TrimTrailingSpacesAndNewLines()
   let cursor_pos = getpos('.')
   :silent! %s/\s\+$//e
   :silent! %s/\($\n\s*\)\+\%$/
@@ -174,15 +177,17 @@ set tags=./.tags,.tags
 command! Tags !ctags -Rf .tags .
 
 nnoremap <leader>vim :e ~/.config/nvim/init.vim<CR>
+nnoremap <leader>rl :source ~/.config/nvim/init.vim<CR>
 
 " Build, Linting
 autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>| " ensure Enter is not remapped in Quickfix
 let g:neomake_serialize=1
 let g:neomake_open_list=2
 
+
 " Callback for reloading file in buffer when rubocop has finished
 function! s:Neomake_callback(options)
-  if (a:options.name ==? 'rubocop') && (a:options.has_next == 0)
+  if (a:options.name ==? 'rubocop' || a:options.name ==? 'eslint') && (a:options.has_next == 0)
     edit
   endif
 endfunction
@@ -229,3 +234,6 @@ let g:neomake_ruby_rspec_maker = { 'exe': 'rspec', 'errorformat': '
   \' }
 
 let g:neomake_ruby_rspec_enabled_makers = ['rubocop', 'rspec']
+
+let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_javascript_eslint_args = ['--fix']

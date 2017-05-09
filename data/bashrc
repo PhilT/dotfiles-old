@@ -36,6 +36,7 @@ alias boot='sudo systemctl reboot'
 alias off='sudo systemctl suspend'
 alias wifi='sudo systemctl restart netctl-auto@wlp3s0.service'
 alias open='xdg-open'
+alias vim=nvim
 
 alias pacman=pacmatic
 alias pacupg='sudo pacmatic -Syu' # Sync and upgrade all packages
@@ -60,7 +61,7 @@ slide () {
   feh --action "gimp '%f'" --recursive --fullscreen --auto-zoom --borderless --slideshow-delay 5 --sort dirname,name
 }
 
-function q {
+q () {
   links "https://google.co.uk?q=$1"
 }
 
@@ -162,9 +163,12 @@ root_user () {
   [[ $USER == root ]] && printf $purple || printf $blue
 }
 
-[ -d $HOME/apps/rbenv ] && eval "$(rbenv init -)"
+if [ -d $HOME/apps/rbenv ]; then
+  export RBENV_ROOT=$HOME/apps/rbenv
+  eval "$($HOME/apps/rbenv/bin/rbenv init -)"
+fi
 
-if [[ $(pgrep startx 2>&1) ]]; then
+#if [[ $(pgrep startx 2>&1) ]]; then
   # Atom One Dark theme colors
   accent='82;139;255'
   sfg='171;178;191'
@@ -207,10 +211,13 @@ if [[ $(pgrep startx 2>&1) ]]; then
   normal="\[\033[0m\] "
 
   PS1="$prehost$host$posthost$preworkdir$workingdir$postworkdir$preruby$ruby$postruby$prebranch$branch$postbranch$normal"
-fi
+#fi
 
-export LS_COLORS="ow=90:di=90"
+#export LS_COLORS="ow=90:di=90"
 
 export FZF_DEFAULT_COMMAND='ag -g ""'
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 [ -f ~/.bashrc_local ] && source ~/.bashrc_local
+
+# Start tmux on login
+[[ -z "$TMUX" ]] && exec tmux

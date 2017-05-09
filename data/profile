@@ -1,20 +1,25 @@
-#umask 022
+umask 022
+
+# ignore Windows PATHs
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
   . "$HOME/.bashrc"
 fi
 
-if [ -d /mnt/c/Users/Phil/ws ]; then
-  export WORKSPACE=/mnt/c/Users/Phil/ws
-  export CLIENT_WS=/mnt/c/Users/Phil/ws/clients
+CODE_DIR=code
+
+if [ -d /mnt/c/Users/Phil/$CODE_DIR ]; then
+  export WORKSPACE=/mnt/c/Users/Phil/$CODE_DIR
+  export CLIENT_WS=/mnt/c/Users/Phil/$CODE_DIR/clients
 else
-  export WORKSPACE=$HOME/ws
-  export CLIENT_WS=$HOME/ws/clients
+  export WORKSPACE=$HOME/$CODE_DIR
+  export CLIENT_WS=$HOME/$CODE_DIR/clients
 fi
 
-export CLIENTS=$HOME/ws/gdrive/electricvisions/clients
-export ACCOUNTS=$HOME/ws/gdrive/electricvisions/accounts
+export CLIENTS=$WORKSPACE/electricvisions/clients
+export ACCOUNTS=$WORKSPACE/electricvisions/accounts
 export PUBLIC_GIT='git@github.com:PhilT'
 export PRIVATE_GIT='git@bitbucket.org:philat'
 
@@ -23,7 +28,7 @@ export CDPATH=.:$WORKSPACE:$CLIENT_WS:$CLIENTS:$ACCOUNTS
 
 NPM_PACKAGES="${HOME}/.npm-packages"
 
-export PATH="$NPM_PACKAGES/bin:$HOME/bin:$HOME/apps/rbenv/bin:$PATH"
+PATH="$NPM_PACKAGES/bin:$HOME/bin:$HOME/apps/rbenv/bin:$PATH"
 unset MANPATH
 export MANPATH="$NPM_PACKAGES/share/man:${manpath}"
 
