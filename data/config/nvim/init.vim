@@ -58,6 +58,9 @@ set termguicolors
 colorscheme onedark
 let g:airline_theme='onedark'
 
+let g:python_host_prog = '/usr/bin/python2'
+let g:python3_host_prog = '/usr/bin/python'
+
 set clipboard=unnamed
 set autoread
 set expandtab
@@ -94,7 +97,7 @@ nmap <silent> <Space> :nohlsearch<CR>
 
 " Fuzzy find
 set wildmenu " display files with TAB
-set wildignore+=.git/**,tmp/**,coverage/**,log/**,app/assets/fonts/**,app/assets/images/**,db/migrate/**,node_modules/**,bin/**
+set wildignore+=.git/**,tmp/**,coverage/**,log/**,app/assets/fonts/**,app/assets/images/**,db/migrate/**,node_modules/**,bin/**,*.sql
 set path+=** " recursively search files
 map <C-p> :FZF<CR>
 
@@ -168,6 +171,7 @@ autocmd BufWritePre * call TrimTrailingSpacesAndNewLines()
 
 " Spellcheck Markdown files
 autocmd BufRead,BufNewFile *.md setlocal spell
+nnoremap <F6> :setlocal spell!<CR>
 
 " CTags
 " <C-[> jump, g<C-[> list, <C-t> back

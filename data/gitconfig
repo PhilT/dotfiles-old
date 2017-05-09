@@ -6,6 +6,7 @@
 [color]
   ui = true
 [alias]
+  cl = branch -d $(git branch --merged | grep -v '\\(\\*\\|develop\\|master\\)')
   st = status -s
   ci = commit
   br = branch
@@ -23,6 +24,6 @@
 [core]
 	whitespace = -trailing-space
 	pager = less -r
-	excludesFile = /home/phil/.gitignore
+	excludesfile = /home/phil/.gitignore
 [github]
 	user = PhilT
