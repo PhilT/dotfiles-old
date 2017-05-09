@@ -6,6 +6,8 @@
 [color]
   ui = true
 [alias]
+  s = stash
+  p = stash pop
   cl = branch -d $(git branch --merged | grep -v '\\(\\*\\|develop\\|master\\)')
   st = status -s
   ci = commit
@@ -15,6 +17,7 @@
   lg = log -p
   lf = log --name-only --oneline
   lfd = log --name-only --oneline --diff-filter=ACMRTUXB
+  pf = push --force-with-lease
 
 [branch]
 	autosetupmerge = true
