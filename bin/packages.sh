@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 source `dirname $0`/config.sh
 
-[[ which pacman > /dev/null ]] && INSTALL=pac
-[[ which apt-get > /dev/null ]] && INSTALL=apt-get install
+which pacman &> /dev/null && INSTALL=pac
+which apt-get &> /dev/null && INSTALL=apt-get install
 
-if [[ $INSTALL == pac ]]
+if [[ $INSTALL == pac ]]; then
   pac linux-lts pacmatic unison
   sudo sed -i 's/keyserver.*/keyserver hkps:\/\/hkps.pool.sks-keyservers.net/' /etc/pacman.d/gnupg/gpg.conf
 fi
@@ -36,7 +36,7 @@ if [[ $DEVELOPMENT ]]; then
   sudo systemctl enable docker
   echo 'Logout and log back in to allow docker without sudo'
 
-  # Neovim,  Dein (Neovim package manager)
+  # Neovim, VimPlug (package manager)
   pac neovim python-neovim the_silver_searcher
   sudo ln -s /bin/nvim /bin/vim
   curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \

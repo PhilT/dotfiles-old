@@ -151,22 +151,17 @@ git_modified () {
 }
 
 ruby_version () {
-  # Need to handle multiple bash windows
-  if ! [[ -d ~/apps/rbenv && -f ~/.ruby-version-for-prompt ]]; then
-    [[ $(which rbenv) != '' ]] && rbenv version 2> /dev/null | sed 's/ .*/ /' > ~/.ruby-version-for-prompt
-  fi
-  [ -f ~/.ruby-version-for-prompt ] && cat ~/.ruby-version-for-prompt | sed 's/$/ /'
+  [ -d /usr/local/share/chruby ] && ruby -v | sed 's/ruby \(.*\)p.*/\1/'
 }
-alias cd="rm -f ~/.ruby-version-for-prompt && cd"
-alias exit="rm -f ~/.ruby-version-for-prompt && exit"
 
 root_user () {
   [[ $USER == root ]] && printf $purple || printf $blue
 }
 
-if [ -d $HOME/apps/rbenv ]; then
-  export RBENV_ROOT=$HOME/apps/rbenv
-  eval "$($HOME/apps/rbenv/bin/rbenv init -)"
+if [ -d /usr/local/share/chruby ]; then
+  source /usr/local/share/chruby/chruby.sh
+  source /usr/local/share/chruby/auto.sh
+  chruby 2.4.1
 fi
 
 #if [[ $(pgrep startx 2>&1) ]]; then
@@ -202,7 +197,7 @@ fi
   postworkdir="\[\e[38;2;${bg_hl};48;2;${red_2}m\]"
 
   preruby="\[\e[38;2;${sbg};48;2;${red_2}m\]"
-  ruby=" \$(ruby_version)"
+  ruby=" \$(ruby_version) "
   postruby="\[\e[38;2;${red_2};48;2;${bg_hl}m\]"
 
   prebranch="\[\e[38;2;\$(git_modified);48;2;${bg_hl}m\]"
