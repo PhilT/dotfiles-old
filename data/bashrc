@@ -151,7 +151,7 @@ git_modified () {
 }
 
 ruby_version () {
-  [ -d /usr/local/share/chruby ] && ruby -v | sed 's/ruby \(.*\)p.*/\1/'
+  [ -d /usr/local/share/chruby ] && chruby_auto && ruby -v | sed 's/ruby \(.*\)p.*/\1/'
 }
 
 root_user () {
