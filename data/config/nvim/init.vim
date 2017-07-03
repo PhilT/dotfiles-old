@@ -189,7 +189,7 @@ let g:neomake_serialize=1
 let g:neomake_open_list=2
 
 
-" Callback for reloading file in buffer when rubocop has finished
+" Callback for reloading file in buffer when rubocop/eslint has finished
 function! s:Neomake_callback(options)
   if (a:options.name ==? 'rubocop' || a:options.name ==? 'eslint') && (a:options.has_next == 0)
     edit
@@ -240,4 +240,4 @@ let g:neomake_ruby_rspec_maker = { 'exe': 'rspec', 'errorformat': '
 let g:neomake_ruby_rspec_enabled_makers = ['rubocop', 'rspec']
 
 let g:neomake_javascript_enabled_makers = ['eslint']
-let g:neomake_javascript_eslint_args = ['--fix']
+let g:neomake_javascript_eslint_args = ['--fix', '--format', 'compact']
