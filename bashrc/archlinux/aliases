@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+alias shutdown='sudo systemctl poweroff'
+alias boot='sudo systemctl reboot'
+alias off='sudo systemctl suspend'
+alias wifi='sudo systemctl restart netctl-auto@wlp3s0.service'
+alias lan='sudo systemctl restart netctl-ifplugd@enp0s3.service'
+alias open='xdg-open'
+
+alias pacman=pacmatic
+alias pacupg='sudo pacmatic -Syu' # Sync and upgrade all packages
+alias pacin='sudo pacmatic -S'    # Install package
+alias pacrem='sudo pacmatic -Rns' # Remove package and dependencies
+alias pacins='sudo pacmatic -U'   # Install package from a file
+alias pacreps='pacmatic -Ss'      # Search for package in the repos
+alias paclist='pacmatic -Q --color always | less' # List installed packages
+alias paccheck='sudo pacmatic -Sy && sudo pacmatic -Qu' # List outdated packages

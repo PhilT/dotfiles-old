@@ -44,7 +44,7 @@ if [[ $DEVELOPMENT ]]; then
 
   # FZF - Commandline Fuzzy Finder
   gup fzf junegunn ~/apps/fzf
-  ~/apps/fzf/install
+  ~/apps/fzf/install --all
 
   # npm global without sudo
   mkdir -p ~/.npm-packages

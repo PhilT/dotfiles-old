@@ -30,5 +30,10 @@ add_current () {
   done
 }
 
+add_bashrc_dir () {
+  ln `pwd`/bashrc ~/bashrc
+}
+
 remove_existing
 add_current
+add_bashrc_dir

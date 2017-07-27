@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+aur () {
+  name=$1
+  sha1=$2
+  url="https://aur.archlinux.org/cgit/aur.git/snapshot/$name.tar.gz"
+  mkdir -p ~/packages > /dev/null
+  pushd ~/packages > /dev/null
+  rm -rf $name
+  rm -rf /tmp/makepkg/$name
+  curl -s $url | tar -zx
+  if [ -d $name ]; then
+    cd $name
+    [[ $version != '' ]] && sed -i "s/^pkgver=.*/pkgver=$version/" PKGBUILD
+    [[ $sha1 != '' ]] && sed -i "s/^sha1sums=.*/sha1sums=('$sha1')/" PKGBUILD
+    makepkg -sf --noconfirm
+    sudo pacman -U --noconfirm --noprogressbar --needed /tmp/$name*.pkg.tar
+  else
+    echo Could not download package
+  fi
+  popd
+}
+export -f aur
+
+pac () {
+  sudo pacman -Syy --noconfirm --noprogressbar --needed $@
+}
+export -f pac
