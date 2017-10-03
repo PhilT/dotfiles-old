@@ -7,7 +7,6 @@ Lint/Debugger:
   Enabled: false
 
 Metrics/LineLength:
-  Max: 80
   Exclude:
     - 'db/migrate/*'
 
@@ -24,4 +23,7 @@ Rails:
   Enabled: true
 
 Documentation:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
   Enabled: false

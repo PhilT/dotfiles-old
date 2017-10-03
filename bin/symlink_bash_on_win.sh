@@ -6,7 +6,7 @@
 existing=`find ~ -maxdepth 1 -type l`
 
 config_files='nvim/init.vim'
-main_files='bashrc eslintrc profile vimrc gitconfig tmux.conf'
+main_files='bashrc eslintrc gitconfig profile ruby-version rubocop.yml tmux.conf vimrc'
 
 remove_existing () {
   for symlink in $existing; do

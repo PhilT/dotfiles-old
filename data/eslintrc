@@ -1,17 +1,41 @@
-{
-  "extends": "airbnb-base",
-  "plugins": ["import"],
-  "env": {
-    "amd": true,
-    "browser": true,
-    "es6": true,
-    "phantomjs": true
-  },
-  "rules": {
-    "func-names": "off", // ES6 sets name correctly
-    "no-multiple-empty-lines": ["error", { "max": 1 }],
-    "no-param-reassign": ["error", { "props": false }],
-    "radix": ["error", "as-needed"],
-    "semi": [2, "never"],
-  }
-}
+---
+env:
+  browser: true
+  es6: true
+  jest: true
+  node: true
+  phantomjs: true
+extends:
+  - airbnb-base
+  - plugin:import/errors
+  - plugin:import/warnings
+parserOptions:
+  ecmaVersion: 6
+  sourceType: module
+  ecmaFeatures:
+    jsx: true
+plugins:
+  - cycle
+  - import
+  - react
+rules:
+  func-names: off # ES6 sets name correctly
+  no-multiple-empty-lines: ["error", { "max": 1 }]
+  no-param-reassign: ["error", { "props": false }]
+  radix: ["error", "as-needed"]
+  semi: [2, "never"]
+settings:
+  import/ignore:
+    - jspm_packages
+    - node_modules
+    - .(sass|scss|less|css)$
+    - .[^js(x)?]+$
+  import/resolve:
+    moduleDirectory:
+      - jspm_packages
+      - node_modules
+      - .
+  import/resolver:
+    jspm:
+      moduleDirectory: jspm_packages
+    node: true

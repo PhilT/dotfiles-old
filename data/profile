@@ -2,6 +2,7 @@ umask 022
 
 # ignore Windows PATHs
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
@@ -11,15 +12,16 @@ fi
 CODE_DIR=code
 
 if [ -d /mnt/c/Users/Phil/$CODE_DIR ]; then
-  export WORKSPACE=/mnt/c/Users/Phil/$CODE_DIR
-  export CLIENT_WS=/mnt/c/Users/Phil/$CODE_DIR/clients
+  BASE_DIR=/mnt/c/Users/Phil
 else
-  export WORKSPACE=$HOME/$CODE_DIR
-  export CLIENT_WS=$HOME/$CODE_DIR/clients
+  BASE_DIR=$HOME
 fi
 
-export CLIENTS=$WORKSPACE/electricvisions/clients
-export ACCOUNTS=$WORKSPACE/electricvisions/accounts
+export WORKSPACE=$BASE_DIR/$CODE_DIR
+export CLIENT_WS=$BASE_DIR/$CODE_DIR/clients
+
+export CLIENTS=$WORKSPACE/documents/electricvisions/clients
+export ACCOUNTS=$WORKSPACE/documents/electricvisions/accounts
 export PUBLIC_GIT='git@github.com:PhilT'
 export PRIVATE_GIT='git@bitbucket.org:philat'
 

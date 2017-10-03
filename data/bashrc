@@ -37,7 +37,6 @@ alias off='sudo systemctl suspend'
 alias wifi='sudo systemctl restart netctl-auto@wlp3s0.service'
 alias lan='sudo systemctl restart netctl-ifplugd@enp0s3.service'
 alias open='xdg-open'
-alias vim=nvim
 
 alias pacman=pacmatic
 alias pacupg='sudo pacmatic -Syu' # Sync and upgrade all packages
@@ -50,10 +49,19 @@ alias paccheck='sudo pacmatic -Sy && sudo pacmatic -Qu' # List outdated packages
 
 alias bi='bundle ins'
 alias be='bundle exec'
+alias beh='bundle exec hanami'
 alias gfz="git st | sed 's/...//' | fzf"
 
 # Halve the size of all images in the current folder
 alias halfsize='ls *.* | xargs -n1 --replace convert -verbose {} -resize 50% {}'
+
+flip () {
+  if [[ `pwd` = '/mnt/c/Users/Phil/code/velocity-tracker' ]]; then
+    cd /mnt/c/Users/Phil/code/formulate/app
+  else
+    cd /mnt/c/Users/Phil/code/velocity-tracker
+  fi
+}
 
 # Slideshow with feh image viewer
 # Press ENTER to load current image into Gimp. H to pause slideshow
@@ -62,80 +70,27 @@ slide () {
   feh --action "gimp '%f'" --recursive --fullscreen --auto-zoom --borderless --slideshow-delay 5 --sort dirname,name
 }
 
-q () {
-  links "https://google.co.uk?q=$1"
-}
-
 pac () {
   sudo pacman -S --noconfirm --noprogressbar --needed $@
 }
 
-aur () {
-  name=$1
-  sha1=$2
-  url="https://aur.archlinux.org/cgit/aur.git/snapshot/$name.tar.gz"
-  mkdir -p ~/packages > /dev/null
-  pushd ~/packages > /dev/null
-  rm -rf $name
-  rm -rf /tmp/makepkg/$name
-  curl -s $url | tar -zx
-  if [ -d $name ]; then
-    cd $name
-    [[ $version != '' ]] && sed -i "s/^pkgver=.*/pkgver=$version/" PKGBUILD
-    [[ $sha1 != '' ]] && sed -i "s/^sha1sums=.*/sha1sums=('$sha1')/" PKGBUILD
-    makepkg -sf --noconfirm
-    sudo pacman -U --noconfirm --noprogressbar --needed /tmp/$name*.pkg.tar
-  else
-    echo Could not download package
-  fi
-  popd
+ungz () {
+  curl -s $1 | tar -zx
 }
 
-# Clone or update a git repo
-gup () {
-  repo=$1; shift
-  author=$1; shift
-  dest=$1; shift
-
-  if [[ $author = '--private' ]]; then
-    host=$PRIVATE_GIT
-  elif [[ ! $author ]]; then
-    host=$PUBLIC_GIT
-  else
-    host=https://github.com/$author
-  fi
-
-  if [[ $dest = '' ]]; then
-    dest=$repo
-  fi
-
-  if [ -d $dest ]; then
-    echo updating $repo
-    cd $dest
-    git pull -q
-    cd - > /dev/null
-  else
-    echo cloning $repo
-    git clone -q $options $host/$repo $dest
-  fi
+# Codi
+# Usage: codi [filetype] [filename]
+codi() {
+  local syntax="${1:-python}"
+  shift
+  vim -c \
+    "let g:startify_disable_at_vimenter = 1 |\
+    set bt=nofile ls=0 noru nonu nornu |\
+    hi ColorColumn ctermbg=NONE |\
+    hi VertSplit ctermbg=NONE |\
+    hi NonText ctermfg=0 |\
+    Codi $syntax" "$@"
 }
-
-# Setup monitor at home
-home () {
-  xrandr --output HDMI2 --auto --pos 0x0 --output eDP1 --left-of HDMI2
-}
-
-# Setup monitor at work
-work () {
-  xrandr --output HDMI1 --auto --pos 0x0 --output eDP1 --left-of HDMI1
-}
-
-# No extra monitor
-lap () {
-  xrandr --output HDMI1 --off --output HDMI2 --off
-}
-
-export -f aur gup pac
 
 parse_git_branch () {
   git symbolic-ref -q HEAD 2> /dev/null | sed 's/refs\/heads\/\(.*\)/ \1 /'
@@ -151,7 +106,7 @@ git_modified () {
 }
 
 ruby_version () {
-  [ -d /usr/local/share/chruby ] && chruby_auto && ruby -v | sed 's/ruby \(.*\)p.*/\1/'
+  [ -d /usr/local/share/chruby ] && chruby_auto && which ruby 2>&1 > /dev/null && ruby -v | sed 's/ruby \(.*\)p.*/\1/'
 }
 
 root_user () {
@@ -161,55 +116,52 @@ root_user () {
 if [ -d /usr/local/share/chruby ]; then
   source /usr/local/share/chruby/chruby.sh
   source /usr/local/share/chruby/auto.sh
-  chruby 2.4.1
 fi
 
-#if [[ $(pgrep startx 2>&1) ]]; then
-  # Atom One Dark theme colors
-  accent='82;139;255'
-  sfg='171;178;191'
-  sbg='40;44;52'
-  bg_1='18;20;23'
-  bg_hl='47;52;61'
-  gutter='102;109;122'
-  mono_1='171;178;191'
-  mono_2='130;137;151'
-  mono_3='92;99;112'
-  cyan='86;182;194'
-  blue='97;175;239'
-  purple='198;120;221'
-  green='152;195;121'
-  red_1='224;108;117'
-  red_2='190;80;70'
-  orange_1='209;154;102'
-  orange_2='229;192;123'
-  gray='62;68;81'
-  silver='170;170;170'
-  black='29;29;29'
+# Atom One Dark theme colors
+accent='82;139;255'
+sfg='171;178;191'
+sbg='40;44;52'
+bg_1='18;20;23'
+bg_hl='47;52;61'
+gutter='102;109;122'
+mono_1='171;178;191'
+mono_2='130;137;151'
+mono_3='92;99;112'
+cyan='86;182;194'
+blue='97;175;239'
+purple='198;120;221'
+green='152;195;121'
+red_1='224;108;117'
+red_2='190;80;70'
+orange_1='209;154;102'
+orange_2='229;192;123'
+gray='62;68;81'
+silver='170;170;170'
+black='29;29;29'
 
 
-  prehost="\[\e[38;2;${sbg};48;2;${green}m\]"
-  host=" \h "
-  posthost="\[\e[38;2;${green};48;2;${bg_hl}m\]"
+prehost="\[\e[38;2;${sbg};48;2;${green}m\]"
+host=" \h "
+posthost="\[\e[38;2;${green};48;2;${bg_hl}m\]"
 
-  preworkdir="\[\e[38;2;${silver};48;2;${bg_hl}m\]"
-  workingdir=" \w "
-  postworkdir="\[\e[38;2;${bg_hl};48;2;${red_2}m\]"
+preworkdir="\[\e[38;2;${silver};48;2;${bg_hl}m\]"
+workingdir=" \w "
+postworkdir="\[\e[38;2;${bg_hl};48;2;${red_2}m\]"
 
-  preruby="\[\e[38;2;${sbg};48;2;${red_2}m\]"
-  ruby=" \$(ruby_version) "
-  postruby="\[\e[38;2;${red_2};48;2;${bg_hl}m\]"
+preruby="\[\e[38;2;${sbg};48;2;${red_2}m\]"
+ruby=" \$(ruby_version) "
+postruby="\[\e[38;2;${red_2};48;2;${bg_hl}m\]"
 
-  prebranch="\[\e[38;2;\$(git_modified);48;2;${bg_hl}m\]"
-  branch="\$(parse_git_branch)"
-  postbranch="\[\e[38;2;${bg_hl};48;2;${bg_1}m\]"
+prebranch="\[\e[38;2;\$(git_modified);48;2;${bg_hl}m\]"
+branch="\$(parse_git_branch)"
+postbranch="\[\e[38;2;${bg_hl};48;2;${bg_1}m\]"
 
-  normal="\[\033[0m\] "
+normal="\[\033[0m\] "
 
-  PS1="$prehost$host$posthost$preworkdir$workingdir$postworkdir$preruby$ruby$postruby$prebranch$branch$postbranch$normal"
-#fi
+PS1="$prehost$host$posthost$preworkdir$workingdir$postworkdir$preruby$ruby$postruby$prebranch$branch$postbranch$normal"
 
-#export LS_COLORS="ow=90:di=90"
+export LS_COLORS="ow=94:di=94"
 
 export FZF_DEFAULT_COMMAND='ag -g ""'
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash

@@ -2,6 +2,8 @@
 
 Make dotfiles portable. Make setup scripts portable (for ArchLinux). Try to make them repeatable.
 
+Has worked on Archlinux, OSX and currently running on Ubuntu on Windows.
+
 ## Usage
 
 Full installation for desired system (uses hostname to determine config to use):

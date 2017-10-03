@@ -8,26 +8,26 @@ Plug 'tpope/vim-obsession' " Save the session so it can be restored by tmux
 Plug 'bling/vim-airline'
 Plug 'airblade/vim-gitgutter'
 
+" Async keyword completion
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " Autocomplete
+Plug 'carlitux/deoplete-ternjs' " Plugin for Ternjs Javascript tooling: Autocomplete, hints, type info, find def, refactoring
+Plug 'Shougo/neco-syntax' " Completions using lang syntax keywords
+
 " Completions, Snippets
 Plug 'jiangmiao/auto-pairs'
-" Plug 'Shougo/deoplete.nvim'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'   " Snippet engine
+Plug 'honza/vim-snippets' " Snippets
 
 " Tools
 Plug 'junegunn/fzf'
 Plug 'mileszs/ack.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'neomake/neomake'
-Plug 'metakirby5/codi.vim' " Interactive dev scratchpad - :Codi/:Codi! (on/off
-Plug 'janko-m/vim-test'
+Plug 'metakirby5/codi.vim' " IRB or Node console - :Codi/:Codi! (on/off
+Plug 'mtth/scratch.vim' " Scratchpad
+Plug 'janko-m/vim-test' " Run tests for a variety of frameworks (Ruby: Minitest, RSpec, Rails, JS: TAP, Jest, Jasmine, etc)
 Plug 'kassio/neoterm' " Reuse Neovim :terminal, :T <command>, eg. :T git status
-
-" FSharp
-" Not working due to https://github.com/Microsoft/BashOnWindows/issues/1265
-" NameResolutionFailure when running ~/.local/share/nvim/plugged/vim-fsharp/install.sh
-" Plug 'vim-syntastic/syntastic'
-" Plug 'fsharp/vim-fsharp', { 'for': 'fsharp', 'do': 'make fsautocomplete', }
+Plug 'tpope/vim-surround'
 
 " Ruby
 Plug 'tpope/vim-bundler'
@@ -43,13 +43,23 @@ Plug 'gavocanov/vim-js-indent'
 Plug 'moll/vim-node'
 Plug 'elzr/vim-json'
 
-" Elm
-Plug 'lambdatoast/elm.vim'
-
 " Git
 Plug 'tpope/vim-fugitive' " Gedit, Gblame, Gdiff, Gstatus, Greset, Gcommit, plus loads more
 
 call plug#end()
+
+""""""" END OF PLUGIN INSTALL
+
+" Ternjs config
+let g:tern_request_timeout = 1
+let g:tern_show_signature_in_pum = '0'  " This do disable full signature type on autocomplete
+let g:tern#filetypes = [
+                \ 'jsx',
+                \ 'javascript.jsx',
+                \ 'vue'
+                \ ] " Add extra filetypes
+
+" General settings
 
 filetype plugin indent on
 syntax enable
@@ -61,33 +71,40 @@ let g:airline_theme='onedark'
 let g:python_host_prog = '/usr/bin/python2'
 let g:python3_host_prog = '/usr/bin/python'
 
-set clipboard=unnamed
 set autoread
-set expandtab
-set ignorecase
-set incsearch
-set smartcase
-set noswapfile
-set number
-set shiftwidth=2
 set backspace=2
-set tabstop=2
-set scrolloff=7
+set clipboard=unnamed
+set expandtab
+set hidden              " hide buffers instead of closing
+set ignorecase
+set incsearch           " show matches as you type
 set laststatus=2
+set noswapfile
+set number              " line numbers
+set scrolloff=7
+set shiftwidth=2
+set smartcase
+set tabstop=2
 
 " Python providers
 let g:python_host_prog = '/usr/bin/python2'
 let g:python3_host_prog = '/usr/bin/python3'
 
+" Scratchpad
+let g:scratch_persistence_file = '.scratch.vim'
+let g:scratch_horizontal = 1
+let g:scratch_height = 10
+nmap go :Scratch<CR>
+nmap gp :ScratchPreview<CR>
 
-""" Completion
-"let g:deoplete#enable_at_startup = 1
+" Completion
+"let g:deoplete#enable_at_startup = 1 " Needs fixing
 "let g:deoplete#disable_auto_complete = 1
 inoremap <silent><expr><C-@> deoplete#mappings#manual_complete()
 
 inoremap <silent><expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsExpandTrigger="<c-tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " Search/Replace
@@ -137,9 +154,10 @@ nnoremap <C-l> <C-w>l
 
 " Terminal
 hi Normal guibg=#121417| " Match background color of terminal in editor
-" tnoremap <Esc> <C-\><C-n> - conflicts with exiting FZF
+tnoremap <C-Esc> <C-\><C-n>| " Exit terminal
 
 " Testing - vim-test
+let test#ruby#minitest#file_pattern = '_spec\.rb'
 let test#strategy = 'neovim'
 nmap <silent> <leader>T :TestNearest<CR>| " Runs test nearest to cursor
 nmap <silent> <leader>t :TestFile<CR>| " Runs all tests in file
@@ -148,7 +166,7 @@ nmap <silent> <leader>l :TestLast<CR>| " Runs last test
 nmap <silent> <leader>g :TestVisit<CR>| " Runs last test file
 
 " Git Gutter
-let g:gitgutter_sign_column_always = 1
+set signcolumn=yes
 
 " Powerline fonts
 let g:airline_powerline_fonts = 1
@@ -196,7 +214,6 @@ function! s:Neomake_callback(options)
   endif
 endfunction
 
-let g:neomake_ruby_rubocop_args = ['--format', 'emacs', '-a', '-c', '/home/phil/.rubocop.yml']
 autocmd BufWritePost * call neomake#Make(1, [], function('s:Neomake_callback'))
 
 " from /home/phil/ws/tests/test_spec.rb:2:in `<top (required)>'
@@ -237,7 +254,7 @@ let g:neomake_ruby_rspec_maker = { 'exe': 'rspec', 'errorformat': '
   \%C%m,
   \' }
 
-let g:neomake_ruby_rspec_enabled_makers = ['rubocop', 'rspec']
+let g:neomake_ruby_rspec_enabled_makers = ['rspec']
 
 let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_javascript_eslint_args = ['--fix', '--format', 'compact']
