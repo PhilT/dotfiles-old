@@ -1,11 +1,12 @@
 
 call plug#begin('$HOME/.local/share/nvim/plugged')
 
+
 Plug 'sheerun/vim-polyglot' " Syntax, indent, compilers for various languages
 Plug 'joshdick/onedark.vim' " theme
 Plug 'tpope/vim-obsession' " Save the session so it can be restored by tmux
 
-Plug 'bling/vim-airline'
+"Plug 'bling/vim-airline'
 Plug 'airblade/vim-gitgutter'
 
 " Async keyword completion
@@ -20,7 +21,7 @@ Plug 'honza/vim-snippets' " Snippets
 
 " Tools
 Plug 'junegunn/fzf'
-Plug 'mileszs/ack.vim'
+Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'neomake/neomake'
 Plug 'metakirby5/codi.vim' " IRB or Node console - :Codi/:Codi! (on/off
@@ -114,14 +115,12 @@ nmap <silent> <Space> :nohlsearch<CR>
 
 " Fuzzy find
 set wildmenu " display files with TAB
-set wildignore+=.git/**,tmp/**,coverage/**,log/**,app/assets/fonts/**,app/assets/images/**,db/migrate/**,node_modules/**,bin/**,*.sql
+set wildignore+=.git/**,tmp/**,coverage/**,log/**,app/assets/fonts/**,app/assets/images/**,db/migrate/**,node_modules/**,bin/**,*.sql,**/*.min.js
 set path+=** " recursively search files
 map <C-p> :FZF<CR>
 
 " Find in files
-if executable('ag')
-  let g:ackprg = 'ag --nogroup --nocolor --column'
-endif
+let g:ag_prg = 'ag --column --path-to-ignore ~/.ignore'
 
 " NERDTree
 map <C-b> :NERDTreeToggle<CR>
@@ -151,6 +150,7 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+
 
 " Terminal
 hi Normal guibg=#121417| " Match background color of terminal in editor
@@ -200,11 +200,12 @@ command! Tags !ctags -Rf .tags .
 
 nnoremap <leader>vim :e ~/.config/nvim/init.vim<CR>
 nnoremap <leader>rr :source ~/.config/nvim/init.vim<CR>
+nnoremap <leader>f :!rubocop -a %<CR>
 
 " Build, Linting
 autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>| " ensure Enter is not remapped in Quickfix
 let g:neomake_serialize=1
-let g:neomake_open_list=2
+let g:neomake_open_list=0
 
 
 " Callback for reloading file in buffer when rubocop/eslint has finished
@@ -214,7 +215,8 @@ function! s:Neomake_callback(options)
   endif
 endfunction
 
-autocmd BufWritePost * call neomake#Make(1, [], function('s:Neomake_callback'))
+autocmd BufWritePost * Neomake " call neomake#Make(1, [], function('s:Neomake_callback'))
+autocmd BufReadPost * Neomake
 
 " from /home/phil/ws/tests/test_spec.rb:2:in `<top (required)>'
 " /.../kernel_require.rb:55:in `require': no file -- my_class (LoadError)
@@ -257,4 +259,5 @@ let g:neomake_ruby_rspec_maker = { 'exe': 'rspec', 'errorformat': '
 let g:neomake_ruby_rspec_enabled_makers = ['rspec']
 
 let g:neomake_javascript_enabled_makers = ['eslint']
-let g:neomake_javascript_eslint_args = ['--fix', '--format', 'compact']
+let g:neomake_javascript_eslint_exe = $PWD .'/node_modules/.bin/eslint'
+let g:neomake_javascript_eslint_args = ['-c', '.eslintrc', '--fix', '--format', 'compact']

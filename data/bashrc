@@ -168,4 +168,4 @@ export FZF_DEFAULT_COMMAND='ag -g ""'
 [ -f ~/.bashrc_local ] && source ~/.bashrc_local
 
 # Start tmux on login
-[[ -z "$TMUX" ]] && exec tmux
+#[[ -z "$TMUX" ]] && exec tmux

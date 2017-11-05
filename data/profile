@@ -28,6 +28,8 @@ export PRIVATE_GIT='git@bitbucket.org:philat'
 export EDITOR=vim
 export CDPATH=.:$WORKSPACE:$CLIENT_WS:$CLIENTS:$ACCOUNTS
 
+export ELASTICSEARCH_URL=http://elastic:changeme@127.0.0.1:9200
+
 NPM_PACKAGES="${HOME}/.npm-packages"
 
 PATH="$NPM_PACKAGES/bin:$HOME/bin:$PATH"

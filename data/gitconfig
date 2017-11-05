@@ -7,8 +7,8 @@
   ui = true
 [alias]
   ap = !git add -N . && git add -p
-  s = stash
-  p = stash pop
+  ss = stash
+  pp = stash pop
   cl = branch -d $(git branch --merged | grep -v '\\(\\*\\|develop\\|master\\)')
   st = status -s
   ci = commit
@@ -21,6 +21,8 @@
   lf = log --name-only --oneline
   lfd = log --name-only --oneline --diff-filter=ACMRTUXB
   pf = push --force-with-lease
+  rem = !git fetch && git rebase origin/master
+  pm = !git co master && git pull
   rc = rebase --continue
   ra = rebase --abort
   rs = rebase --skip
