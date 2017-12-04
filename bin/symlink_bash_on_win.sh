@@ -3,10 +3,13 @@
 # Adds symlinks for everything in data/ to ~/ and prefixes them with a dot ('.')
 # so that dotfiles can be kept updated. Also symlinks selected files in ~/.config.
 
+# This Windows version copies a smaller subset of files as many are ArchLinux specific
+# in main bin/symlink script.
+
 existing=`find ~ -maxdepth 1 -type l`
 
 config_files='nvim/init.vim'
-main_files='bashrc eslintrc gitconfig profile ruby-version rubocop.yml tmux.conf vimrc'
+main_files='bashrc eslintrc gitignore ignore gitconfig profile ruby-version rubocop.yml tmux.conf vimrc'
 
 remove_existing () {
   for symlink in $existing; do

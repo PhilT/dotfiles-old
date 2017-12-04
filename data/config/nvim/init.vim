@@ -1,23 +1,17 @@
-
 call plug#begin('$HOME/.local/share/nvim/plugged')
 
-
 Plug 'sheerun/vim-polyglot' " Syntax, indent, compilers for various languages
-Plug 'joshdick/onedark.vim' " theme
-Plug 'tpope/vim-obsession' " Save the session so it can be restored by tmux
+Plug 'rakr/vim-one' " theme
 
-"Plug 'bling/vim-airline'
 Plug 'airblade/vim-gitgutter'
 
-" Async keyword completion
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " Autocomplete
-Plug 'carlitux/deoplete-ternjs' " Plugin for Ternjs Javascript tooling: Autocomplete, hints, type info, find def, refactoring
-Plug 'Shougo/neco-syntax' " Completions using lang syntax keywords
-
-" Completions, Snippets
-Plug 'jiangmiao/auto-pairs'
-Plug 'SirVer/ultisnips'   " Snippet engine
-Plug 'honza/vim-snippets' " Snippets
+" Async keyword completion & snippets
+"Plug 'roxma/nvim-completion-manager'
+Plug 'Shougo/neco-syntax'   " Completions using lang syntax keywords
+Plug 'jiangmiao/auto-pairs' " Auto-pair brackets. <M-p> on/off, <M-e> wrap, <M-n>/<M-b> Next/prev pair
+Plug 'SirVer/ultisnips'     " Snippet engine
+Plug 'honza/vim-snippets'   " Snippets
+Plug 'Shougo/echodoc.vim'   " Display docs in echo area - see syntax of methods
 
 " Tools
 Plug 'junegunn/fzf'
@@ -37,7 +31,6 @@ Plug 'tpope/vim-rake'
 
 " JavaScript
 Plug 'slm-lang/vim-slm'
-Plug 'marijnh/tern_for_vim', { 'build': 'npm install' }
 Plug 'othree/yajs.vim'
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'gavocanov/vim-js-indent'
@@ -47,9 +40,17 @@ Plug 'elzr/vim-json'
 " Git
 Plug 'tpope/vim-fugitive' " Gedit, Gblame, Gdiff, Gstatus, Greset, Gcommit, plus loads more
 
+" Formatting
+Plug 'ntpeters/vim-better-whitespace'
+
 call plug#end()
 
 """"""" END OF PLUGIN INSTALL
+
+" Logging
+let $NVIM_PYTHON_LOG_FILE="/tmp/nvim_log"
+let $NVIM_NCM_LOG_LEVEL="DEBUG"
+let $NVIM_NCM_MULTI_THREAD=0
 
 " Ternjs config
 let g:tern_request_timeout = 1
@@ -62,20 +63,16 @@ let g:tern#filetypes = [
 
 " General settings
 
-filetype plugin indent on
-syntax enable
-
 set termguicolors
-colorscheme onedark
-let g:airline_theme='onedark'
-
-let g:python_host_prog = '/usr/bin/python2'
-let g:python3_host_prog = '/usr/bin/python'
+set background=dark
+colorscheme one
+hi! EndOfBuffer gui=NONE guifg=#1b202a guibg=NONE
 
 set autoread
 set backspace=2
 set clipboard=unnamed
-set expandtab
+set expandtab           " Tabs to spaces
+set fillchars+=vert:│   " Set vertical border on split screen
 set hidden              " hide buffers instead of closing
 set ignorecase
 set incsearch           " show matches as you type
@@ -99,49 +96,33 @@ nmap go :Scratch<CR>
 nmap gp :ScratchPreview<CR>
 
 " Completion
-"let g:deoplete#enable_at_startup = 1 " Needs fixing
-"let g:deoplete#disable_auto_complete = 1
-inoremap <silent><expr><C-@> deoplete#mappings#manual_complete()
-
-inoremap <silent><expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-let g:UltiSnipsExpandTrigger="<c-tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<c-tab>"
 
 " Search/Replace
 hi Search guibg=#61AFEF
 hi WildMenu guifg=#333333 guibg=#61AFEF
-nmap <silent> <Space> :nohlsearch<CR>
+nnoremap <silent> <Space> :nohlsearch<CR>
 
 " Fuzzy find
 set wildmenu " display files with TAB
 set wildignore+=.git/**,tmp/**,coverage/**,log/**,app/assets/fonts/**,app/assets/images/**,db/migrate/**,node_modules/**,bin/**,*.sql,**/*.min.js
 set path+=** " recursively search files
-map <C-p> :FZF<CR>
+nnoremap <C-f> :FZF<CR>
+set rtp+=~/apps/fzf
 
 " Find in files
 let g:ag_prg = 'ag --column --path-to-ignore ~/.ignore'
 
 " NERDTree
-map <C-b> :NERDTreeToggle<CR>
+nnoremap <C-b> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif " quit vim if NERDTree is last window
 let NERDTreeQuitOnOpen=1 "close NERDTree after opening file
 
-" Toggle line numbers and paste formatting
-nmap <Leader>i :setlocal number!<CR>
-nmap <Leader>o :set paste!<CR>
-
-" Map F1 to del key to fix terminfo problem when using st (simple terminal)
-" https://github.com/neovim/neovim/issues/3211
-map <F1> <del>
-map! <F1> <del>
-
 " Buffers
-nmap <C-n> :cn<CR>
-nmap <C-m> :cp<CR>
-map <Leader>p :bp<CR>| " previous buffer
-map <Leader>n :bn<CR>| " next buffer
-map <Leader>d :bd<CR>| " delete buffer
+nnoremap <C-n> :cn<CR>
+nnoremap <C-m> :cp<CR>
 
 " Sensible movement keys
 nnoremap j gj
@@ -151,25 +132,43 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-
 " Terminal
-hi Normal guibg=#121417| " Match background color of terminal in editor
-tnoremap <C-Esc> <C-\><C-n>| " Exit terminal
+tnoremap <Esc> <C-\><C-n>| " Exit terminal
 
 " Testing - vim-test
 let test#ruby#minitest#file_pattern = '_spec\.rb'
 let test#strategy = 'neovim'
-nmap <silent> <leader>T :TestNearest<CR>| " Runs test nearest to cursor
-nmap <silent> <leader>t :TestFile<CR>| " Runs all tests in file
-nmap <silent> <leader>a :TestSuite<CR>| " Runs entire suite
-nmap <silent> <leader>l :TestLast<CR>| " Runs last test
-nmap <silent> <leader>g :TestVisit<CR>| " Runs last test file
 
 " Git Gutter
 set signcolumn=yes
 
-" Powerline fonts
-let g:airline_powerline_fonts = 1
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Leaders mappings
+"
+
+nnoremap <silent> <Leader>a :TestSuite<CR>|             " Runs entire suite
+nnoremap <silent> <Leader>c :set background=light<CR>|  " Switch to light theme
+nnoremap <silent> <Leader>C :set background=dark<CR>|   " Switch to dark theme
+nnoremap <silent> <Leader>d :bd<CR>|                    " delete buffer
+nnoremap <silent> <Leader>f :!rubocop -a %<CR>|         " Run Rubocop autocorrect on current file
+nnoremap <silent> <Leader>g :TestVisit<CR>|             " Runs last test file
+nnoremap <silent> <Leader>i :setlocal number!<CR>|      " Toggle line numbers
+nnoremap <silent> <Leader>l :TestLast<CR>|              " Runs last test
+nnoremap <silent> <Leader>n :bn<CR>|                    " next buffer
+nnoremap <silent> <Leader>o :set paste!<CR>|            " Toggle paste formatting
+nnoremap <silent> <Leader>p :bp<CR>|                    " previous buffer
+nnoremap <silent> <Leader>rr :source ~/.config/nvim/init.vim<CR>
+nnoremap <silent> <Leader>t :TestFile<CR>|              " Runs all tests in file
+nnoremap <silent> <Leader>T :TestNearest<CR>|           " Runs test nearest to cursor
+nnoremap <silent> <Leader>vim :e ~/.config/nvim/init.vim<CR>| " Reload vimrc
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Functions
+""
+
+" Remove trailing whitespace
+autocmd BufEnter * EnableStripWhitespaceOnSave
 
 " only highlight current line while in insert mode
 augroup CursorLine
@@ -177,15 +176,6 @@ augroup CursorLine
   au InsertEnter * setlocal cursorline
   au InsertLeave * setlocal nocursorline
 augroup END
-
-" remove trailing spaces and extra lines at end of file
-function! TrimTrailingSpacesAndNewLines()
-  let cursor_pos = getpos('.')
-  :silent! %s/\s\+$//e
-  :silent! %s/\($\n\s*\)\+\%$/
-  call setpos('.', cursor_pos)
-endfunction
-autocmd BufWritePre * call TrimTrailingSpacesAndNewLines()
 
 " Spellcheck Markdown files
 autocmd BufRead,BufNewFile *.md setlocal spell
@@ -198,15 +188,10 @@ nnoremap <F6> :setlocal spell!<CR>
 set tags=./.tags,.tags
 command! Tags !ctags -Rf .tags .
 
-nnoremap <leader>vim :e ~/.config/nvim/init.vim<CR>
-nnoremap <leader>rr :source ~/.config/nvim/init.vim<CR>
-nnoremap <leader>f :!rubocop -a %<CR>
-
 " Build, Linting
 autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>| " ensure Enter is not remapped in Quickfix
 let g:neomake_serialize=1
 let g:neomake_open_list=0
-
 
 " Callback for reloading file in buffer when rubocop/eslint has finished
 function! s:Neomake_callback(options)
