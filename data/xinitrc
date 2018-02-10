@@ -3,5 +3,8 @@ xrdb -merge ~/.Xresources
 [ -f /usr/bin/xbindkeys ] && xbindkeys
 [ -f /usr/bin/VBoxClient-all ] && VBoxClient-all
 xset m 3/2 0
+xset s off -dpms
+setxkbmap gb
+xrandr --rate 60
 exec ~/bin/startdwm
 

@@ -43,6 +43,8 @@ alias pacreps='pacmatic -Ss'      # Search for package in the repos
 alias paclist='pacmatic -Q --color always | less' # List installed packages
 alias paccheck='sudo pacmatic -Sy && sudo pacmatic -Qu' # List outdated packages
 
+alias aurupg='~/ws/dotfiles/bin/aur_packages.sh'
+
 alias bi='bundle ins'
 alias be='bundle exec'
 alias gfz="git st | sed 's/...//' | fzf"

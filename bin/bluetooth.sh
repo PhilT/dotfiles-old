@@ -8,8 +8,8 @@ if [[ $BLUETOOTH ]]; then
   sudo systemctl enable bluetooth
   sudo systemctl restart bluetooth
 
-  echo ACTION=="add", KERNEL=="hci0", RUN+="/usr/bin/hciconfig hci0 up" | tee -a sudo /etc/udev/rules.d/10-local.rules >> /dev/null
+  echo ACTION=="add", KERNEL=="hci0", RUN+="/usr/bin/hciconfig hci0 up" | sudo tee -a /etc/udev/rules.d/10-local.rules >> /dev/null
 
-  `dirname $0`/pair_mouse.exp
+  [[ $BT_MOUSE ]] && `dirname $0`/pair_mouse.exp
 fi
 

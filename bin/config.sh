@@ -14,11 +14,13 @@ elif [[ $MACHINE == $LAPTOP ]]; then
   SOUND=true
   DEVELOPMENT=true
   BLUETOOTH=true
+  BT_MOUSE=true
 elif [[ $MACHINE == $SERVER ]]; then
   DESKTOP=true
   MEDIA_SERVER=true
   SOUND=true
   APPS=true
+  BLUETOOTH=true
 else
   echo 'Machine (hostname) not recognised.'
   echo 'Did you forget to update config.sh or arch_installer/install.sh?'
