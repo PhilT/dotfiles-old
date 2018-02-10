@@ -1,31 +1,34 @@
-" Setup pathogen
+set nocompatible
+
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
+filetype indent on
+filetype plugin on
 syntax on
-filetype plugin indent on
 
 Helptags
-colorscheme hybrid
 set background=dark
-let g:molokai_original=0
-highlight NonText ctermfg=0
-highlight SignColumn ctermbg=8
+let g:hybrid_custom_term_colors = 1
+colorscheme hybrid
 
 map <C-p> :FZF<CR>
 set rtp+=~/apps/fzf
 
+set clipboard=unnamed
+set autoread
 set expandtab
 set ignorecase
 set incsearch
+set smartcase
 set noswapfile
 set number
 set shiftwidth=2
 set backspace=2
-set smartcase
 set tabstop=2
 set tags=./tags
 set wildignore+=.git/**,tmp/**,coverage/**,log/**,app/assets/fonts/**,app/assets/images/**,db/migrate/**,node_modules/**,bin/**,fca-frontend/**,frontend/**
 set so=7
+set laststatus=2
 
 map <C-b> :NERDTreeToggle<CR>
 
@@ -34,8 +37,11 @@ map! <Esc>[; <C-Semicolon>
 
 nmap <C-n> :cn<CR>
 nmap <C-m> :cp<CR>
-nmap <Leader>n :setlocal number!<CR>
+nmap <Leader>l :setlocal number!<CR>
 nmap <Leader>o :set paste!<CR>
+map <Leader>p :bp<CR> " previous buffer
+map <Leader>n :bn<CR> " next buffer
+map <Leader>d :bd<CR> " delete buffer
 vmap <C-c> y: call system("xsel -i", getreg("\""))<CR>
 
 noremap j gj
@@ -46,10 +52,9 @@ noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 
 let test#strategy = 'dispatch'
-nmap <silent> <leader>t :TestNearest<CR>
-nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>T :TestNearest<CR>
+nmap <silent> <leader>t :TestFile<CR>
 nmap <silent> <leader>a :TestSuite<CR>
-nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
 
 " only highlight current line while in insert mode
@@ -85,3 +90,9 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_eruby_ruby_quiet_messages = {'regex': 'possibly useless use of a variable in void context'}
+let g:syntastic_sass_checkers = ['sassc']
+
+let g:gitgutter_enabled = 0
+
+autocmd BufRead,BufNewFile *.md setlocal spell

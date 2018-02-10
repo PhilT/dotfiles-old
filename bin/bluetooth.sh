@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 source `dirname $0`/config.sh
 
-# THIS SCRIPT IS REPEATABLE
-
 if [[ $BLUETOOTH ]]; then
   pac bluez bluez-utils expect
   sudo systemctl enable bluetooth
@@ -12,4 +10,3 @@ if [[ $BLUETOOTH ]]; then
 
   [[ $BT_MOUSE ]] && `dirname $0`/pair_mouse.exp
 fi
-

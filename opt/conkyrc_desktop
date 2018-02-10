@@ -7,4 +7,4 @@ use_spacer none
 short_units yes
 
 TEXT
-${cpu cpu1}% ${cpu cpu2}% ${cpu cpu3}% ${cpu cpu4}% | $memperc% ($mem) | ${time %Y-%m-%d %H:%M}
+${cpu cpu1}% ${cpu cpu2}% | $memperc% ($mem) | ${time %Y-%m-%d %H:%M}

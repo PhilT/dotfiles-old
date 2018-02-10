@@ -1,0 +1,29 @@
+AllCops:
+  Exclude:
+    - 'db/schema.rb'
+
+Lint/Debugger:
+  Description: 'Turn off Check for debugger calls in vim with autocorrect'
+  Enabled: false
+
+Metrics/LineLength:
+  Exclude:
+    - 'db/migrate/*'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+    - 'test/**/*'
+
+Metrics/MethodLength:
+  Exclude:
+    - 'db/migrate/*'
+
+Rails:
+  Enabled: true
+
+Documentation:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false

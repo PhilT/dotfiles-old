@@ -7,4 +7,3 @@ xset s off -dpms
 setxkbmap gb
 xrandr --rate 60
 exec ~/bin/startdwm
-

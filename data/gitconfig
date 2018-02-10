@@ -4,16 +4,30 @@
 	name = Phil Thompson
 	email = phil@electricvisions.com
 [color]
-#  ui = true
+  ui = true
 [alias]
+  ap = !git add -N . && git add -p
+  ss = stash
+  pp = stash pop
+  cl = branch -d $(git branch --merged | grep -v '\\(\\*\\|develop\\|master\\)')
   st = status -s
   ci = commit
   br = branch
   co = checkout
   df = diff HEAD
+  ds = diff --staged
   lg = log -p
+  lo = log --oneline
   lf = log --name-only --oneline
   lfd = log --name-only --oneline --diff-filter=ACMRTUXB
+  pf = push --force-with-lease
+  rem = !git fetch && git rebase origin/master
+  pm = !git co master && git pull
+  rc = rebase --continue
+  ra = rebase --abort
+  rs = rebase --skip
+  ri = rebase -i
+  x = update-index --chmod=+x
 
 [branch]
 	autosetupmerge = true
@@ -22,5 +36,12 @@
 	default = current
 [core]
 	whitespace = -trailing-space
+	pager = less -r
+	excludesfile = /home/phil/.gitignore
+	filemode = false
 [github]
 	user = PhilT
+[merge]
+	tool = vimdiff
+[mergetool]
+	path = nvim

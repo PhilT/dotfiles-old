@@ -1,29 +1,42 @@
-#umask 022
+umask 022
+
+# ignore Windows PATHs
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
-	. "$HOME/.bashrc"
+  . "$HOME/.bashrc"
 fi
 
-# used in dotfiles/bin scripts
-export WORKSPACE=$HOME/ws
-export CLIENTS=$HOME/ws/documents/electricvisions/clients
-export ACCOUNTS=$HOME/ws/documents/electricvisions/accounts
+CODE_DIR=code
+
+if [ -d /mnt/c/Users/Phil/$CODE_DIR ]; then
+  BASE_DIR=/mnt/c/Users/Phil
+else
+  BASE_DIR=$HOME
+fi
+
+export WORKSPACE=$BASE_DIR/$CODE_DIR
+export CLIENT_WS=$BASE_DIR/$CODE_DIR/clients
+
+export CLIENTS=$WORKSPACE/documents/electricvisions/clients
+export ACCOUNTS=$WORKSPACE/documents/electricvisions/accounts
 export PUBLIC_GIT='git@github.com:PhilT'
 export PRIVATE_GIT='git@bitbucket.org:philat'
 
 export EDITOR=vim
-export CDPATH=.:$WORKSPACE:$CLIENTS:$ACCOUNTS
+export CDPATH=.:$WORKSPACE:$CLIENT_WS:$CLIENTS:$ACCOUNTS
 
-BINSTUBS_SAFE=.bin/safe/../../.bin:bin/safe/../../bin  # create a 'safe' folder in .bin/ or bin/ for security
-RBENV_SHIMS=$HOME/.rbenv/shims      # rbenv shims folder (instead of rbenv init)
-USER_BIN=$HOME/bin                  # for running user scripts
-#DHCLIENT=yes                        # use instead of dhcpd as lease problems occur
+export ELASTICSEARCH_URL=http://elastic:changeme@127.0.0.1:9200
 
-PATH=$BINSTUBS_SAFE:$RBENV_SHIMS:$USER_BIN:$PATH
+NPM_PACKAGES="${HOME}/.npm-packages"
+
+PATH="$NPM_PACKAGES/bin:$HOME/bin:$PATH"
+unset MANPATH
+export MANPATH="$NPM_PACKAGES/share/man:${manpath}"
 
 [ -f ~/.profile_local ] && source ~/.profile_local
 
-if [[ `which startx 2>&1` != '' ]]; then
-  `pgrep startx 2>&1` || startx
-fi
+pgrep startx 2>&1 || (which startx > /dev/null 2>&1 && startx)
+>>>>>>> b873c41bc113f1b9d6335192884377caf2b356e4
